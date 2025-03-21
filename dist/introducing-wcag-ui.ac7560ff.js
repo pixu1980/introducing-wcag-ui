@@ -1,656 +1,23 @@
-// modules are defined as an array
-// [ module function, map of requires ]
-//
-// map of requires is short require name -> numeric require
-//
-// anything defined in a previous bundle is accessed via the
-// orig method which is the require for previous bundles
 
-(function (modules, entry, mainEntry, parcelRequireName, globalName) {
-  /* eslint-disable no-undef */
-  var globalObject =
-    typeof globalThis !== 'undefined'
-      ? globalThis
-      : typeof self !== 'undefined'
-      ? self
-      : typeof window !== 'undefined'
-      ? window
-      : typeof global !== 'undefined'
-      ? global
-      : {};
-  /* eslint-enable no-undef */
-
-  // Save the require from previous bundle to this closure if any
-  var previousRequire =
-    typeof globalObject[parcelRequireName] === 'function' &&
-    globalObject[parcelRequireName];
-
-  var cache = previousRequire.cache || {};
-  // Do not use `require` to prevent Webpack from trying to bundle this call
-  var nodeRequire =
-    typeof module !== 'undefined' &&
-    typeof module.require === 'function' &&
-    module.require.bind(module);
-
-  function newRequire(name, jumped) {
-    if (!cache[name]) {
-      if (!modules[name]) {
-        // if we cannot find the module within our internal map or
-        // cache jump to the current global require ie. the last bundle
-        // that was added to the page.
-        var currentRequire =
-          typeof globalObject[parcelRequireName] === 'function' &&
-          globalObject[parcelRequireName];
-        if (!jumped && currentRequire) {
-          return currentRequire(name, true);
-        }
-
-        // If there are other bundles on this page the require from the
-        // previous one is saved to 'previousRequire'. Repeat this as
-        // many times as there are bundles until the module is found or
-        // we exhaust the require chain.
-        if (previousRequire) {
-          return previousRequire(name, true);
-        }
-
-        // Try the node require function if it exists.
-        if (nodeRequire && typeof name === 'string') {
-          return nodeRequire(name);
-        }
-
-        var err = new Error("Cannot find module '" + name + "'");
-        err.code = 'MODULE_NOT_FOUND';
-        throw err;
-      }
-
-      localRequire.resolve = resolve;
-      localRequire.cache = {};
-
-      var module = (cache[name] = new newRequire.Module(name));
-
-      modules[name][0].call(
-        module.exports,
-        localRequire,
-        module,
-        module.exports,
-        globalObject
-      );
-    }
-
-    return cache[name].exports;
-
-    function localRequire(x) {
-      var res = localRequire.resolve(x);
-      return res === false ? {} : newRequire(res);
-    }
-
-    function resolve(x) {
-      var id = modules[name][1][x];
-      return id != null ? id : x;
-    }
-  }
-
-  function Module(moduleName) {
-    this.id = moduleName;
-    this.bundle = newRequire;
-    this.exports = {};
-  }
-
-  newRequire.isParcelRequire = true;
-  newRequire.Module = Module;
-  newRequire.modules = modules;
-  newRequire.cache = cache;
-  newRequire.parent = previousRequire;
-  newRequire.register = function (id, exports) {
-    modules[id] = [
-      function (require, module) {
-        module.exports = exports;
-      },
-      {},
-    ];
-  };
-
-  Object.defineProperty(newRequire, 'root', {
-    get: function () {
-      return globalObject[parcelRequireName];
-    },
-  });
-
-  globalObject[parcelRequireName] = newRequire;
-
-  for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
-  }
-
-  if (mainEntry) {
-    // Expose entry point to Node, AMD or browser globals
-    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
-    var mainExports = newRequire(mainEntry);
-
-    // CommonJS
-    if (typeof exports === 'object' && typeof module !== 'undefined') {
-      module.exports = mainExports;
-
-      // RequireJS
-    } else if (typeof define === 'function' && define.amd) {
-      define(function () {
-        return mainExports;
-      });
-
-      // <script>
-    } else if (globalName) {
-      this[globalName] = mainExports;
-    }
-  }
-})({"cKNkg":[function(require,module,exports,__globalThis) {
-var global = arguments[3];
-var HMR_HOST = null;
-var HMR_PORT = null;
-var HMR_SECURE = false;
-var HMR_ENV_HASH = "d6ea1d42532a7575";
-var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "6e8a5cd20fbc91cd";
-"use strict";
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
-import type {
-  HMRAsset,
-  HMRMessage,
-} from '@parcel/reporter-dev-server/src/HMRServer.js';
-interface ParcelRequire {
-  (string): mixed;
-  cache: {|[string]: ParcelModule|};
-  hotData: {|[string]: mixed|};
-  Module: any;
-  parent: ?ParcelRequire;
-  isParcelRequire: true;
-  modules: {|[string]: [Function, {|[string]: string|}]|};
-  HMR_BUNDLE_ID: string;
-  root: ParcelRequire;
-}
-interface ParcelModule {
-  hot: {|
-    data: mixed,
-    accept(cb: (Function) => void): void,
-    dispose(cb: (mixed) => void): void,
-    // accept(deps: Array<string> | string, cb: (Function) => void): void,
-    // decline(): void,
-    _acceptCallbacks: Array<(Function) => void>,
-    _disposeCallbacks: Array<(mixed) => void>,
-  |};
-}
-interface ExtensionContext {
-  runtime: {|
-    reload(): void,
-    getURL(url: string): string;
-    getManifest(): {manifest_version: number, ...};
-  |};
-}
-declare var module: {bundle: ParcelRequire, ...};
-declare var HMR_HOST: string;
-declare var HMR_PORT: string;
-declare var HMR_ENV_HASH: string;
-declare var HMR_SECURE: boolean;
-declare var HMR_USE_SSE: boolean;
-declare var chrome: ExtensionContext;
-declare var browser: ExtensionContext;
-declare var __parcel__import__: (string) => Promise<void>;
-declare var __parcel__importScripts__: (string) => Promise<void>;
-declare var globalThis: typeof self;
-declare var ServiceWorkerGlobalScope: Object;
-*/ var OVERLAY_ID = '__parcel__error__overlay__';
-var OldModule = module.bundle.Module;
-function Module(moduleName) {
-    OldModule.call(this, moduleName);
-    this.hot = {
-        data: module.bundle.hotData[moduleName],
-        _acceptCallbacks: [],
-        _disposeCallbacks: [],
-        accept: function(fn) {
-            this._acceptCallbacks.push(fn || function() {});
-        },
-        dispose: function(fn) {
-            this._disposeCallbacks.push(fn);
-        }
-    };
-    module.bundle.hotData[moduleName] = undefined;
-}
-module.bundle.Module = Module;
-module.bundle.hotData = {};
-var checkedAssets /*: {|[string]: boolean|} */ , disposedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
-function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
-}
-function getPort() {
-    return HMR_PORT || location.port;
-}
-// eslint-disable-next-line no-redeclare
-var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-    var hostname = getHostname();
-    var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == 'https:' && ![
-        'localhost',
-        '127.0.0.1',
-        '0.0.0.0'
-    ].includes(hostname) ? 'wss' : 'ws';
-    var ws;
-    if (HMR_USE_SSE) ws = new EventSource('/__parcel_hmr');
-    else try {
-        ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
-    } catch (err) {
-        if (err.message) console.error(err.message);
-        ws = {};
-    }
-    // Web extension context
-    var extCtx = typeof browser === 'undefined' ? typeof chrome === 'undefined' ? null : chrome : browser;
-    // Safari doesn't support sourceURL in error stacks.
-    // eval may also be disabled via CSP, so do a quick check.
-    var supportsSourceURL = false;
-    try {
-        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
-    } catch (err) {
-        supportsSourceURL = err.stack.includes('test.js');
-    }
-    // $FlowFixMe
-    ws.onmessage = async function(event /*: {data: string, ...} */ ) {
-        checkedAssets = {} /*: {|[string]: boolean|} */ ;
-        disposedAssets = {} /*: {|[string]: boolean|} */ ;
-        assetsToAccept = [];
-        assetsToDispose = [];
-        var data /*: HMRMessage */  = JSON.parse(event.data);
-        if (data.type === 'reload') fullReload();
-        else if (data.type === 'update') {
-            // Remove error overlay if there is one
-            if (typeof document !== 'undefined') removeErrorOverlay();
-            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH);
-            // Handle HMR Update
-            let handled = assets.every((asset)=>{
-                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
-            });
-            if (handled) {
-                console.clear();
-                // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
-                if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') window.dispatchEvent(new CustomEvent('parcelhmraccept'));
-                await hmrApplyUpdates(assets);
-                hmrDisposeQueue();
-                // Run accept callbacks. This will also re-execute other disposed assets in topological order.
-                let processedAssets = {};
-                for(let i = 0; i < assetsToAccept.length; i++){
-                    let id = assetsToAccept[i][1];
-                    if (!processedAssets[id]) {
-                        hmrAccept(assetsToAccept[i][0], id);
-                        processedAssets[id] = true;
-                    }
-                }
-            } else fullReload();
-        }
-        if (data.type === 'error') {
-            // Log parcel errors to console
-            for (let ansiDiagnostic of data.diagnostics.ansi){
-                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
-            }
-            if (typeof document !== 'undefined') {
-                // Render the fancy html overlay
-                removeErrorOverlay();
-                var overlay = createErrorOverlay(data.diagnostics.html);
-                // $FlowFixMe
-                document.body.appendChild(overlay);
-            }
-        }
-    };
-    if (ws instanceof WebSocket) {
-        ws.onerror = function(e) {
-            if (e.message) console.error(e.message);
-        };
-        ws.onclose = function() {
-            console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
-        };
-    }
-}
-function removeErrorOverlay() {
-    var overlay = document.getElementById(OVERLAY_ID);
-    if (overlay) {
-        overlay.remove();
-        console.log("[parcel] \u2728 Error resolved");
-    }
-}
-function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement('div');
-    overlay.id = OVERLAY_ID;
-    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    for (let diagnostic of diagnostics){
-        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
-            return `${p}
-<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
-${frame.code}`;
-        }, '') : diagnostic.stack;
-        errorHTML += `
-      <div>
-        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
-          \u{1F6A8} ${diagnostic.message}
-        </div>
-        <pre>${stack}</pre>
-        <div>
-          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + '</div>').join('')}
-        </div>
-        ${diagnostic.documentation ? `<div>\u{1F4DD} <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ''}
-      </div>
-    `;
-    }
-    errorHTML += '</div>';
-    overlay.innerHTML = errorHTML;
-    return overlay;
-}
-function fullReload() {
-    if ('reload' in location) location.reload();
-    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
-}
-function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
-    var modules = bundle.modules;
-    if (!modules) return [];
-    var parents = [];
-    var k, d, dep;
-    for(k in modules)for(d in modules[k][1]){
-        dep = modules[k][1][d];
-        if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) parents.push([
-            bundle,
-            k
-        ]);
-    }
-    if (bundle.parent) parents = parents.concat(getParents(bundle.parent, id));
-    return parents;
-}
-function updateLink(link) {
-    var href = link.getAttribute('href');
-    if (!href) return;
-    var newLink = link.cloneNode();
-    newLink.onload = function() {
-        if (link.parentNode !== null) // $FlowFixMe
-        link.parentNode.removeChild(link);
-    };
-    newLink.setAttribute('href', // $FlowFixMe
-    href.split('?')[0] + '?' + Date.now());
-    // $FlowFixMe
-    link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-var cssTimeout = null;
-function reloadCSS() {
-    if (cssTimeout) return;
-    cssTimeout = setTimeout(function() {
-        var links = document.querySelectorAll('link[rel="stylesheet"]');
-        for(var i = 0; i < links.length; i++){
-            // $FlowFixMe[incompatible-type]
-            var href /*: string */  = links[i].getAttribute('href');
-            var hostname = getHostname();
-            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
-            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
-            if (!absolute) updateLink(links[i]);
-        }
-        cssTimeout = null;
-    }, 50);
-}
-function hmrDownload(asset) {
-    if (asset.type === 'js') {
-        if (typeof document !== 'undefined') {
-            let script = document.createElement('script');
-            script.src = asset.url + '?t=' + Date.now();
-            if (asset.outputFormat === 'esmodule') script.type = 'module';
-            return new Promise((resolve, reject)=>{
-                var _document$head;
-                script.onload = ()=>resolve(script);
-                script.onerror = reject;
-                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
-            });
-        } else if (typeof importScripts === 'function') {
-            // Worker scripts
-            if (asset.outputFormat === 'esmodule') return import(asset.url + '?t=' + Date.now());
-            else return new Promise((resolve, reject)=>{
-                try {
-                    importScripts(asset.url + '?t=' + Date.now());
-                    resolve();
-                } catch (err) {
-                    reject(err);
-                }
-            });
-        }
-    }
-}
-async function hmrApplyUpdates(assets) {
-    global.parcelHotUpdate = Object.create(null);
-    let scriptsToRemove;
-    try {
-        // If sourceURL comments aren't supported in eval, we need to load
-        // the update from the dev server over HTTP so that stack traces
-        // are correct in errors/logs. This is much slower than eval, so
-        // we only do it if needed (currently just Safari).
-        // https://bugs.webkit.org/show_bug.cgi?id=137297
-        // This path is also taken if a CSP disallows eval.
-        if (!supportsSourceURL) {
-            let promises = assets.map((asset)=>{
-                var _hmrDownload;
-                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
-                    // Web extension fix
-                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != 'undefined' && global instanceof ServiceWorkerGlobalScope) {
-                        extCtx.runtime.reload();
-                        return;
-                    }
-                    throw err;
-                });
-            });
-            scriptsToRemove = await Promise.all(promises);
-        }
-        assets.forEach(function(asset) {
-            hmrApply(module.bundle.root, asset);
-        });
-    } finally{
-        delete global.parcelHotUpdate;
-        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
-            if (script) {
-                var _document$head2;
-                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
-            }
-        });
-    }
-}
-function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
-    var modules = bundle.modules;
-    if (!modules) return;
-    if (asset.type === 'css') reloadCSS();
-    else if (asset.type === 'js') {
-        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
-        if (deps) {
-            if (modules[asset.id]) {
-                // Remove dependencies that are removed and will become orphaned.
-                // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                let oldDeps = modules[asset.id][1];
-                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    let id = oldDeps[dep];
-                    let parents = getParents(module.bundle.root, id);
-                    if (parents.length === 1) hmrDelete(module.bundle.root, id);
-                }
-            }
-            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
-            // support for source maps is better with eval.
-            (0, eval)(asset.output);
-            // $FlowFixMe
-            let fn = global.parcelHotUpdate[asset.id];
-            modules[asset.id] = [
-                fn,
-                deps
-            ];
-        }
-        // Always traverse to the parent bundle, even if we already replaced the asset in this bundle.
-        // This is required in case modules are duplicated. We need to ensure all instances have the updated code.
-        if (bundle.parent) hmrApply(bundle.parent, asset);
-    }
-}
-function hmrDelete(bundle, id) {
-    let modules = bundle.modules;
-    if (!modules) return;
-    if (modules[id]) {
-        // Collect dependencies that will become orphaned when this module is deleted.
-        let deps = modules[id][1];
-        let orphans = [];
-        for(let dep in deps){
-            let parents = getParents(module.bundle.root, deps[dep]);
-            if (parents.length === 1) orphans.push(deps[dep]);
-        }
-        // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
-        delete modules[id];
-        delete bundle.cache[id];
-        // Now delete the orphans.
-        orphans.forEach((id)=>{
-            hmrDelete(module.bundle.root, id);
-        });
-    } else if (bundle.parent) hmrDelete(bundle.parent, id);
-}
-function hmrAcceptCheck(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
-    if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
-    // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    let parents = getParents(module.bundle.root, id);
-    let accepted = false;
-    while(parents.length > 0){
-        let v = parents.shift();
-        let a = hmrAcceptCheckOne(v[0], v[1], null);
-        if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
-        accepted = true;
-        else {
-            // Otherwise, queue the parents in the next level upward.
-            let p = getParents(module.bundle.root, v[1]);
-            if (p.length === 0) {
-                // If there are no parents, then we've reached an entry without accepting. Reload.
-                accepted = false;
-                break;
-            }
-            parents.push(...p);
-        }
-    }
-    return accepted;
-}
-function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , depsByBundle /*: ?{ [string]: { [string]: string } }*/ ) {
-    var modules = bundle.modules;
-    if (!modules) return;
-    if (depsByBundle && !depsByBundle[bundle.HMR_BUNDLE_ID]) {
-        // If we reached the root bundle without finding where the asset should go,
-        // there's nothing to do. Mark as "accepted" so we don't reload the page.
-        if (!bundle.parent) return true;
-        return hmrAcceptCheck(bundle.parent, id, depsByBundle);
-    }
-    if (checkedAssets[id]) return true;
-    checkedAssets[id] = true;
-    var cached = bundle.cache[id];
-    assetsToDispose.push([
-        bundle,
-        id
-    ]);
-    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) {
-        assetsToAccept.push([
-            bundle,
-            id
-        ]);
-        return true;
-    }
-}
-function hmrDisposeQueue() {
-    // Dispose all old assets.
-    for(let i = 0; i < assetsToDispose.length; i++){
-        let id = assetsToDispose[i][1];
-        if (!disposedAssets[id]) {
-            hmrDispose(assetsToDispose[i][0], id);
-            disposedAssets[id] = true;
-        }
-    }
-    assetsToDispose = [];
-}
-function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
-    var cached = bundle.cache[id];
-    bundle.hotData[id] = {};
-    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
-    if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
-        cb(bundle.hotData[id]);
-    });
-    delete bundle.cache[id];
-}
-function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
-    // Execute the module.
-    bundle(id);
-    // Run the accept callbacks in the new version of the module.
-    var cached = bundle.cache[id];
-    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-        let assetsToAlsoAccept = [];
-        cached.hot._acceptCallbacks.forEach(function(cb) {
-            let additionalAssets = cb(function() {
-                return getParents(module.bundle.root, id);
-            });
-            if (Array.isArray(additionalAssets) && additionalAssets.length) assetsToAlsoAccept.push(...additionalAssets);
-        });
-        if (assetsToAlsoAccept.length) {
-            let handled = assetsToAlsoAccept.every(function(a) {
-                return hmrAcceptCheck(a[0], a[1]);
-            });
-            if (!handled) return fullReload();
-            hmrDisposeQueue();
-        }
-    }
+function $parcel$interopDefault(a) {
+  return a && a.__esModule ? a.default : a;
 }
 
-},{}],"fFaKF":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _revealJs = require("reveal.js");
-var _revealJsDefault = parcelHelpers.interopDefault(_revealJs);
-var _notes = require("reveal.js/plugin/notes/notes");
-var _notesDefault = parcelHelpers.interopDefault(_notes);
-var _highlight = require("reveal.js/plugin/highlight/highlight");
-var _highlightDefault = parcelHelpers.interopDefault(_highlight);
-var _diveIn = require("./_dive-in");
-// reveal.js initialization
-const slides = (0, _revealJsDefault.default)({
-    plugins: [
-        (0, _notesDefault.default),
-        (0, _highlightDefault.default)
-    ],
-    // highlight.js options
-    highlight: {
-        highlightOnLoad: true,
-        tabReplace: '  '
-    },
-    navigationMode: 'linear',
-    ...window.location.href.includes('?print-pdf') && {
-        pdfSeparateFragments: false
-    },
-    hash: true,
-    // Flags if we should monitor the hash and change slides accordingly
-    respondToHashChanges: true,
-    // Push each slide change to the browser history.  Implies `hash: true`
-    history: true
-});
-// keyboard interaction configuration
-slides.configure({
-    keyboard: {
-        8: 'prev',
-        // 27: null,
-        78: null
-    }
-});
-slides.initialize();
-
-},{"reveal.js":"1B4nY","reveal.js/plugin/notes/notes":"bFmVD","reveal.js/plugin/highlight/highlight":"jDyx9","./_dive-in":"10drY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1B4nY":[function(require,module,exports,__globalThis) {
+function $parcel$export(e, n, v, s) {
+  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
+}
 /*!
-* reveal.js 5.1.0
-* https://revealjs.com
-* MIT licensed
-*
-* Copyright (C) 2011-2024 Hakim El Hattab, https://hakim.se
-*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>X);
-const e = (e, t)=>{
+ * reveal.js 5.1.0
+ * https://revealjs.com
+ * MIT licensed
+ *
+ * Copyright (C) 2011-2024 Hakim El Hattab, https://hakim.se
+ */ const $ef6d0cb1bf5eee6a$var$e = (e, t)=>{
     for(let i in t)e[i] = t[i];
     return e;
-}, t = (e, t)=>Array.from(e.querySelectorAll(t)), i = (e, t, i)=>{
+}, $ef6d0cb1bf5eee6a$var$t = (e, t)=>Array.from(e.querySelectorAll(t)), $ef6d0cb1bf5eee6a$var$i = (e, t, i)=>{
     i ? e.classList.add(t) : e.classList.remove(t);
-}, s = (e)=>{
+}, $ef6d0cb1bf5eee6a$var$s = (e)=>{
     if ("string" == typeof e) {
         if ("null" === e) return null;
         if ("true" === e) return !0;
@@ -658,42 +25,42 @@ const e = (e, t)=>{
         if (e.match(/^-?[\d\.]+$/)) return parseFloat(e);
     }
     return e;
-}, a = (e, t)=>{
+}, $ef6d0cb1bf5eee6a$var$a = (e, t)=>{
     e.style.transform = t;
-}, n = (e, t)=>{
+}, $ef6d0cb1bf5eee6a$var$n = (e, t)=>{
     let i = e.matches || e.matchesSelector || e.msMatchesSelector;
     return !(!i || !i.call(e, t));
-}, r = (e, t)=>{
+}, $ef6d0cb1bf5eee6a$var$r = (e, t)=>{
     if ("function" == typeof e.closest) return e.closest(t);
     for(; e;){
-        if (n(e, t)) return e;
+        if ($ef6d0cb1bf5eee6a$var$n(e, t)) return e;
         e = e.parentNode;
     }
     return null;
-}, o = (e)=>{
+}, $ef6d0cb1bf5eee6a$var$o = (e)=>{
     let t = (e = e || document.documentElement).requestFullscreen || e.webkitRequestFullscreen || e.webkitRequestFullScreen || e.mozRequestFullScreen || e.msRequestFullscreen;
     t && t.apply(e);
-}, l = (e)=>{
+}, $ef6d0cb1bf5eee6a$var$l = (e)=>{
     let t = document.createElement("style");
     return t.type = "text/css", e && e.length > 0 && (t.styleSheet ? t.styleSheet.cssText = e : t.appendChild(document.createTextNode(e))), document.head.appendChild(t), t;
-}, d = ()=>{
+}, $ef6d0cb1bf5eee6a$var$d = ()=>{
     let e = {};
     location.search.replace(/[A-Z0-9]+?=([\w\.%-]*)/gi, (t)=>{
         e[t.split("=").shift()] = t.split("=").pop();
     });
     for(let t in e){
         let i = e[t];
-        e[t] = s(unescape(i));
+        e[t] = $ef6d0cb1bf5eee6a$var$s(unescape(i));
     }
     return void 0 !== e.dependencies && delete e.dependencies, e;
-}, c = {
+}, $ef6d0cb1bf5eee6a$var$c = {
     mp4: "video/mp4",
     m4a: "video/mp4",
     ogv: "video/ogg",
     mpeg: "video/mpeg",
     webm: "video/webm"
-}, h = navigator.userAgent, u = /(iphone|ipod|ipad|android)/gi.test(h) || "MacIntel" === navigator.platform && navigator.maxTouchPoints > 1, g = /android/gi.test(h);
-var p = function(e) {
+}, $ef6d0cb1bf5eee6a$var$h = navigator.userAgent, $ef6d0cb1bf5eee6a$var$u = /(iphone|ipod|ipad|android)/gi.test($ef6d0cb1bf5eee6a$var$h) || "MacIntel" === navigator.platform && navigator.maxTouchPoints > 1, $ef6d0cb1bf5eee6a$var$g = /android/gi.test($ef6d0cb1bf5eee6a$var$h);
+var $ef6d0cb1bf5eee6a$var$v = function(e) {
     if (e) {
         var t = function(e) {
             return [].slice.call(e);
@@ -718,7 +85,7 @@ var p = function(e) {
             var t = e.filter(c);
             t.forEach(d), t.forEach(function(e) {
                 g(e), l(e);
-            }), t.forEach(p);
+            }), t.forEach(v);
         }, l = function(e) {
             return e.dirty = 0;
         }, d = function(e) {
@@ -733,7 +100,7 @@ var p = function(e) {
             return !e.preStyleTestCompleted && (/inline-/.test(e.display) || (t = !0, e.display = "inline-block"), "nowrap" !== e.whiteSpace && (t = !0, e.whiteSpace = "nowrap"), e.preStyleTestCompleted = !0, t);
         }, g = function(e) {
             e.element.style.whiteSpace = e.whiteSpace, e.element.style.display = e.display, e.element.style.fontSize = e.currentFontSize + "px";
-        }, p = function(e) {
+        }, v = function(e) {
             e.element.dispatchEvent(new CustomEvent("fit", {
                 detail: {
                     oldValue: e.previousFontSize,
@@ -741,7 +108,7 @@ var p = function(e) {
                     scaleFactor: e.currentFontSize / e.previousFontSize
                 }
             }));
-        }, v = function(e, t) {
+        }, p = function(e, t) {
             return function() {
                 e.dirty = t, e.active && n();
             };
@@ -760,7 +127,7 @@ var p = function(e) {
                 return e.active = !1;
             };
         }, b = function(e) {
-            e.observeMutations && (e.observer = new MutationObserver(v(e, 1)), e.observer.observe(e.element, e.observeMutations));
+            e.observeMutations && (e.observer = new MutationObserver(p(e, 1)), e.observer.observe(e.element, e.observeMutations));
         }, w = {
             minSize: 16,
             maxSize: 512,
@@ -772,20 +139,20 @@ var p = function(e) {
             }
         }, E = null, S = function() {
             e.clearTimeout(E), E = e.setTimeout(r(2), k.observeWindowDelay);
-        }, A = [
+        }, R = [
             "resize",
             "orientationchange"
         ];
         return Object.defineProperty(k, "observeWindow", {
             set: function(t) {
                 var i = "".concat(t ? "add" : "remove", "EventListener");
-                A.forEach(function(t) {
+                R.forEach(function(t) {
                     e[i](t, S);
                 });
             }
         }), k.observeWindow = !0, k.observeWindowDelay = 100, k.fitAll = r(i), k;
     }
-    function R(e, t) {
+    function A(e, t) {
         var a = Object.assign({}, w, t), r = e.map(function(e) {
             var t = Object.assign({}, a, {
                 element: e,
@@ -799,7 +166,7 @@ var p = function(e) {
                 }, b(e), e.newbie = !0, e.dirty = !0, s.push(e);
             }(t), {
                 element: e,
-                fit: v(t, i),
+                fit: p(t, i),
                 unfreeze: f(t),
                 freeze: y(t),
                 unsubscribe: m(t)
@@ -809,12 +176,12 @@ var p = function(e) {
     }
     function k(e) {
         var i = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-        return "string" == typeof e ? R(t(document.querySelectorAll(e)), i) : R([
+        return "string" == typeof e ? A(t(document.querySelectorAll(e)), i) : A([
             e
         ], i)[0];
     }
 }("undefined" == typeof window ? null : window);
-class v {
+class $ef6d0cb1bf5eee6a$var$p {
     constructor(e){
         this.Reveal = e, this.startEmbeddedIframe = this.startEmbeddedIframe.bind(this);
     }
@@ -824,13 +191,13 @@ class v {
         return "boolean" != typeof t && (t = e.hasAttribute("data-preload")), t;
     }
     load(e, i = {}) {
-        e.style.display = this.Reveal.getConfig().display, t(e, "img[data-src], video[data-src], audio[data-src], iframe[data-src]").forEach((e)=>{
+        e.style.display = this.Reveal.getConfig().display, $ef6d0cb1bf5eee6a$var$t(e, "img[data-src], video[data-src], audio[data-src], iframe[data-src]").forEach((e)=>{
             ("IFRAME" !== e.tagName || this.shouldPreload(e)) && (e.setAttribute("src", e.getAttribute("data-src")), e.setAttribute("data-lazy-loaded", ""), e.removeAttribute("data-src"));
-        }), t(e, "video, audio").forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(e, "video, audio").forEach((e)=>{
             let i = 0;
-            t(e, "source[data-src]").forEach((e)=>{
+            $ef6d0cb1bf5eee6a$var$t(e, "source[data-src]").forEach((e)=>{
                 e.setAttribute("src", e.getAttribute("data-src")), e.removeAttribute("data-src"), e.setAttribute("data-lazy-loaded", ""), i += 1;
-            }), u && "VIDEO" === e.tagName && e.setAttribute("playsinline", ""), i > 0 && e.load();
+            }), $ef6d0cb1bf5eee6a$var$u && "VIDEO" === e.tagName && e.setAttribute("playsinline", ""), i > 0 && e.load();
         });
         let s = e.slideBackgroundElement;
         if (s) {
@@ -840,12 +207,12 @@ class v {
                 s.setAttribute("data-loaded", "true");
                 let n = e.getAttribute("data-background-image"), r = e.getAttribute("data-background-video"), o = e.hasAttribute("data-background-video-loop"), l = e.hasAttribute("data-background-video-muted");
                 if (n) /^data:/.test(n.trim()) ? t.style.backgroundImage = `url(${n.trim()})` : t.style.backgroundImage = n.split(",").map((e)=>`url(${((e = "")=>encodeURI(e).replace(/%5B/g, "[").replace(/%5D/g, "]").replace(/[!'()*]/g, (e)=>`%${e.charCodeAt(0).toString(16).toUpperCase()}`))(decodeURI(e.trim()))})`).join(",");
-                else if (r && !this.Reveal.isSpeakerNotes()) {
+                else if (r) {
                     let e = document.createElement("video");
-                    o && e.setAttribute("loop", ""), l && (e.muted = !0), u && (e.muted = !0, e.setAttribute("playsinline", "")), r.split(",").forEach((t)=>{
+                    o && e.setAttribute("loop", ""), (l || this.Reveal.isSpeakerNotes()) && (e.muted = !0), $ef6d0cb1bf5eee6a$var$u && (e.muted = !0, e.setAttribute("playsinline", "")), r.split(",").forEach((t)=>{
                         const i = document.createElement("source");
                         i.setAttribute("src", t);
-                        let s = ((e = "")=>c[e.split(".").pop()])(t);
+                        let s = ((e = "")=>$ef6d0cb1bf5eee6a$var$c[e.split(".").pop()])(t);
                         s && i.setAttribute("type", s), e.appendChild(i);
                     }), t.appendChild(e);
                 } else if (a && !0 !== i.excludeIframes) {
@@ -860,7 +227,7 @@ class v {
     }
     layout(e) {
         Array.from(e.querySelectorAll(".r-fit-text")).forEach((e)=>{
-            p(e, {
+            $ef6d0cb1bf5eee6a$var$v(e, {
                 minSize: 24,
                 maxSize: .8 * this.Reveal.getConfig().height,
                 observeMutations: !1,
@@ -871,17 +238,17 @@ class v {
     unload(e) {
         e.style.display = "none";
         let i = this.Reveal.getSlideBackground(e);
-        i && (i.style.display = "none", t(i, "iframe[src]").forEach((e)=>{
+        i && (i.style.display = "none", $ef6d0cb1bf5eee6a$var$t(i, "iframe[src]").forEach((e)=>{
             e.removeAttribute("src");
-        })), t(e, "video[data-lazy-loaded][src], audio[data-lazy-loaded][src], iframe[data-lazy-loaded][src]").forEach((e)=>{
+        })), $ef6d0cb1bf5eee6a$var$t(e, "video[data-lazy-loaded][src], audio[data-lazy-loaded][src], iframe[data-lazy-loaded][src]").forEach((e)=>{
             e.setAttribute("data-src", e.getAttribute("src")), e.removeAttribute("src");
-        }), t(e, "video[data-lazy-loaded] source[src], audio source[src]").forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(e, "video[data-lazy-loaded] source[src], audio source[src]").forEach((e)=>{
             e.setAttribute("data-src", e.getAttribute("src")), e.removeAttribute("src");
         });
     }
     formatEmbeddedContent() {
         let e = (e, i, s)=>{
-            t(this.Reveal.getSlidesElement(), "iframe[" + e + '*="' + i + '"]').forEach((t)=>{
+            $ef6d0cb1bf5eee6a$var$t(this.Reveal.getSlidesElement(), "iframe[" + e + '*="' + i + '"]').forEach((t)=>{
                 let i = t.getAttribute(e);
                 i && -1 === i.indexOf(s) && t.setAttribute(e, i + (/\?/.test(i) ? "&" : "?") + s);
             });
@@ -889,64 +256,68 @@ class v {
         e("src", "youtube.com/embed/", "enablejsapi=1"), e("data-src", "youtube.com/embed/", "enablejsapi=1"), e("src", "player.vimeo.com/", "api=1"), e("data-src", "player.vimeo.com/", "api=1");
     }
     startEmbeddedContent(e) {
-        e && !this.Reveal.isSpeakerNotes() && (t(e, 'img[src$=".gif"]').forEach((e)=>{
-            e.setAttribute("src", e.getAttribute("src"));
-        }), t(e, "video, audio").forEach((e)=>{
-            if (r(e, ".fragment") && !r(e, ".fragment.visible")) return;
-            let t = this.Reveal.getConfig().autoPlayMedia;
-            if ("boolean" != typeof t && (t = e.hasAttribute("data-autoplay") || !!r(e, ".slide-background")), t && "function" == typeof e.play) {
-                if (e.readyState > 1) this.startEmbeddedMedia({
+        if (e) {
+            const i = this.Reveal.isSpeakerNotes();
+            $ef6d0cb1bf5eee6a$var$t(e, 'img[src$=".gif"]').forEach((e)=>{
+                e.setAttribute("src", e.getAttribute("src"));
+            }), $ef6d0cb1bf5eee6a$var$t(e, "video, audio").forEach((e)=>{
+                if ($ef6d0cb1bf5eee6a$var$r(e, ".fragment") && !$ef6d0cb1bf5eee6a$var$r(e, ".fragment.visible")) return;
+                let t = this.Reveal.getConfig().autoPlayMedia;
+                if ("boolean" != typeof t && (t = e.hasAttribute("data-autoplay") || !!$ef6d0cb1bf5eee6a$var$r(e, ".slide-background")), t && "function" == typeof e.play) {
+                    if (i && !e.muted) return;
+                    if (e.readyState > 1) this.startEmbeddedMedia({
+                        target: e
+                    });
+                    else if ($ef6d0cb1bf5eee6a$var$u) {
+                        let t = e.play();
+                        t && "function" == typeof t.catch && !1 === e.controls && t.catch(()=>{
+                            e.controls = !0, e.addEventListener("play", ()=>{
+                                e.controls = !1;
+                            });
+                        });
+                    } else e.removeEventListener("loadeddata", this.startEmbeddedMedia), e.addEventListener("loadeddata", this.startEmbeddedMedia);
+                }
+            }), i || ($ef6d0cb1bf5eee6a$var$t(e, "iframe[src]").forEach((e)=>{
+                $ef6d0cb1bf5eee6a$var$r(e, ".fragment") && !$ef6d0cb1bf5eee6a$var$r(e, ".fragment.visible") || this.startEmbeddedIframe({
                     target: e
                 });
-                else if (u) {
-                    let t = e.play();
-                    t && "function" == typeof t.catch && !1 === e.controls && t.catch(()=>{
-                        e.controls = !0, e.addEventListener("play", ()=>{
-                            e.controls = !1;
-                        });
-                    });
-                } else e.removeEventListener("loadeddata", this.startEmbeddedMedia), e.addEventListener("loadeddata", this.startEmbeddedMedia);
-            }
-        }), t(e, "iframe[src]").forEach((e)=>{
-            r(e, ".fragment") && !r(e, ".fragment.visible") || this.startEmbeddedIframe({
-                target: e
-            });
-        }), t(e, "iframe[data-src]").forEach((e)=>{
-            r(e, ".fragment") && !r(e, ".fragment.visible") || e.getAttribute("src") !== e.getAttribute("data-src") && (e.removeEventListener("load", this.startEmbeddedIframe), e.addEventListener("load", this.startEmbeddedIframe), e.setAttribute("src", e.getAttribute("data-src")));
-        }));
+            }), $ef6d0cb1bf5eee6a$var$t(e, "iframe[data-src]").forEach((e)=>{
+                $ef6d0cb1bf5eee6a$var$r(e, ".fragment") && !$ef6d0cb1bf5eee6a$var$r(e, ".fragment.visible") || e.getAttribute("src") !== e.getAttribute("data-src") && (e.removeEventListener("load", this.startEmbeddedIframe), e.addEventListener("load", this.startEmbeddedIframe), e.setAttribute("src", e.getAttribute("data-src")));
+            }));
+        }
     }
     startEmbeddedMedia(e) {
-        let t = !!r(e.target, "html"), i = !!r(e.target, ".present");
+        let t = !!$ef6d0cb1bf5eee6a$var$r(e.target, "html"), i = !!$ef6d0cb1bf5eee6a$var$r(e.target, ".present");
         t && i && (e.target.paused || e.target.ended) && (e.target.currentTime = 0, e.target.play()), e.target.removeEventListener("loadeddata", this.startEmbeddedMedia);
     }
     startEmbeddedIframe(e) {
         let t = e.target;
         if (t && t.contentWindow) {
-            let i = !!r(e.target, "html"), s = !!r(e.target, ".present");
+            let i = !!$ef6d0cb1bf5eee6a$var$r(e.target, "html"), s = !!$ef6d0cb1bf5eee6a$var$r(e.target, ".present");
             if (i && s) {
                 let e = this.Reveal.getConfig().autoPlayMedia;
-                "boolean" != typeof e && (e = t.hasAttribute("data-autoplay") || !!r(t, ".slide-background")), /youtube\.com\/embed\//.test(t.getAttribute("src")) && e ? t.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*") : /player\.vimeo\.com\//.test(t.getAttribute("src")) && e ? t.contentWindow.postMessage('{"method":"play"}', "*") : t.contentWindow.postMessage("slide:start", "*");
+                "boolean" != typeof e && (e = t.hasAttribute("data-autoplay") || !!$ef6d0cb1bf5eee6a$var$r(t, ".slide-background")), /youtube\.com\/embed\//.test(t.getAttribute("src")) && e ? t.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*") : /player\.vimeo\.com\//.test(t.getAttribute("src")) && e ? t.contentWindow.postMessage('{"method":"play"}', "*") : t.contentWindow.postMessage("slide:start", "*");
             }
         }
     }
     stopEmbeddedContent(i, s = {}) {
-        s = e({
+        s = $ef6d0cb1bf5eee6a$var$e({
             unloadIframes: !0
-        }, s), i && i.parentNode && (t(i, "video, audio").forEach((e)=>{
+        }, s), i && i.parentNode && ($ef6d0cb1bf5eee6a$var$t(i, "video, audio").forEach((e)=>{
             e.hasAttribute("data-ignore") || "function" != typeof e.pause || (e.setAttribute("data-paused-by-reveal", ""), e.pause());
-        }), t(i, "iframe").forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(i, "iframe").forEach((e)=>{
             e.contentWindow && e.contentWindow.postMessage("slide:stop", "*"), e.removeEventListener("load", this.startEmbeddedIframe);
-        }), t(i, 'iframe[src*="youtube.com/embed/"]').forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(i, 'iframe[src*="youtube.com/embed/"]').forEach((e)=>{
             !e.hasAttribute("data-ignore") && e.contentWindow && "function" == typeof e.contentWindow.postMessage && e.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*");
-        }), t(i, 'iframe[src*="player.vimeo.com/"]').forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(i, 'iframe[src*="player.vimeo.com/"]').forEach((e)=>{
             !e.hasAttribute("data-ignore") && e.contentWindow && "function" == typeof e.contentWindow.postMessage && e.contentWindow.postMessage('{"method":"pause"}', "*");
-        }), !0 === s.unloadIframes && t(i, "iframe[data-src]").forEach((e)=>{
+        }), !0 === s.unloadIframes && $ef6d0cb1bf5eee6a$var$t(i, "iframe[data-src]").forEach((e)=>{
             e.setAttribute("src", "about:blank"), e.removeAttribute("src");
         }));
     }
 }
-const m = ".slides section", f = ".slides>section", y = ".slides>section.present>section", b = /registerPlugin|registerKeyboardShortcut|addKeyBinding|addEventListener|showPreview/, w = /fade-(down|up|right|left|out|in-then-out|in-then-semi-out)|semi-fade-out|current-visible|shrink|grow/;
-class E {
+const $ef6d0cb1bf5eee6a$var$m = ".slides section", $ef6d0cb1bf5eee6a$var$f = ".slides>section", $ef6d0cb1bf5eee6a$var$y = ".slides>section.present>section", $ef6d0cb1bf5eee6a$var$b = /registerPlugin|registerKeyboardShortcut|addKeyBinding|addEventListener|showPreview/;
+class $ef6d0cb1bf5eee6a$var$w {
     constructor(e){
         this.Reveal = e;
     }
@@ -990,7 +361,7 @@ class E {
         this.element.remove();
     }
 }
-class S {
+class $ef6d0cb1bf5eee6a$var$E {
     constructor(e){
         this.Reveal = e, this.onInput = this.onInput.bind(this), this.onBlur = this.onBlur.bind(this), this.onKeyDown = this.onKeyDown.bind(this);
     }
@@ -1046,7 +417,7 @@ class S {
         setTimeout(()=>this.hide(), 1);
     }
 }
-const A = (e)=>{
+const $ef6d0cb1bf5eee6a$var$S = (e)=>{
     let t = e.match(/^#([0-9a-f]{3})$/i);
     if (t && t[1]) return t = t[1], {
         r: 17 * parseInt(t.charAt(0), 16),
@@ -1065,7 +436,7 @@ const A = (e)=>{
         g: parseInt(s[2], 10),
         b: parseInt(s[3], 10)
     };
-    let a = e.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\,\s*([\d]+|[\d]*.[\d]+)\s*\)$/i);
+    let a = e.match(/^rgba\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d]+|[\d]*.[\d]+)\s*\)$/i);
     return a ? {
         r: parseInt(a[1], 10),
         g: parseInt(a[2], 10),
@@ -1073,7 +444,7 @@ const A = (e)=>{
         a: parseFloat(a[4])
     } : null;
 };
-class R {
+class $ef6d0cb1bf5eee6a$var$R {
     constructor(e){
         this.Reveal = e;
     }
@@ -1083,7 +454,7 @@ class R {
     create() {
         this.element.innerHTML = "", this.element.classList.add("no-transition"), this.Reveal.getHorizontalSlides().forEach((e)=>{
             let i = this.createBackground(e, this.element);
-            t(e, "section").forEach((e)=>{
+            $ef6d0cb1bf5eee6a$var$t(e, "section").forEach((e)=>{
                 this.createBackground(e, i), i.classList.add("stack");
             });
         }), this.Reveal.getConfig().parallaxBackgroundImage ? (this.element.style.backgroundImage = 'url("' + this.Reveal.getConfig().parallaxBackgroundImage + '")', this.element.style.backgroundSize = this.Reveal.getConfig().parallaxBackgroundSize, this.element.style.backgroundRepeat = this.Reveal.getConfig().parallaxBackgroundRepeat, this.element.style.backgroundPosition = this.Reveal.getConfig().parallaxBackgroundPosition, setTimeout(()=>{
@@ -1117,13 +488,13 @@ class R {
     getContrastClass(e) {
         const t = e.slideBackgroundElement;
         let i = e.getAttribute("data-background-color");
-        if (!i || !A(i)) {
+        if (!i || !$ef6d0cb1bf5eee6a$var$S(i)) {
             let e = window.getComputedStyle(t);
             e && e.backgroundColor && (i = e.backgroundColor);
         }
         if (i) {
-            const e = A(i);
-            if (e && 0 !== e.a) return "string" == typeof (s = i) && (s = A(s)), (s ? (299 * s.r + 587 * s.g + 114 * s.b) / 1e3 : null) < 128 ? "has-dark-background" : "has-light-background";
+            const e = $ef6d0cb1bf5eee6a$var$S(i);
+            if (e && 0 !== e.a) return "string" == typeof (s = i) && (s = $ef6d0cb1bf5eee6a$var$S(s)), (s ? (299 * s.r + 587 * s.g + 114 * s.b) / 1e3 : null) < 128 ? "has-dark-background" : "has-light-background";
         }
         var s;
         return null;
@@ -1139,7 +510,7 @@ class R {
     update(e = !1) {
         let i = this.Reveal.getConfig(), s = this.Reveal.getCurrentSlide(), a = this.Reveal.getIndices(), n = null, r = i.rtl ? "future" : "past", o = i.rtl ? "past" : "future";
         if (Array.from(this.element.childNodes).forEach((i, s)=>{
-            i.classList.remove("past", "present", "future"), s < a.h ? i.classList.add(r) : s > a.h ? i.classList.add(o) : (i.classList.add("present"), n = i), (e || s === a.h) && t(i, ".slide-background").forEach((e, t)=>{
+            i.classList.remove("past", "present", "future"), s < a.h ? i.classList.add(r) : s > a.h ? i.classList.add(o) : (i.classList.add("present"), n = i), (e || s === a.h) && $ef6d0cb1bf5eee6a$var$t(i, ".slide-background").forEach((e, t)=>{
                 e.classList.remove("past", "present", "future");
                 const i = "number" == typeof a.v ? a.v : 0;
                 t < i ? e.classList.add("past") : t > i ? e.classList.add("future") : (e.classList.add("present"), s === a.h && (n = e));
@@ -1155,9 +526,10 @@ class R {
                 }
             }
         }
-        if (this.previousBackground && this.Reveal.slideContent.stopEmbeddedContent(this.previousBackground, {
+        const l = n !== this.previousBackground;
+        if (l && this.previousBackground && this.Reveal.slideContent.stopEmbeddedContent(this.previousBackground, {
             unloadIframes: !this.Reveal.slideContent.shouldPreload(this.previousBackground)
-        }), n) {
+        }), l && n) {
             this.Reveal.slideContent.startEmbeddedContent(n);
             let e = n.querySelector(".slide-background-content");
             if (e) {
@@ -1185,8 +557,8 @@ class R {
         this.element.remove();
     }
 }
-let k = 0;
-class L {
+let $ef6d0cb1bf5eee6a$var$A = 0;
+class $ef6d0cb1bf5eee6a$var$k {
     constructor(e){
         this.Reveal = e;
     }
@@ -1194,17 +566,17 @@ class L {
         this.reset();
         let i = this.Reveal.getSlides(), s = i.indexOf(t), a = i.indexOf(e);
         if (e && t && e.hasAttribute("data-auto-animate") && t.hasAttribute("data-auto-animate") && e.getAttribute("data-auto-animate-id") === t.getAttribute("data-auto-animate-id") && !(s > a ? t : e).hasAttribute("data-auto-animate-restart")) {
-            this.autoAnimateStyleSheet = this.autoAnimateStyleSheet || l();
+            this.autoAnimateStyleSheet = this.autoAnimateStyleSheet || $ef6d0cb1bf5eee6a$var$l();
             let i = this.getAutoAnimateOptions(t);
             e.dataset.autoAnimate = "pending", t.dataset.autoAnimate = "pending", i.slideDirection = s > a ? "forward" : "backward";
             let n = "none" === e.style.display;
             n && (e.style.display = this.Reveal.getConfig().display);
-            let r = this.getAutoAnimatableElements(e, t).map((e)=>this.autoAnimateElements(e.from, e.to, e.options || {}, i, k++));
+            let r = this.getAutoAnimatableElements(e, t).map((e)=>this.autoAnimateElements(e.from, e.to, e.options || {}, i, $ef6d0cb1bf5eee6a$var$A++));
             if (n && (e.style.display = "none"), "false" !== t.dataset.autoAnimateUnmatched && !0 === this.Reveal.getConfig().autoAnimateUnmatched) {
                 let e = .8 * i.duration, s = .2 * i.duration;
                 this.getUnmatchedAutoAnimateElements(t).forEach((e)=>{
                     let t = this.getAutoAnimateOptions(e, i), s = "unmatched";
-                    t.duration === i.duration && t.delay === i.delay || (s = "unmatched-" + k++, r.push(`[data-auto-animate="running"] [data-auto-animate-target="${s}"] { transition: opacity ${t.duration}s ease ${t.delay}s; }`)), e.dataset.autoAnimateTarget = s;
+                    t.duration === i.duration && t.delay === i.delay || (s = "unmatched-" + $ef6d0cb1bf5eee6a$var$A++, r.push(`[data-auto-animate="running"] [data-auto-animate-target="${s}"] { transition: opacity ${t.duration}s ease ${t.delay}s; }`)), e.dataset.autoAnimateTarget = s;
                 }, this), r.push(`[data-auto-animate="running"] [data-auto-animate-target="unmatched"] { transition: opacity ${e}s ease ${s}s; }`);
             }
             this.autoAnimateStyleSheet.innerHTML = r.join(""), requestAnimationFrame(()=>{
@@ -1220,9 +592,9 @@ class L {
         }
     }
     reset() {
-        t(this.Reveal.getRevealElement(), '[data-auto-animate]:not([data-auto-animate=""])').forEach((e)=>{
+        $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), '[data-auto-animate]:not([data-auto-animate=""])').forEach((e)=>{
             e.dataset.autoAnimate = "";
-        }), t(this.Reveal.getRevealElement(), "[data-auto-animate-target]").forEach((e)=>{
+        }), $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), "[data-auto-animate-target]").forEach((e)=>{
             delete e.dataset.autoAnimateTarget;
         }), this.autoAnimateStyleSheet && this.autoAnimateStyleSheet.parentNode && (this.autoAnimateStyleSheet.parentNode.removeChild(this.autoAnimateStyleSheet), this.autoAnimateStyleSheet = null);
     }
@@ -1231,12 +603,7 @@ class L {
         let n = this.getAutoAnimateOptions(t, s);
         void 0 !== i.delay && (n.delay = i.delay), void 0 !== i.duration && (n.duration = i.duration), void 0 !== i.easing && (n.easing = i.easing);
         let r = this.getAutoAnimatableProperties("from", e, i), o = this.getAutoAnimatableProperties("to", t, i);
-        if (t.classList.contains("fragment") && (delete o.styles.opacity, e.classList.contains("fragment"))) (e.className.match(w) || [
-            ""
-        ])[0] === (t.className.match(w) || [
-            ""
-        ])[0] && "forward" === s.slideDirection && t.classList.add("visible", "disabled");
-        if (!1 !== i.translate || !1 !== i.scale) {
+        if (t.classList.contains("fragment") && delete o.styles.opacity, !1 !== i.translate || !1 !== i.scale) {
             let e = this.Reveal.getScale(), t = {
                 x: (r.x - o.x) / e,
                 y: (r.y - o.y) / e,
@@ -1264,8 +631,8 @@ class L {
             duration: this.Reveal.getConfig().autoAnimateDuration,
             delay: 0
         };
-        if (s = e(s, i), t.parentNode) {
-            let e = r(t.parentNode, "[data-auto-animate-target]");
+        if (s = $ef6d0cb1bf5eee6a$var$e(s, i), t.parentNode) {
+            let e = $ef6d0cb1bf5eee6a$var$r(t.parentNode, "[data-auto-animate-target]");
             e && (s = this.getAutoAnimateOptions(e, s));
         }
         return t.dataset.autoAnimateEasing && (s.easing = t.dataset.autoAnimateEasing), t.dataset.autoAnimateDuration && (s.duration = parseFloat(t.dataset.autoAnimateDuration)), t.dataset.autoAnimateDelay && (s.delay = parseFloat(t.dataset.autoAnimateDelay)), s;
@@ -1312,10 +679,10 @@ class L {
     getAutoAnimatePairs(e, t) {
         let i = [];
         const s = "h1, h2, h3, h4, h5, h6, p, li";
-        return this.findAutoAnimateMatches(i, e, t, "[data-id]", (e)=>e.nodeName + ":::" + e.getAttribute("data-id")), this.findAutoAnimateMatches(i, e, t, s, (e)=>e.nodeName + ":::" + e.innerText), this.findAutoAnimateMatches(i, e, t, "img, video, iframe", (e)=>e.nodeName + ":::" + (e.getAttribute("src") || e.getAttribute("data-src"))), this.findAutoAnimateMatches(i, e, t, "pre", (e)=>e.nodeName + ":::" + e.innerText), i.forEach((e)=>{
-            n(e.from, s) ? e.options = {
+        return this.findAutoAnimateMatches(i, e, t, "[data-id]", (e)=>e.nodeName + ":::" + e.getAttribute("data-id")), this.findAutoAnimateMatches(i, e, t, s, (e)=>e.nodeName + ":::" + e.textContent.trim()), this.findAutoAnimateMatches(i, e, t, "img, video, iframe", (e)=>e.nodeName + ":::" + (e.getAttribute("src") || e.getAttribute("data-src"))), this.findAutoAnimateMatches(i, e, t, "pre", (e)=>e.nodeName + ":::" + e.textContent.trim()), i.forEach((e)=>{
+            $ef6d0cb1bf5eee6a$var$n(e.from, s) ? e.options = {
                 scale: !1
-            } : n(e.from, "pre") && (e.options = {
+            } : $ef6d0cb1bf5eee6a$var$n(e.from, "pre") && (e.options = {
                 scale: !1,
                 styles: [
                     "width",
@@ -1369,7 +736,7 @@ class L {
         }, []);
     }
 }
-class C {
+class $ef6d0cb1bf5eee6a$var$L {
     constructor(e){
         this.Reveal = e, this.active = !1, this.activatedCallbacks = [], this.onScroll = this.onScroll.bind(this);
     }
@@ -1377,7 +744,7 @@ class C {
         if (this.active) return;
         const e = this.Reveal.getState();
         this.active = !0, this.slideHTMLBeforeActivation = this.Reveal.getSlidesElement().innerHTML;
-        const i = t(this.Reveal.getRevealElement(), f), s = t(this.Reveal.getRevealElement(), ".backgrounds>.slide-background");
+        const i = $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), $ef6d0cb1bf5eee6a$var$f), s = $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), ".backgrounds>.slide-background");
         let a;
         this.viewportElement.classList.add("loading-scroll-mode", "reveal-scroll");
         const n = window.getComputedStyle(this.viewportElement);
@@ -1402,7 +769,7 @@ class C {
             this.Reveal.isVerticalStack(e) ? e.querySelectorAll("section").forEach((e, i)=>{
                 d(e, t, i, !0);
             }) : d(e, t, 0);
-        }, this), this.createProgressBar(), t(this.Reveal.getRevealElement(), ".stack").forEach((e)=>e.remove()), r.forEach((e)=>o.appendChild(e)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.layout(), this.Reveal.setState(e), this.activatedCallbacks.forEach((e)=>e()), this.activatedCallbacks = [], this.restoreScrollPosition(), this.viewportElement.classList.remove("loading-scroll-mode"), this.viewportElement.addEventListener("scroll", this.onScroll, {
+        }, this), this.createProgressBar(), $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), ".stack").forEach((e)=>e.remove()), r.forEach((e)=>o.appendChild(e)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.layout(), this.Reveal.setState(e), this.activatedCallbacks.forEach((e)=>e()), this.activatedCallbacks = [], this.restoreScrollPosition(), this.viewportElement.classList.remove("loading-scroll-mode"), this.viewportElement.addEventListener("scroll", this.onScroll, {
             passive: !0
         });
     }
@@ -1478,7 +845,7 @@ class C {
                     e + (i + 1) * s
                 ];
             }), e = t.range[1];
-        });
+        }), this.slideTriggers[this.slideTriggers.length - 1].range[1] = 1;
     }
     createFragmentTriggersForPage(e, t) {
         t = t || e.slideElement;
@@ -1606,13 +973,13 @@ class C {
         return this.Reveal.getViewportElement();
     }
 }
-class x {
+class $ef6d0cb1bf5eee6a$var$C {
     constructor(e){
         this.Reveal = e;
     }
     async activate() {
-        const e = this.Reveal.getConfig(), i = t(this.Reveal.getRevealElement(), m), s = e.slideNumber && /all|print/i.test(e.showSlideNumber), a = this.Reveal.getComputedSlideSize(window.innerWidth, window.innerHeight), n = Math.floor(a.width * (1 + e.margin)), r = Math.floor(a.height * (1 + e.margin)), o = a.width, d = a.height;
-        await new Promise(requestAnimationFrame), l("@page{size:" + n + "px " + r + "px; margin: 0px;}"), l(".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " + o + "px; max-height:" + d + "px}"), document.documentElement.classList.add("reveal-print", "print-pdf"), document.body.style.width = n + "px", document.body.style.height = r + "px";
+        const e = this.Reveal.getConfig(), i = $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), $ef6d0cb1bf5eee6a$var$m), s = e.slideNumber && /all|print/i.test(e.showSlideNumber), a = this.Reveal.getComputedSlideSize(window.innerWidth, window.innerHeight), n = Math.floor(a.width * (1 + e.margin)), r = Math.floor(a.height * (1 + e.margin)), o = a.width, d = a.height;
+        await new Promise(requestAnimationFrame), $ef6d0cb1bf5eee6a$var$l("@page{size:" + n + "px " + r + "px; margin: 0px;}"), $ef6d0cb1bf5eee6a$var$l(".reveal section>img, .reveal section>video, .reveal section>iframe{max-width: " + o + "px; max-height:" + d + "px}"), document.documentElement.classList.add("reveal-print", "print-pdf"), document.body.style.width = n + "px", document.body.style.height = r + "px";
         const c = this.Reveal.getViewportElement();
         let h;
         if (c) {
@@ -1620,14 +987,14 @@ class x {
             e && e.background && (h = e.background);
         }
         await new Promise(requestAnimationFrame), this.Reveal.layoutSlideContents(o, d), await new Promise(requestAnimationFrame);
-        const u = i.map((e)=>e.scrollHeight), g = [], p = i[0].parentNode;
-        let v = 1;
+        const u = i.map((e)=>e.scrollHeight), g = [], v = i[0].parentNode;
+        let p = 1;
         i.forEach(function(i, a) {
             if (!1 === i.classList.contains("stack")) {
                 let l = (n - o) / 2, c = (r - d) / 2;
-                const p = u[a];
-                let m = Math.max(Math.ceil(p / r), 1);
-                m = Math.min(m, e.pdfMaxPagesPerSlide), (1 === m && e.center || i.classList.contains("center")) && (c = Math.max((r - p) / 2, 0));
+                const v = u[a];
+                let m = Math.max(Math.ceil(v / r), 1);
+                m = Math.min(m, e.pdfMaxPagesPerSlide), (1 === m && e.center || i.classList.contains("center")) && (c = Math.max((r - v) / 2, 0));
                 const f = document.createElement("div");
                 if (g.push(f), f.className = "pdf-page", f.style.height = (r + e.pdfPageHeightOffset) * m + "px", h && (f.style.background = h), f.appendChild(i), i.style.left = l + "px", i.style.top = c + "px", i.style.width = o + "px", this.Reveal.slideContent.layout(i), i.slideBackgroundElement && f.insertBefore(i.slideBackgroundElement, i), e.showNotes) {
                     const t = this.Reveal.getSlideNotes(i);
@@ -1638,7 +1005,7 @@ class x {
                 }
                 if (s) {
                     const e = document.createElement("div");
-                    e.classList.add("slide-number"), e.classList.add("slide-number-pdf"), e.innerHTML = v++, f.appendChild(e);
+                    e.classList.add("slide-number"), e.classList.add("slide-number-pdf"), e.innerHTML = p++, f.appendChild(e);
                 }
                 if (e.pdfSeparateFragments) {
                     const e = this.Reveal.fragments.sort(f.querySelectorAll(".fragment"), !0);
@@ -1660,11 +1027,11 @@ class x {
                             e.classList.remove("visible", "current-fragment");
                         });
                     });
-                } else t(f, ".fragment:not(.fade-out)").forEach(function(e) {
+                } else $ef6d0cb1bf5eee6a$var$t(f, ".fragment:not(.fade-out)").forEach(function(e) {
                     e.classList.add("visible");
                 });
             }
-        }, this), await new Promise(requestAnimationFrame), g.forEach((e)=>p.appendChild(e)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.dispatchEvent({
+        }, this), await new Promise(requestAnimationFrame), g.forEach((e)=>v.appendChild(e)), this.Reveal.slideContent.layout(this.Reveal.getSlidesElement()), this.Reveal.dispatchEvent({
             type: "pdf-ready"
         }), c.classList.remove("loading-scroll-mode");
     }
@@ -1672,7 +1039,7 @@ class x {
         return "print" === this.Reveal.getConfig().view;
     }
 }
-class P {
+class $ef6d0cb1bf5eee6a$var$P {
     constructor(e){
         this.Reveal = e;
     }
@@ -1680,12 +1047,12 @@ class P {
         !1 === e.fragments ? this.disable() : !1 === t.fragments && this.enable();
     }
     disable() {
-        t(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
+        $ef6d0cb1bf5eee6a$var$t(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
             e.classList.add("visible"), e.classList.remove("current-fragment");
         });
     }
     enable() {
-        t(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
+        $ef6d0cb1bf5eee6a$var$t(this.Reveal.getSlidesElement(), ".fragment").forEach((e)=>{
             e.classList.remove("visible"), e.classList.remove("current-fragment");
         });
     }
@@ -1723,7 +1090,7 @@ class P {
     }
     sortAll() {
         this.Reveal.getHorizontalSlides().forEach((e)=>{
-            let i = t(e, "section");
+            let i = $ef6d0cb1bf5eee6a$var$t(e, "section");
             i.forEach((e, t)=>{
                 this.sort(e.querySelectorAll(".fragment"));
             }, this), 0 === i.length && this.sort(e.querySelectorAll(".fragment"));
@@ -1798,13 +1165,13 @@ class P {
         return this.goto(null, -1);
     }
 }
-class T {
+class $ef6d0cb1bf5eee6a$var$x {
     constructor(e){
         this.Reveal = e, this.active = !1, this.onSlideClicked = this.onSlideClicked.bind(this);
     }
     activate() {
         if (this.Reveal.getConfig().overview && !this.Reveal.isScrollView() && !this.isActive()) {
-            this.active = !0, this.Reveal.getRevealElement().classList.add("overview"), this.Reveal.cancelAutoSlide(), this.Reveal.getSlidesElement().appendChild(this.Reveal.getBackgroundsElement()), t(this.Reveal.getRevealElement(), m).forEach((e)=>{
+            this.active = !0, this.Reveal.getRevealElement().classList.add("overview"), this.Reveal.cancelAutoSlide(), this.Reveal.getSlidesElement().appendChild(this.Reveal.getBackgroundsElement()), $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), $ef6d0cb1bf5eee6a$var$m).forEach((e)=>{
                 e.classList.contains("stack") || e.addEventListener("click", this.onSlideClicked, !0);
             });
             const e = 70, i = this.Reveal.getComputedSlideSize();
@@ -1822,12 +1189,12 @@ class T {
     }
     layout() {
         this.Reveal.getHorizontalSlides().forEach((e, i)=>{
-            e.setAttribute("data-index-h", i), a(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), e.classList.contains("stack") && t(e, "section").forEach((e, t)=>{
-                e.setAttribute("data-index-h", i), e.setAttribute("data-index-v", t), a(e, "translate3d(0, " + t * this.overviewSlideHeight + "px, 0)");
+            e.setAttribute("data-index-h", i), $ef6d0cb1bf5eee6a$var$a(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), e.classList.contains("stack") && $ef6d0cb1bf5eee6a$var$t(e, "section").forEach((e, t)=>{
+                e.setAttribute("data-index-h", i), e.setAttribute("data-index-v", t), $ef6d0cb1bf5eee6a$var$a(e, "translate3d(0, " + t * this.overviewSlideHeight + "px, 0)");
             });
         }), Array.from(this.Reveal.getBackgroundsElement().childNodes).forEach((e, i)=>{
-            a(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), t(e, ".slide-background").forEach((e, t)=>{
-                a(e, "translate3d(0, " + t * this.overviewSlideHeight + "px, 0)");
+            $ef6d0cb1bf5eee6a$var$a(e, "translate3d(" + i * this.overviewSlideWidth + "px, 0, 0)"), $ef6d0cb1bf5eee6a$var$t(e, ".slide-background").forEach((e, t)=>{
+                $ef6d0cb1bf5eee6a$var$a(e, "translate3d(0, " + t * this.overviewSlideHeight + "px, 0)");
             });
         });
     }
@@ -1845,10 +1212,10 @@ class T {
         if (this.Reveal.getConfig().overview) {
             this.active = !1, this.Reveal.getRevealElement().classList.remove("overview"), this.Reveal.getRevealElement().classList.add("overview-deactivating"), setTimeout(()=>{
                 this.Reveal.getRevealElement().classList.remove("overview-deactivating");
-            }, 1), this.Reveal.getRevealElement().appendChild(this.Reveal.getBackgroundsElement()), t(this.Reveal.getRevealElement(), m).forEach((e)=>{
-                a(e, ""), e.removeEventListener("click", this.onSlideClicked, !0);
-            }), t(this.Reveal.getBackgroundsElement(), ".slide-background").forEach((e)=>{
-                a(e, "");
+            }, 1), this.Reveal.getRevealElement().appendChild(this.Reveal.getBackgroundsElement()), $ef6d0cb1bf5eee6a$var$t(this.Reveal.getRevealElement(), $ef6d0cb1bf5eee6a$var$m).forEach((e)=>{
+                $ef6d0cb1bf5eee6a$var$a(e, ""), e.removeEventListener("click", this.onSlideClicked, !0);
+            }), $ef6d0cb1bf5eee6a$var$t(this.Reveal.getBackgroundsElement(), ".slide-background").forEach((e)=>{
+                $ef6d0cb1bf5eee6a$var$a(e, "");
             }), this.Reveal.transformSlides({
                 overview: ""
             });
@@ -1881,7 +1248,7 @@ class T {
         }
     }
 }
-class N {
+class $ef6d0cb1bf5eee6a$var$T {
     constructor(e){
         this.Reveal = e, this.shortcuts = {}, this.bindings = {}, this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
     }
@@ -2000,10 +1367,10 @@ class N {
             66,
             86,
             190
-        ].includes(i) || 191 === i && !e.shiftKey ? this.Reveal.togglePause() : 70 === i ? o(t.embedded ? this.Reveal.getViewportElement() : document.documentElement) : 65 === i ? t.autoSlideStoppable && this.Reveal.toggleAutoSlide(s) : 71 === i ? t.jumpToSlide && this.Reveal.toggleJumpToSlide() : 63 !== i && 191 !== i || !e.shiftKey ? 112 === i ? this.Reveal.toggleHelp() : u = !1 : this.Reveal.toggleHelp()), u ? e.preventDefault && e.preventDefault() : 27 !== i && 79 !== i || (!1 === this.Reveal.closeOverlay() && this.Reveal.overview.toggle(), e.preventDefault && e.preventDefault()), this.Reveal.cueAutoSlide();
+        ].includes(i) || 191 === i && !e.shiftKey ? this.Reveal.togglePause() : 70 === i ? $ef6d0cb1bf5eee6a$var$o(t.embedded ? this.Reveal.getViewportElement() : document.documentElement) : 65 === i ? t.autoSlideStoppable && this.Reveal.toggleAutoSlide(s) : 71 === i ? t.jumpToSlide && this.Reveal.toggleJumpToSlide() : 63 !== i && 191 !== i || !e.shiftKey ? 112 === i ? this.Reveal.toggleHelp() : u = !1 : this.Reveal.toggleHelp()), u ? e.preventDefault && e.preventDefault() : 27 !== i && 79 !== i || (!1 === this.Reveal.closeOverlay() && this.Reveal.overview.toggle(), e.preventDefault && e.preventDefault()), this.Reveal.cueAutoSlide();
     }
 }
-class M {
+class $ef6d0cb1bf5eee6a$var$N {
     MAX_REPLACE_STATE_FREQUENCY = 1e3;
     constructor(e){
         this.Reveal = e, this.writeURLTimeout = 0, this.replaceStateTimestamp = 0, this.onWindowHashChange = this.onWindowHashChange.bind(this);
@@ -2071,23 +1438,23 @@ class M {
         this.readURL();
     }
 }
-class I {
+class $ef6d0cb1bf5eee6a$var$M {
     constructor(e){
         this.Reveal = e, this.onNavigateLeftClicked = this.onNavigateLeftClicked.bind(this), this.onNavigateRightClicked = this.onNavigateRightClicked.bind(this), this.onNavigateUpClicked = this.onNavigateUpClicked.bind(this), this.onNavigateDownClicked = this.onNavigateDownClicked.bind(this), this.onNavigatePrevClicked = this.onNavigatePrevClicked.bind(this), this.onNavigateNextClicked = this.onNavigateNextClicked.bind(this), this.onEnterFullscreen = this.onEnterFullscreen.bind(this);
     }
     render() {
         const e = this.Reveal.getConfig().rtl, i = this.Reveal.getRevealElement();
-        this.element = document.createElement("aside"), this.element.className = "controls", this.element.innerHTML = `<button class="navigate-left" aria-label="${e ? "next slide" : "previous slide"}"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-right" aria-label="${e ? "previous slide" : "next slide"}"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>`, this.Reveal.getRevealElement().appendChild(this.element), this.controlsLeft = t(i, ".navigate-left"), this.controlsRight = t(i, ".navigate-right"), this.controlsUp = t(i, ".navigate-up"), this.controlsDown = t(i, ".navigate-down"), this.controlsPrev = t(i, ".navigate-prev"), this.controlsNext = t(i, ".navigate-next"), this.controlsFullscreen = t(i, ".enter-fullscreen"), this.controlsRightArrow = this.element.querySelector(".navigate-right"), this.controlsLeftArrow = this.element.querySelector(".navigate-left"), this.controlsDownArrow = this.element.querySelector(".navigate-down");
+        this.element = document.createElement("aside"), this.element.className = "controls", this.element.innerHTML = `<button class="navigate-left" aria-label="${e ? "next slide" : "previous slide"}"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-right" aria-label="${e ? "previous slide" : "next slide"}"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-up" aria-label="above slide"><div class="controls-arrow"></div></button>\n\t\t\t<button class="navigate-down" aria-label="below slide"><div class="controls-arrow"></div></button>`, this.Reveal.getRevealElement().appendChild(this.element), this.controlsLeft = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-left"), this.controlsRight = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-right"), this.controlsUp = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-up"), this.controlsDown = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-down"), this.controlsPrev = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-prev"), this.controlsNext = $ef6d0cb1bf5eee6a$var$t(i, ".navigate-next"), this.controlsFullscreen = $ef6d0cb1bf5eee6a$var$t(i, ".enter-fullscreen"), this.controlsRightArrow = this.element.querySelector(".navigate-right"), this.controlsLeftArrow = this.element.querySelector(".navigate-left"), this.controlsDownArrow = this.element.querySelector(".navigate-down");
     }
     configure(e, t) {
-        this.element.style.display = e.controls ? "block" : "none", this.element.setAttribute("data-controls-layout", e.controlsLayout), this.element.setAttribute("data-controls-back-arrows", e.controlsBackArrows);
+        this.element.style.display = e.controls && ("speaker-only" !== e.controls || this.Reveal.isSpeakerNotes()) ? "block" : "none", this.element.setAttribute("data-controls-layout", e.controlsLayout), this.element.setAttribute("data-controls-back-arrows", e.controlsBackArrows);
     }
     bind() {
         let e = [
             "touchstart",
             "click"
         ];
-        g && (e = [
+        $ef6d0cb1bf5eee6a$var$g && (e = [
             "touchstart"
         ]), e.forEach((e)=>{
             this.controlsLeft.forEach((t)=>t.addEventListener(e, this.onNavigateLeftClicked, !1)), this.controlsRight.forEach((t)=>t.addEventListener(e, this.onNavigateRightClicked, !1)), this.controlsUp.forEach((t)=>t.addEventListener(e, this.onNavigateUpClicked, !1)), this.controlsDown.forEach((t)=>t.addEventListener(e, this.onNavigateDownClicked, !1)), this.controlsPrev.forEach((t)=>t.addEventListener(e, this.onNavigatePrevClicked, !1)), this.controlsNext.forEach((t)=>t.addEventListener(e, this.onNavigateNextClicked, !1)), this.controlsFullscreen.forEach((t)=>t.addEventListener(e, this.onEnterFullscreen, !1));
@@ -2132,7 +1499,9 @@ class I {
                 e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled");
             }), e.next && this.controlsNext.forEach((e)=>{
                 e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled");
-            }), this.Reveal.isVerticalSlide(t) ? (e.prev && this.controlsUp.forEach((e)=>{
+            });
+            const i = this.Reveal.isVerticalSlide(t), s = i && t.parentElement && t.parentElement.querySelectorAll(":scope > section").length > 1;
+            i && s ? (e.prev && this.controlsUp.forEach((e)=>{
                 e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled");
             }), e.next && this.controlsDown.forEach((e)=>{
                 e.classList.add("fragmented", "enabled"), e.removeAttribute("disabled");
@@ -2170,10 +1539,10 @@ class I {
     }
     onEnterFullscreen(e) {
         const t = this.Reveal.getConfig(), i = this.Reveal.getViewportElement();
-        o(t.embedded ? i : i.parentElement);
+        $ef6d0cb1bf5eee6a$var$o(t.embedded ? i : i.parentElement);
     }
 }
-class B {
+class $ef6d0cb1bf5eee6a$var$I {
     constructor(e){
         this.Reveal = e, this.onProgressClicked = this.onProgressClicked.bind(this);
     }
@@ -2209,7 +1578,7 @@ class B {
         this.element.remove();
     }
 }
-class H {
+class $ef6d0cb1bf5eee6a$var$B {
     constructor(e){
         this.Reveal = e, this.lastMouseWheelStep = 0, this.cursorHidden = !1, this.cursorInactiveTimeout = 0, this.onDocumentCursorActive = this.onDocumentCursorActive.bind(this), this.onDocumentMouseScroll = this.onDocumentMouseScroll.bind(this);
     }
@@ -2236,7 +1605,7 @@ class H {
         }
     }
 }
-const D = (e, t)=>{
+const $ef6d0cb1bf5eee6a$var$H = (e, t)=>{
     const i = document.createElement("script");
     i.type = "text/javascript", i.async = !1, i.defer = !1, i.src = e, "function" == typeof t && (i.onload = i.onreadystatechange = (e)=>{
         ("load" === e.type || /loaded|complete/.test(i.readyState)) && (i.onload = i.onreadystatechange = i.onerror = null, t());
@@ -2246,7 +1615,7 @@ const D = (e, t)=>{
     const s = document.querySelector("head");
     s.insertBefore(i, s.lastChild);
 };
-class F {
+class $ef6d0cb1bf5eee6a$var$D {
     constructor(e){
         this.Reveal = e, this.state = "idle", this.registeredPlugins = {}, this.asyncDependencies = [];
     }
@@ -2261,7 +1630,7 @@ class F {
                     t && "function" == typeof t.callback && t.callback(), 0 == --s && this.initPlugins().then(e);
                 };
                 i.forEach((e)=>{
-                    "string" == typeof e.id ? (this.registerPlugin(e), t(e)) : "string" == typeof e.src ? D(e.src, ()=>t(e)) : (console.warn("Unrecognized plugin format", e), t());
+                    "string" == typeof e.id ? (this.registerPlugin(e), t(e)) : "string" == typeof e.src ? $ef6d0cb1bf5eee6a$var$H(e.src, ()=>t(e)) : (console.warn("Unrecognized plugin format", e), t());
                 });
             } else this.initPlugins().then(e);
         });
@@ -2286,7 +1655,7 @@ class F {
     }
     loadAsync() {
         return this.state = "loaded", this.asyncDependencies.length && this.asyncDependencies.forEach((e)=>{
-            D(e.src, e.callback);
+            $ef6d0cb1bf5eee6a$var$H(e.src, e.callback);
         }), Promise.resolve();
     }
     registerPlugin(e) {
@@ -2309,7 +1678,112 @@ class F {
         }), this.registeredPlugins = {}, this.asyncDependencies = [];
     }
 }
-class z {
+class $ef6d0cb1bf5eee6a$var$F {
+    constructor(e){
+        this.Reveal = e, this.onSlidesClicked = this.onSlidesClicked.bind(this), this.linkPreviewSelector = null, this.mediaPreviewSelector = "[data-preview-image], [data-preview-video]";
+    }
+    update() {
+        this.Reveal.getConfig().previewLinks ? this.linkPreviewSelector = "a[href]:not([data-preview-link=false])" : this.linkPreviewSelector = "[data-preview-link]:not([data-preview-link=false])", this.hasLinkPreviews = this.Reveal.getSlidesElement().querySelectorAll(this.linkPreviewSelector).length > 0, this.hasMediaPreviews = this.Reveal.getSlidesElement().querySelectorAll(this.mediaPreviewSelector).length > 0, this.hasLinkPreviews || this.hasMediaPreviews ? this.Reveal.getSlidesElement().addEventListener("click", this.onSlidesClicked, !1) : this.Reveal.getSlidesElement().removeEventListener("click", this.onSlidesClicked, !1);
+    }
+    createOverlay(e) {
+        this.dom = document.createElement("div"), this.dom.classList.add("r-overlay"), this.dom.classList.add(e), this.viewport = document.createElement("div"), this.viewport.classList.add("r-overlay-viewport"), this.dom.appendChild(this.viewport), this.Reveal.getRevealElement().appendChild(this.dom);
+    }
+    showIframePreview(e) {
+        this.close(), this.createOverlay("r-overlay-preview"), this.dom.dataset.state = "loading", this.viewport.innerHTML = `<header class="r-overlay-header">\n\t\t\t\t<a class="r-overlay-button r-overlay-external" href="${e}" target="_blank"><span class="icon"></span></a>\n\t\t\t\t<button class="r-overlay-button r-overlay-close"><span class="icon"></span></button>\n\t\t\t</header>\n\t\t\t<div class="r-overlay-spinner"></div>\n\t\t\t<div class="r-overlay-content">\n\t\t\t\t<iframe src="${e}"></iframe>\n\t\t\t\t<small class="r-overlay-content-inner">\n\t\t\t\t\t<span class="r-overlay-error x-frame-error">Unable to load iframe. This is likely due to the site's policy (x-frame-options).</span>\n\t\t\t\t</small>\n\t\t\t</div>`, this.dom.querySelector("iframe").addEventListener("load", (e)=>{
+            this.dom.dataset.state = "loaded";
+        }, !1), this.dom.querySelector(".r-overlay-close").addEventListener("click", (e)=>{
+            this.close(), e.preventDefault();
+        }, !1), this.dom.querySelector(".r-overlay-external").addEventListener("click", (e)=>{
+            this.close();
+        }, !1), this.Reveal.dispatchEvent({
+            type: "showiframepreview",
+            data: {
+                url: e
+            }
+        });
+    }
+    showMediaPreview(e, t, i) {
+        if ("image" !== t && "video" !== t) return void console.warn("Please specify a valid media type to preview (image|video)");
+        this.close(), this.createOverlay("r-overlay-preview"), this.dom.dataset.state = "loading", this.dom.dataset.previewFit = i && i.dataset.previewFit || "scale-down", this.viewport.innerHTML = '<header class="r-overlay-header">\n\t\t\t\t<button class="r-overlay-button r-overlay-close">Esc <span class="icon"></span></button>\n\t\t\t</header>\n\t\t\t<div class="r-overlay-spinner"></div>\n\t\t\t<div class="r-overlay-content"></div>';
+        const s = this.dom.querySelector(".r-overlay-content");
+        if ("image" === t) {
+            const t = document.createElement("img", {});
+            t.src = e, s.appendChild(t), t.addEventListener("load", ()=>{
+                this.dom.dataset.state = "loaded";
+            }, !1), t.addEventListener("error", ()=>{
+                this.dom.dataset.state = "error", s.innerHTML = '<span class="r-overlay-error">Unable to load image.</span>';
+            }, !1), this.dom.style.cursor = "zoom-out", this.dom.addEventListener("click", (e)=>{
+                this.close();
+            }, !1);
+        } else {
+            if ("video" !== t) throw new Error("Please specify a valid media type to preview");
+            {
+                const t = document.createElement("video");
+                t.autoplay = "false" !== this.dom.dataset.previewAutoplay, t.controls = "false" !== this.dom.dataset.previewControls, t.loop = "true" === this.dom.dataset.previewLoop, t.muted = "true" === this.dom.dataset.previewMuted, t.playsInline = !0, t.src = e, s.appendChild(t), t.addEventListener("loadeddata", ()=>{
+                    this.dom.dataset.state = "loaded";
+                }, !1), t.addEventListener("error", ()=>{
+                    this.dom.dataset.state = "error", s.innerHTML = '<span class="r-overlay-error">Unable to load video.</span>';
+                }, !1);
+            }
+        }
+        this.dom.querySelector(".r-overlay-close").addEventListener("click", (e)=>{
+            this.close(), e.preventDefault();
+        }, !1), this.Reveal.dispatchEvent({
+            type: "showmediapreview",
+            data: {
+                mediaType: t,
+                url: e,
+                trigger: i
+            }
+        });
+    }
+    toggleHelp(e) {
+        "boolean" == typeof e ? e ? this.showHelp() : this.close() : this.dom ? this.close() : this.showHelp();
+    }
+    showHelp() {
+        if (this.Reveal.getConfig().help) {
+            this.close(), this.createOverlay("r-overlay-help");
+            let e = '<p class="title">Keyboard Shortcuts</p>', t = this.Reveal.keyboard.getShortcuts(), i = this.Reveal.keyboard.getBindings();
+            e += "<table><th>KEY</th><th>ACTION</th>";
+            for(let i in t)e += `<tr><td>${i}</td><td>${t[i]}</td></tr>`;
+            for(let t in i)i[t].key && i[t].description && (e += `<tr><td>${i[t].key}</td><td>${i[t].description}</td></tr>`);
+            e += "</table>", this.viewport.innerHTML = `\n\t\t\t\t<header class="r-overlay-header">\n\t\t\t\t\t<button class="r-overlay-button r-overlay-close">Esc <span class="icon"></span></button>\n\t\t\t\t</header>\n\t\t\t\t<div class="r-overlay-content">\n\t\t\t\t\t<div class="r-overlay-help-content">${e}</div>\n\t\t\t\t</div>\n\t\t\t`, this.dom.querySelector(".r-overlay-close").addEventListener("click", (e)=>{
+                this.close(), e.preventDefault();
+            }, !1), this.Reveal.dispatchEvent({
+                type: "showhelp"
+            });
+        }
+    }
+    isOpen() {
+        return !!this.dom;
+    }
+    close() {
+        return !!this.dom && (this.dom.remove(), this.dom = null, !0);
+    }
+    onSlidesClicked(e) {
+        const t = e.target, i = t.closest(this.linkPreviewSelector), s = t.closest(this.mediaPreviewSelector);
+        if (i) {
+            let t = i.getAttribute("href");
+            t && (this.showIframePreview(t), e.preventDefault());
+        } else if (s) {
+            if (s.hasAttribute("data-preview-image")) {
+                let t = s.dataset.previewImage || s.getAttribute("src");
+                t && (this.showMediaPreview(t, "image", s), e.preventDefault());
+            } else if (s.hasAttribute("data-preview-video")) {
+                let t = s.dataset.previewVideo || s.getAttribute("src");
+                if (!t) {
+                    let e = s.querySelector("source");
+                    e && (t = e.getAttribute("src"));
+                }
+                t && (this.showMediaPreview(t, "video", s), e.preventDefault());
+            }
+        }
+    }
+    destroy() {
+        this.close();
+    }
+}
+class $ef6d0cb1bf5eee6a$var$z {
     constructor(e){
         this.Reveal = e, this.touchStartX = 0, this.touchStartY = 0, this.touchStartCount = 0, this.touchCaptured = !1, this.onPointerDown = this.onPointerDown.bind(this), this.onPointerMove = this.onPointerMove.bind(this), this.onPointerUp = this.onPointerUp.bind(this), this.onTouchStart = this.onTouchStart.bind(this), this.onTouchMove = this.onTouchMove.bind(this), this.onTouchEnd = this.onTouchEnd.bind(this);
     }
@@ -2322,7 +1796,7 @@ class z {
         e.removeEventListener("pointerdown", this.onPointerDown, !1), e.removeEventListener("pointermove", this.onPointerMove, !1), e.removeEventListener("pointerup", this.onPointerUp, !1), e.removeEventListener("MSPointerDown", this.onPointerDown, !1), e.removeEventListener("MSPointerMove", this.onPointerMove, !1), e.removeEventListener("MSPointerUp", this.onPointerUp, !1), e.removeEventListener("touchstart", this.onTouchStart, !1), e.removeEventListener("touchmove", this.onTouchMove, !1), e.removeEventListener("touchend", this.onTouchEnd, !1);
     }
     isSwipePrevented(e) {
-        if (n(e, "video[controls], audio[controls]")) return !0;
+        if ($ef6d0cb1bf5eee6a$var$n(e, "video[controls], audio[controls]")) return !0;
         for(; e && "function" == typeof e.hasAttribute;){
             if (e.hasAttribute("data-prevent-swipe")) return !0;
             e = e.parentNode;
@@ -2336,7 +1810,7 @@ class z {
     onTouchMove(e) {
         if (this.isSwipePrevented(e.target)) return !0;
         let t = this.Reveal.getConfig();
-        if (this.touchCaptured) g && e.preventDefault();
+        if (this.touchCaptured) $ef6d0cb1bf5eee6a$var$g && e.preventDefault();
         else {
             this.Reveal.onUserInput(e);
             let i = e.touches[0].clientX, s = e.touches[0].clientY;
@@ -2376,8 +1850,8 @@ class z {
         ], this.onTouchEnd(e));
     }
 }
-const q = "focus", O = "blur";
-class W {
+const $ef6d0cb1bf5eee6a$var$q = "focus", $ef6d0cb1bf5eee6a$var$O = "blur";
+class $ef6d0cb1bf5eee6a$var$U {
     constructor(e){
         this.Reveal = e, this.onRevealPointerDown = this.onRevealPointerDown.bind(this), this.onDocumentPointerDown = this.onDocumentPointerDown.bind(this);
     }
@@ -2391,13 +1865,13 @@ class W {
         this.Reveal.getRevealElement().removeEventListener("pointerdown", this.onRevealPointerDown, !1), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1);
     }
     focus() {
-        this.state !== q && (this.Reveal.getRevealElement().classList.add("focused"), document.addEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = q;
+        this.state !== $ef6d0cb1bf5eee6a$var$q && (this.Reveal.getRevealElement().classList.add("focused"), document.addEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = $ef6d0cb1bf5eee6a$var$q;
     }
     blur() {
-        this.state !== O && (this.Reveal.getRevealElement().classList.remove("focused"), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = O;
+        this.state !== $ef6d0cb1bf5eee6a$var$O && (this.Reveal.getRevealElement().classList.remove("focused"), document.removeEventListener("pointerdown", this.onDocumentPointerDown, !1)), this.state = $ef6d0cb1bf5eee6a$var$O;
     }
     isFocused() {
-        return this.state === q;
+        return this.state === $ef6d0cb1bf5eee6a$var$q;
     }
     destroy() {
         this.Reveal.getRevealElement().classList.remove("focused");
@@ -2406,11 +1880,11 @@ class W {
         this.focus();
     }
     onDocumentPointerDown(e) {
-        let t = r(e.target, ".reveal");
+        let t = $ef6d0cb1bf5eee6a$var$r(e.target, ".reveal");
         t && t === this.Reveal.getRevealElement() || this.blur();
     }
 }
-class U {
+class $ef6d0cb1bf5eee6a$var$W {
     constructor(e){
         this.Reveal = e;
     }
@@ -2441,7 +1915,7 @@ class U {
         this.element.remove();
     }
 }
-class V {
+class $ef6d0cb1bf5eee6a$var$V {
     constructor(e, t){
         this.diameter = 100, this.diameter2 = this.diameter / 2, this.thickness = 6, this.playing = !1, this.progress = 0, this.progressOffset = 1, this.container = e, this.progressCheck = t, this.canvas = document.createElement("canvas"), this.canvas.className = "playback", this.canvas.width = this.diameter, this.canvas.height = this.diameter, this.canvas.style.width = this.diameter2 + "px", this.canvas.style.height = this.diameter2 + "px", this.context = this.canvas.getContext("2d"), this.container.appendChild(this.canvas), this.render();
     }
@@ -2469,7 +1943,7 @@ class V {
         this.playing = !1, this.canvas.parentNode && this.container.removeChild(this.canvas);
     }
 }
-var j = {
+var $ef6d0cb1bf5eee6a$var$j = {
     width: 960,
     height: 700,
     margin: .04,
@@ -2560,24 +2034,24 @@ var j = {
     dependencies: [],
     plugins: []
 };
-const K = "5.1.0";
-function $(n, o) {
+const $ef6d0cb1bf5eee6a$var$K = "5.2.0";
+function $ef6d0cb1bf5eee6a$var$$(n, o) {
     arguments.length < 2 && (o = arguments[0], n = document.querySelector(".reveal"));
     const l = {};
-    let c, h, g, p, w, A = {}, k = !1, D = !1, q = {
+    let c, h, g, v, S, A = {}, H = !1, q = !1, O = {
         hasNavigatedHorizontally: !1,
         hasNavigatedVertically: !1
-    }, O = [], $ = 1, X = {
+    }, $ = [], X = 1, Y = {
         layout: "",
         overview: ""
-    }, Y = {}, _ = "idle", J = 0, G = 0, Q = -1, Z = !1, ee = new v(l), te = new E(l), ie = new S(l), se = new L(l), ae = new R(l), ne = new C(l), re = new x(l), oe = new P(l), le = new T(l), de = new N(l), ce = new M(l), he = new I(l), ue = new B(l), ge = new H(l), pe = new F(l), ve = new W(l), me = new z(l), fe = new U(l);
-    function ye() {
-        D = !0, A.showHiddenSlides || t(Y.wrapper, 'section[data-visibility="hidden"]').forEach((e)=>{
+    }, _ = {}, J = "idle", G = 0, Q = 0, Z = -1, ee = !1, te = new $ef6d0cb1bf5eee6a$var$p(l), ie = new $ef6d0cb1bf5eee6a$var$w(l), se = new $ef6d0cb1bf5eee6a$var$E(l), ae = new $ef6d0cb1bf5eee6a$var$k(l), ne = new $ef6d0cb1bf5eee6a$var$R(l), re = new $ef6d0cb1bf5eee6a$var$L(l), oe = new $ef6d0cb1bf5eee6a$var$C(l), le = new $ef6d0cb1bf5eee6a$var$P(l), de = new $ef6d0cb1bf5eee6a$var$x(l), ce = new $ef6d0cb1bf5eee6a$var$T(l), he = new $ef6d0cb1bf5eee6a$var$N(l), ue = new $ef6d0cb1bf5eee6a$var$M(l), ge = new $ef6d0cb1bf5eee6a$var$I(l), ve = new $ef6d0cb1bf5eee6a$var$B(l), pe = new $ef6d0cb1bf5eee6a$var$D(l), me = new $ef6d0cb1bf5eee6a$var$F(l), fe = new $ef6d0cb1bf5eee6a$var$U(l), ye = new $ef6d0cb1bf5eee6a$var$z(l), be = new $ef6d0cb1bf5eee6a$var$W(l);
+    function we() {
+        !1 !== H && (q = !0, A.showHiddenSlides || $ef6d0cb1bf5eee6a$var$t(_.wrapper, 'section[data-visibility="hidden"]').forEach((e)=>{
             const t = e.parentNode;
             1 === t.childElementCount && /section/i.test(t.nodeName) ? t.remove() : e.remove();
         }), function() {
-            Y.slides.classList.add("no-transition"), u ? Y.wrapper.classList.add("no-hover") : Y.wrapper.classList.remove("no-hover");
-            ae.render(), te.render(), ie.render(), he.render(), ue.render(), fe.render(), Y.pauseOverlay = ((e, t, i, s = "")=>{
+            _.slides.classList.add("no-transition"), $ef6d0cb1bf5eee6a$var$u ? _.wrapper.classList.add("no-hover") : _.wrapper.classList.remove("no-hover");
+            ne.render(), ie.render(), se.render(), ue.render(), ge.render(), be.render(), _.pauseOverlay = ((e, t, i, s = "")=>{
                 let a = e.querySelectorAll("." + i);
                 for(let t = 0; t < a.length; t++){
                     let i = a[t];
@@ -2585,163 +2059,129 @@ function $(n, o) {
                 }
                 let n = document.createElement(t);
                 return n.className = i, n.innerHTML = s, e.appendChild(n), n;
-            })(Y.wrapper, "div", "pause-overlay", A.controls ? '<button class="resume-button">Resume presentation</button>' : null), Y.statusElement = function() {
-                let e = Y.wrapper.querySelector(".aria-status");
-                e || (e = document.createElement("div"), e.style.position = "absolute", e.style.height = "1px", e.style.width = "1px", e.style.overflow = "hidden", e.style.clip = "rect( 1px, 1px, 1px, 1px )", e.classList.add("aria-status"), e.setAttribute("aria-live", "polite"), e.setAttribute("aria-atomic", "true"), Y.wrapper.appendChild(e));
+            })(_.wrapper, "div", "pause-overlay", A.controls ? '<button class="resume-button">Resume presentation</button>' : null), _.statusElement = function() {
+                let e = _.wrapper.querySelector(".aria-status");
+                e || (e = document.createElement("div"), e.style.position = "absolute", e.style.height = "1px", e.style.width = "1px", e.style.overflow = "hidden", e.style.clip = "rect( 1px, 1px, 1px, 1px )", e.classList.add("aria-status"), e.setAttribute("aria-live", "polite"), e.setAttribute("aria-atomic", "true"), _.wrapper.appendChild(e));
                 return e;
-            }(), Y.wrapper.setAttribute("role", "application");
-        }(), A.postMessage && window.addEventListener("message", At, !1), setInterval(()=>{
-            (!ne.isActive() && 0 !== Y.wrapper.scrollTop || 0 !== Y.wrapper.scrollLeft) && (Y.wrapper.scrollTop = 0, Y.wrapper.scrollLeft = 0);
-        }, 1e3), document.addEventListener("fullscreenchange", xt), document.addEventListener("webkitfullscreenchange", xt), rt().forEach((e)=>{
-            t(e, "section").forEach((e, t)=>{
+            }(), _.wrapper.setAttribute("role", "application");
+        }(), A.postMessage && window.addEventListener("message", wt, !1), setInterval(()=>{
+            (!re.isActive() && 0 !== _.wrapper.scrollTop || 0 !== _.wrapper.scrollLeft) && (_.wrapper.scrollTop = 0, _.wrapper.scrollLeft = 0);
+        }, 1e3), document.addEventListener("fullscreenchange", kt), document.addEventListener("webkitfullscreenchange", kt), st().forEach((e)=>{
+            $ef6d0cb1bf5eee6a$var$t(e, "section").forEach((e, t)=>{
                 t > 0 && (e.classList.remove("present"), e.classList.remove("past"), e.classList.add("future"), e.setAttribute("aria-hidden", "true"));
             });
-        }), Ee(), ae.update(!0), function() {
+        }), Re(), ne.update(!0), function() {
             const e = "print" === A.view, t = "scroll" === A.view || "reader" === A.view;
-            (e || t) && (e ? Ae() : me.unbind(), Y.viewport.classList.add("loading-scroll-mode"), e ? "complete" === document.readyState ? re.activate() : window.addEventListener("load", ()=>re.activate()) : ne.activate());
-        }(), ce.readURL(), setTimeout(()=>{
-            Y.slides.classList.remove("no-transition"), Y.wrapper.classList.add("ready"), Ce({
+            (e || t) && (e ? ke() : ye.unbind(), _.viewport.classList.add("loading-scroll-mode"), e ? "complete" === document.readyState ? oe.activate() : window.addEventListener("load", ()=>oe.activate()) : re.activate());
+        }(), he.readURL(), setTimeout(()=>{
+            _.slides.classList.remove("no-transition"), _.wrapper.classList.add("ready"), xe({
                 type: "ready",
                 data: {
                     indexh: c,
                     indexv: h,
-                    currentSlide: p
+                    currentSlide: v
                 }
             });
-        }, 1);
+        }, 1));
     }
-    function be(e) {
-        Y.statusElement.textContent = e;
+    function Ee(e) {
+        _.statusElement.textContent = e;
     }
-    function we(e) {
+    function Se(e) {
         let t = "";
         if (3 === e.nodeType) t += e.textContent;
         else if (1 === e.nodeType) {
             let i = e.getAttribute("aria-hidden"), s = "none" === window.getComputedStyle(e).display;
             "true" === i || s || Array.from(e.childNodes).forEach((e)=>{
-                t += we(e);
+                t += Se(e);
             });
         }
         return t = t.trim(), "" === t ? "" : t + " ";
     }
-    function Ee(t) {
+    function Re(t) {
         const s = {
             ...A
         };
-        if ("object" == typeof t && e(A, t), !1 === l.isReady()) return;
-        const a = Y.wrapper.querySelectorAll(m).length;
-        Y.wrapper.classList.remove(s.transition), Y.wrapper.classList.add(A.transition), Y.wrapper.setAttribute("data-transition-speed", A.transitionSpeed), Y.wrapper.setAttribute("data-background-transition", A.backgroundTransition), Y.viewport.style.setProperty("--slide-width", "string" == typeof A.width ? A.width : A.width + "px"), Y.viewport.style.setProperty("--slide-height", "string" == typeof A.height ? A.height : A.height + "px"), A.shuffle && Ge(), i(Y.wrapper, "embedded", A.embedded), i(Y.wrapper, "rtl", A.rtl), i(Y.wrapper, "center", A.center), !1 === A.pause && Ke(), A.previewLinks ? (Te(), Ne("[data-preview-link=false]")) : (Ne(), Te("[data-preview-link]:not([data-preview-link=false])")), se.reset(), w && (w.destroy(), w = null), a > 1 && A.autoSlide && A.autoSlideStoppable && (w = new V(Y.wrapper, ()=>Math.min(Math.max((Date.now() - Q) / J, 0), 1)), w.on("click", Tt), Z = !1), "default" !== A.navigationMode ? Y.wrapper.setAttribute("data-navigation-mode", A.navigationMode) : Y.wrapper.removeAttribute("data-navigation-mode"), fe.configure(A, s), ve.configure(A, s), ge.configure(A, s), he.configure(A, s), ue.configure(A, s), de.configure(A, s), oe.configure(A, s), te.configure(A, s), Je();
-    }
-    function Se() {
-        window.addEventListener("resize", Lt, !1), A.touch && me.bind(), A.keyboard && de.bind(), A.progress && ue.bind(), A.respondToHashChanges && ce.bind(), he.bind(), ve.bind(), Y.slides.addEventListener("click", kt, !1), Y.slides.addEventListener("transitionend", Rt, !1), Y.pauseOverlay.addEventListener("click", Ke, !1), A.focusBodyOnPageVisibilityChange && document.addEventListener("visibilitychange", Ct, !1);
+        if ("object" == typeof t && $ef6d0cb1bf5eee6a$var$e(A, t), !1 === l.isReady()) return;
+        const a = _.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$m).length;
+        _.wrapper.classList.remove(s.transition), _.wrapper.classList.add(A.transition), _.wrapper.setAttribute("data-transition-speed", A.transitionSpeed), _.wrapper.setAttribute("data-background-transition", A.backgroundTransition), _.viewport.style.setProperty("--slide-width", "string" == typeof A.width ? A.width : A.width + "px"), _.viewport.style.setProperty("--slide-height", "string" == typeof A.height ? A.height : A.height + "px"), A.shuffle && Ye(), $ef6d0cb1bf5eee6a$var$i(_.wrapper, "embedded", A.embedded), $ef6d0cb1bf5eee6a$var$i(_.wrapper, "rtl", A.rtl), $ef6d0cb1bf5eee6a$var$i(_.wrapper, "center", A.center), !1 === A.pause && We(), ae.reset(), S && (S.destroy(), S = null), a > 1 && A.autoSlide && A.autoSlideStoppable && (S = new $ef6d0cb1bf5eee6a$var$V(_.wrapper, ()=>Math.min(Math.max((Date.now() - Z) / G, 0), 1)), S.on("click", Lt), ee = !1), "default" !== A.navigationMode ? _.wrapper.setAttribute("data-navigation-mode", A.navigationMode) : _.wrapper.removeAttribute("data-navigation-mode"), be.configure(A, s), fe.configure(A, s), ve.configure(A, s), ue.configure(A, s), ge.configure(A, s), ce.configure(A, s), le.configure(A, s), ie.configure(A, s), Xe();
     }
     function Ae() {
-        me.unbind(), ve.unbind(), de.unbind(), he.unbind(), ue.unbind(), ce.unbind(), window.removeEventListener("resize", Lt, !1), Y.slides.removeEventListener("click", kt, !1), Y.slides.removeEventListener("transitionend", Rt, !1), Y.pauseOverlay.removeEventListener("click", Ke, !1);
+        window.addEventListener("resize", Rt, !1), A.touch && ye.bind(), A.keyboard && ce.bind(), A.progress && ge.bind(), A.respondToHashChanges && he.bind(), ue.bind(), fe.bind(), _.slides.addEventListener("click", St, !1), _.slides.addEventListener("transitionend", Et, !1), _.pauseOverlay.addEventListener("click", We, !1), A.focusBodyOnPageVisibilityChange && document.addEventListener("visibilitychange", At, !1);
     }
-    function Re(e, t, i) {
+    function ke() {
+        ye.unbind(), fe.unbind(), ce.unbind(), ue.unbind(), ge.unbind(), he.unbind(), window.removeEventListener("resize", Rt, !1), _.slides.removeEventListener("click", St, !1), _.slides.removeEventListener("transitionend", Et, !1), _.pauseOverlay.removeEventListener("click", We, !1);
+    }
+    function Le(e, t, i) {
         n.addEventListener(e, t, i);
     }
-    function ke(e, t, i) {
+    function Ce(e, t, i) {
         n.removeEventListener(e, t, i);
     }
-    function Le(e) {
-        "string" == typeof e.layout && (X.layout = e.layout), "string" == typeof e.overview && (X.overview = e.overview), X.layout ? a(Y.slides, X.layout + " " + X.overview) : a(Y.slides, X.overview);
+    function Pe(e) {
+        "string" == typeof e.layout && (Y.layout = e.layout), "string" == typeof e.overview && (Y.overview = e.overview), Y.layout ? $ef6d0cb1bf5eee6a$var$a(_.slides, Y.layout + " " + Y.overview) : $ef6d0cb1bf5eee6a$var$a(_.slides, Y.overview);
     }
-    function Ce({ target: t = Y.wrapper, type: i, data: s, bubbles: a = !0 }) {
+    function xe({ target: t = _.wrapper, type: i, data: s, bubbles: a = !0 }) {
         let n = document.createEvent("HTMLEvents", 1, 2);
-        return n.initEvent(i, a, !0), e(n, s), t.dispatchEvent(n), t === Y.wrapper && Pe(i), n;
+        return n.initEvent(i, a, !0), $ef6d0cb1bf5eee6a$var$e(n, s), t.dispatchEvent(n), t === _.wrapper && Ne(i), n;
     }
-    function xe(e) {
-        Ce({
+    function Te(e) {
+        xe({
             type: "slidechanged",
             data: {
                 indexh: c,
                 indexv: h,
                 previousSlide: g,
-                currentSlide: p,
+                currentSlide: v,
                 origin: e
             }
         });
     }
-    function Pe(t, i) {
+    function Ne(t, i) {
         if (A.postMessageEvents && window.parent !== window.self) {
             let s = {
                 namespace: "reveal",
                 eventName: t,
-                state: ut()
+                state: dt()
             };
-            e(s, i), window.parent.postMessage(JSON.stringify(s), "*");
+            $ef6d0cb1bf5eee6a$var$e(s, i), window.parent.postMessage(JSON.stringify(s), "*");
         }
     }
-    function Te(e = "a") {
-        Array.from(Y.wrapper.querySelectorAll(e)).forEach((e)=>{
-            /^(http|www)/gi.test(e.getAttribute("href")) && e.addEventListener("click", Pt, !1);
-        });
-    }
-    function Ne(e = "a") {
-        Array.from(Y.wrapper.querySelectorAll(e)).forEach((e)=>{
-            /^(http|www)/gi.test(e.getAttribute("href")) && e.removeEventListener("click", Pt, !1);
-        });
-    }
-    function Me(e) {
-        Be(), Y.overlay = document.createElement("div"), Y.overlay.classList.add("overlay"), Y.overlay.classList.add("overlay-preview"), Y.wrapper.appendChild(Y.overlay), Y.overlay.innerHTML = `<header>\n\t\t\t\t<a class="close" href="#"><span class="icon"></span></a>\n\t\t\t\t<a class="external" href="${e}" target="_blank"><span class="icon"></span></a>\n\t\t\t</header>\n\t\t\t<div class="spinner"></div>\n\t\t\t<div class="viewport">\n\t\t\t\t<iframe src="${e}"></iframe>\n\t\t\t\t<small class="viewport-inner">\n\t\t\t\t\t<span class="x-frame-error">Unable to load iframe. This is likely due to the site's policy (x-frame-options).</span>\n\t\t\t\t</small>\n\t\t\t</div>`, Y.overlay.querySelector("iframe").addEventListener("load", (e)=>{
-            Y.overlay.classList.add("loaded");
-        }, !1), Y.overlay.querySelector(".close").addEventListener("click", (e)=>{
-            Be(), e.preventDefault();
-        }, !1), Y.overlay.querySelector(".external").addEventListener("click", (e)=>{
-            Be();
-        }, !1);
-    }
-    function Ie() {
-        if (A.help) {
-            Be(), Y.overlay = document.createElement("div"), Y.overlay.classList.add("overlay"), Y.overlay.classList.add("overlay-help"), Y.wrapper.appendChild(Y.overlay);
-            let e = '<p class="title">Keyboard Shortcuts</p><br/>', t = de.getShortcuts(), i = de.getBindings();
-            e += "<table><th>KEY</th><th>ACTION</th>";
-            for(let i in t)e += `<tr><td>${i}</td><td>${t[i]}</td></tr>`;
-            for(let t in i)i[t].key && i[t].description && (e += `<tr><td>${i[t].key}</td><td>${i[t].description}</td></tr>`);
-            e += "</table>", Y.overlay.innerHTML = `\n\t\t\t\t<header>\n\t\t\t\t\t<a class="close" href="#"><span class="icon"></span></a>\n\t\t\t\t</header>\n\t\t\t\t<div class="viewport">\n\t\t\t\t\t<div class="viewport-inner">${e}</div>\n\t\t\t\t</div>\n\t\t\t`, Y.overlay.querySelector(".close").addEventListener("click", (e)=>{
-                Be(), e.preventDefault();
-            }, !1);
-        }
-    }
-    function Be() {
-        return !!Y.overlay && (Y.overlay.parentNode.removeChild(Y.overlay), Y.overlay = null, !0);
-    }
-    function He() {
-        if (Y.wrapper && !re.isActive()) {
-            const e = Y.viewport.offsetWidth, t = Y.viewport.offsetHeight;
+    function Me() {
+        if (_.wrapper && !oe.isActive()) {
+            const e = _.viewport.offsetWidth, t = _.viewport.offsetHeight;
             if (!A.disableLayout) {
-                u && !A.embedded && document.documentElement.style.setProperty("--vh", .01 * window.innerHeight + "px");
-                const i = ne.isActive() ? Fe(e, t) : Fe(), s = $;
-                De(A.width, A.height), Y.slides.style.width = i.width + "px", Y.slides.style.height = i.height + "px", $ = Math.min(i.presentationWidth / i.width, i.presentationHeight / i.height), $ = Math.max($, A.minScale), $ = Math.min($, A.maxScale), 1 === $ || ne.isActive() ? (Y.slides.style.zoom = "", Y.slides.style.left = "", Y.slides.style.top = "", Y.slides.style.bottom = "", Y.slides.style.right = "", Le({
+                $ef6d0cb1bf5eee6a$var$u && !A.embedded && document.documentElement.style.setProperty("--vh", .01 * window.innerHeight + "px");
+                const i = re.isActive() ? Be(e, t) : Be(), s = X;
+                Ie(A.width, A.height), _.slides.style.width = i.width + "px", _.slides.style.height = i.height + "px", X = Math.min(i.presentationWidth / i.width, i.presentationHeight / i.height), X = Math.max(X, A.minScale), X = Math.min(X, A.maxScale), 1 === X || re.isActive() ? (_.slides.style.zoom = "", _.slides.style.left = "", _.slides.style.top = "", _.slides.style.bottom = "", _.slides.style.right = "", Pe({
                     layout: ""
-                })) : (Y.slides.style.zoom = "", Y.slides.style.left = "50%", Y.slides.style.top = "50%", Y.slides.style.bottom = "auto", Y.slides.style.right = "auto", Le({
-                    layout: "translate(-50%, -50%) scale(" + $ + ")"
+                })) : (_.slides.style.zoom = "", _.slides.style.left = "50%", _.slides.style.top = "50%", _.slides.style.bottom = "auto", _.slides.style.right = "auto", Pe({
+                    layout: "translate(-50%, -50%) scale(" + X + ")"
                 }));
-                const a = Array.from(Y.wrapper.querySelectorAll(m));
+                const a = Array.from(_.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$m));
                 for(let e = 0, t = a.length; e < t; e++){
                     const t = a[e];
                     "none" !== t.style.display && (A.center || t.classList.contains("center") ? t.classList.contains("stack") ? t.style.top = 0 : t.style.top = Math.max((i.height - t.scrollHeight) / 2, 0) + "px" : t.style.top = "");
                 }
-                s !== $ && Ce({
+                s !== X && xe({
                     type: "resize",
                     data: {
                         oldScale: s,
-                        scale: $,
+                        scale: X,
                         size: i
                     }
                 });
             }
             !function() {
-                if (Y.wrapper && !A.disableLayout && !re.isActive() && "number" == typeof A.scrollActivationWidth && "scroll" !== A.view) {
-                    const e = Fe();
-                    e.presentationWidth > 0 && e.presentationWidth <= A.scrollActivationWidth ? ne.isActive() || (ae.create(), ne.activate()) : ne.isActive() && ne.deactivate();
+                if (_.wrapper && !A.disableLayout && !oe.isActive() && "number" == typeof A.scrollActivationWidth && "scroll" !== A.view) {
+                    const e = Be();
+                    e.presentationWidth > 0 && e.presentationWidth <= A.scrollActivationWidth ? re.isActive() || (ne.create(), re.activate()) : re.isActive() && re.deactivate();
                 }
-            }(), Y.viewport.style.setProperty("--slide-scale", $), Y.viewport.style.setProperty("--viewport-width", e + "px"), Y.viewport.style.setProperty("--viewport-height", t + "px"), ne.layout(), ue.update(), ae.updateParallax(), le.isActive() && le.update();
+            }(), _.viewport.style.setProperty("--slide-scale", X), _.viewport.style.setProperty("--viewport-width", e + "px"), _.viewport.style.setProperty("--viewport-height", t + "px"), re.layout(), ge.update(), ne.updateParallax(), de.isActive() && de.update();
         }
     }
-    function De(e, i) {
-        t(Y.slides, "section > .stretch, section > .r-stretch").forEach((t)=>{
+    function Ie(e, i) {
+        $ef6d0cb1bf5eee6a$var$t(_.slides, "section > .stretch, section > .r-stretch").forEach((t)=>{
             let s = ((e, t = 0)=>{
                 if (e) {
                     let i, s = e.style.height;
@@ -2755,61 +2195,61 @@ function $(n, o) {
             } else t.style.width = e + "px", t.style.height = s + "px";
         });
     }
-    function Fe(e, t) {
+    function Be(e, t) {
         let i = A.width, s = A.height;
-        A.disableLayout && (i = Y.slides.offsetWidth, s = Y.slides.offsetHeight);
+        A.disableLayout && (i = _.slides.offsetWidth, s = _.slides.offsetHeight);
         const a = {
             width: i,
             height: s,
-            presentationWidth: e || Y.wrapper.offsetWidth,
-            presentationHeight: t || Y.wrapper.offsetHeight
+            presentationWidth: e || _.wrapper.offsetWidth,
+            presentationHeight: t || _.wrapper.offsetHeight
         };
         return a.presentationWidth -= a.presentationWidth * A.margin, a.presentationHeight -= a.presentationHeight * A.margin, "string" == typeof a.width && /%$/.test(a.width) && (a.width = parseInt(a.width, 10) / 100 * a.presentationWidth), "string" == typeof a.height && /%$/.test(a.height) && (a.height = parseInt(a.height, 10) / 100 * a.presentationHeight), a;
     }
-    function ze(e, t) {
+    function He(e, t) {
         "object" == typeof e && "function" == typeof e.setAttribute && e.setAttribute("data-previous-indexv", t || 0);
     }
-    function qe(e) {
+    function De(e) {
         if ("object" == typeof e && "function" == typeof e.setAttribute && e.classList.contains("stack")) {
             const t = e.hasAttribute("data-start-indexv") ? "data-start-indexv" : "data-previous-indexv";
             return parseInt(e.getAttribute(t) || 0, 10);
         }
         return 0;
     }
-    function Oe(e = p) {
+    function Fe(e = v) {
         return e && e.parentNode && !!e.parentNode.nodeName.match(/section/i);
     }
-    function We() {
-        return !(!p || !Oe(p)) && !p.nextElementSibling;
+    function ze() {
+        return !(!v || !Fe(v)) && !v.nextElementSibling;
     }
-    function Ue() {
+    function qe() {
         return 0 === c && 0 === h;
     }
-    function Ve() {
-        return !!p && !p.nextElementSibling && (!Oe(p) || !p.parentNode.nextElementSibling);
+    function Oe() {
+        return !!v && !v.nextElementSibling && (!Fe(v) || !v.parentNode.nextElementSibling);
     }
-    function je() {
+    function Ue() {
         if (A.pause) {
-            const e = Y.wrapper.classList.contains("paused");
-            pt(), Y.wrapper.classList.add("paused"), !1 === e && Ce({
+            const e = _.wrapper.classList.contains("paused");
+            ht(), _.wrapper.classList.add("paused"), !1 === e && xe({
                 type: "paused"
             });
         }
     }
-    function Ke() {
-        const e = Y.wrapper.classList.contains("paused");
-        Y.wrapper.classList.remove("paused"), gt(), e && Ce({
+    function We() {
+        const e = _.wrapper.classList.contains("paused");
+        _.wrapper.classList.remove("paused"), ct(), e && xe({
             type: "resumed"
         });
     }
-    function $e(e) {
-        "boolean" == typeof e ? e ? je() : Ke() : Xe() ? Ke() : je();
+    function Ve(e) {
+        "boolean" == typeof e ? e ? Ue() : We() : je() ? We() : Ue();
     }
-    function Xe() {
-        return Y.wrapper.classList.contains("paused");
+    function je() {
+        return _.wrapper.classList.contains("paused");
     }
-    function Ye(e, i, s, a) {
-        if (Ce({
+    function Ke(e, i, s, a) {
+        if (xe({
             type: "beforeslidechange",
             data: {
                 indexh: void 0 === e ? c : e,
@@ -2817,116 +2257,116 @@ function $(n, o) {
                 origin: a
             }
         }).defaultPrevented) return;
-        g = p;
-        const r = Y.wrapper.querySelectorAll(f);
-        if (ne.isActive()) {
-            const t = ne.getSlideByIndices(e, i);
-            return void (t && ne.scrollToSlide(t));
+        g = v;
+        const r = _.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$f);
+        if (re.isActive()) {
+            const t = re.getSlideByIndices(e, i);
+            return void (t && re.scrollToSlide(t));
         }
         if (0 === r.length) return;
-        void 0 !== i || le.isActive() || (i = qe(r[e])), g && g.parentNode && g.parentNode.classList.contains("stack") && ze(g.parentNode, h);
-        const o = O.concat();
-        O.length = 0;
+        void 0 !== i || de.isActive() || (i = De(r[e])), g && g.parentNode && g.parentNode.classList.contains("stack") && He(g.parentNode, h);
+        const o = $.concat();
+        $.length = 0;
         let l = c || 0, d = h || 0;
-        c = Qe(f, void 0 === e ? c : e), h = Qe(y, void 0 === i ? h : i);
+        c = _e($ef6d0cb1bf5eee6a$var$f, void 0 === e ? c : e), h = _e($ef6d0cb1bf5eee6a$var$y, void 0 === i ? h : i);
         let u = c !== l || h !== d;
         u || (g = null);
-        let v = r[c], m = v.querySelectorAll("section");
-        n.classList.toggle("is-vertical-slide", m.length > 1), p = m[h] || v;
+        let p = r[c], m = p.querySelectorAll("section");
+        n.classList.toggle("is-vertical-slide", m.length > 1), v = m[h] || p;
         let b = !1;
-        u && g && p && !le.isActive() && (_ = "running", b = _e(g, p, l, d), b && Y.slides.classList.add("disable-slide-transitions")), tt(), He(), le.isActive() && le.update(), void 0 !== s && oe.goto(s), g && g !== p && (g.classList.remove("present"), g.setAttribute("aria-hidden", "true"), Ue() && setTimeout(()=>{
-            t(Y.wrapper, f + ".stack").forEach((e)=>{
-                ze(e, 0);
+        u && g && v && !de.isActive() && (J = "running", b = $e(g, v, l, d), b && _.slides.classList.add("disable-slide-transitions")), Qe(), Me(), de.isActive() && de.update(), void 0 !== s && le.goto(s), g && g !== v && (g.classList.remove("present"), g.setAttribute("aria-hidden", "true"), qe() && setTimeout(()=>{
+            $ef6d0cb1bf5eee6a$var$t(_.wrapper, $ef6d0cb1bf5eee6a$var$f + ".stack").forEach((e)=>{
+                He(e, 0);
             });
         }, 0));
-        e: for(let e = 0, t = O.length; e < t; e++){
-            for(let t = 0; t < o.length; t++)if (o[t] === O[e]) {
+        e: for(let e = 0, t = $.length; e < t; e++){
+            for(let t = 0; t < o.length; t++)if (o[t] === $[e]) {
                 o.splice(t, 1);
                 continue e;
             }
-            Y.viewport.classList.add(O[e]), Ce({
-                type: O[e]
+            _.viewport.classList.add($[e]), xe({
+                type: $[e]
             });
         }
-        for(; o.length;)Y.viewport.classList.remove(o.pop());
-        u && xe(a), !u && g || (ee.stopEmbeddedContent(g), ee.startEmbeddedContent(p)), requestAnimationFrame(()=>{
-            be(we(p));
-        }), ue.update(), he.update(), fe.update(), ae.update(), ae.updateParallax(), te.update(), oe.update(), ce.writeURL(), gt(), b && (setTimeout(()=>{
-            Y.slides.classList.remove("disable-slide-transitions");
-        }, 0), A.autoAnimate && se.run(g, p));
+        for(; o.length;)_.viewport.classList.remove(o.pop());
+        u && Te(a), !u && g || (te.stopEmbeddedContent(g), te.startEmbeddedContent(v)), requestAnimationFrame(()=>{
+            Ee(Se(v));
+        }), ge.update(), ue.update(), be.update(), ne.update(), ne.updateParallax(), ie.update(), le.update(), he.writeURL(), ct(), b && (setTimeout(()=>{
+            _.slides.classList.remove("disable-slide-transitions");
+        }, 0), A.autoAnimate && ae.run(g, v));
     }
-    function _e(e, t, i, s) {
+    function $e(e, t, i, s) {
         return e.hasAttribute("data-auto-animate") && t.hasAttribute("data-auto-animate") && e.getAttribute("data-auto-animate-id") === t.getAttribute("data-auto-animate-id") && !(c > i || h > s ? t : e).hasAttribute("data-auto-animate-restart");
     }
-    function Je() {
-        Ae(), Se(), He(), J = A.autoSlide, gt(), ae.create(), ce.writeURL(), !0 === A.sortFragmentsOnSync && oe.sortAll(), he.update(), ue.update(), tt(), fe.update(), fe.updateVisibility(), ae.update(!0), te.update(), ee.formatEmbeddedContent(), !1 === A.autoPlayMedia ? ee.stopEmbeddedContent(p, {
+    function Xe() {
+        ke(), Ae(), Me(), G = A.autoSlide, ct(), ne.create(), he.writeURL(), !0 === A.sortFragmentsOnSync && le.sortAll(), ue.update(), ge.update(), Qe(), be.update(), be.updateVisibility(), me.update(), ne.update(!0), ie.update(), te.formatEmbeddedContent(), !1 === A.autoPlayMedia ? te.stopEmbeddedContent(v, {
             unloadIframes: !1
-        }) : ee.startEmbeddedContent(p), le.isActive() && le.layout();
+        }) : te.startEmbeddedContent(v), de.isActive() && de.layout();
     }
-    function Ge(e = rt()) {
+    function Ye(e = st()) {
         e.forEach((t, i)=>{
             let s = e[Math.floor(Math.random() * e.length)];
             s.parentNode === t.parentNode && t.parentNode.insertBefore(t, s);
             let a = t.querySelectorAll("section");
-            a.length && Ge(a);
+            a.length && Ye(a);
         });
     }
-    function Qe(e, i) {
-        let s = t(Y.wrapper, e), a = s.length, n = ne.isActive() || re.isActive(), r = !1, o = !1;
+    function _e(e, i) {
+        let s = $ef6d0cb1bf5eee6a$var$t(_.wrapper, e), a = s.length, n = re.isActive() || oe.isActive(), r = !1, o = !1;
         if (a) {
             A.loop && (i >= a && (r = !0), (i %= a) < 0 && (i = a + i, o = !0)), i = Math.max(Math.min(i, a - 1), 0);
             for(let e = 0; e < a; e++){
-                let t = s[e], a = A.rtl && !Oe(t);
-                t.classList.remove("past"), t.classList.remove("present"), t.classList.remove("future"), t.setAttribute("hidden", ""), t.setAttribute("aria-hidden", "true"), t.querySelector("section") && t.classList.add("stack"), n ? t.classList.add("present") : e < i ? (t.classList.add(a ? "future" : "past"), A.fragments && Ze(t)) : e > i ? (t.classList.add(a ? "past" : "future"), A.fragments && et(t)) : e === i && A.fragments && (r ? et(t) : o && Ze(t));
+                let t = s[e], a = A.rtl && !Fe(t);
+                t.classList.remove("past"), t.classList.remove("present"), t.classList.remove("future"), t.setAttribute("hidden", ""), t.setAttribute("aria-hidden", "true"), t.querySelector("section") && t.classList.add("stack"), n ? t.classList.add("present") : e < i ? (t.classList.add(a ? "future" : "past"), A.fragments && Je(t)) : e > i ? (t.classList.add(a ? "past" : "future"), A.fragments && Ge(t)) : e === i && A.fragments && (r ? Ge(t) : o && Je(t));
             }
             let e = s[i], t = e.classList.contains("present");
-            e.classList.add("present"), e.removeAttribute("hidden"), e.removeAttribute("aria-hidden"), t || Ce({
+            e.classList.add("present"), e.removeAttribute("hidden"), e.removeAttribute("aria-hidden"), t || xe({
                 target: e,
                 type: "visible",
                 bubbles: !1
             });
             let l = e.getAttribute("data-state");
-            l && (O = O.concat(l.split(" ")));
+            l && ($ = $.concat(l.split(" ")));
         } else i = 0;
         return i;
     }
-    function Ze(e) {
-        t(e, ".fragment").forEach((e)=>{
+    function Je(e) {
+        $ef6d0cb1bf5eee6a$var$t(e, ".fragment").forEach((e)=>{
             e.classList.add("visible"), e.classList.remove("current-fragment");
         });
     }
-    function et(e) {
-        t(e, ".fragment.visible").forEach((e)=>{
+    function Ge(e) {
+        $ef6d0cb1bf5eee6a$var$t(e, ".fragment.visible").forEach((e)=>{
             e.classList.remove("visible", "current-fragment");
         });
     }
-    function tt() {
-        let e, i, s = rt(), a = s.length;
+    function Qe() {
+        let e, i, s = st(), a = s.length;
         if (a && void 0 !== c) {
-            let n = le.isActive() ? 10 : A.viewDistance;
-            u && (n = le.isActive() ? 6 : A.mobileViewDistance), re.isActive() && (n = Number.MAX_VALUE);
+            let n = de.isActive() ? 10 : A.viewDistance;
+            $ef6d0cb1bf5eee6a$var$u && (n = de.isActive() ? 6 : A.mobileViewDistance), oe.isActive() && (n = Number.MAX_VALUE);
             for(let r = 0; r < a; r++){
-                let o = s[r], l = t(o, "section"), d = l.length;
-                if (e = Math.abs((c || 0) - r) || 0, A.loop && (e = Math.abs(((c || 0) - r) % (a - n)) || 0), e < n ? ee.load(o) : ee.unload(o), d) {
-                    let t = qe(o);
+                let o = s[r], l = $ef6d0cb1bf5eee6a$var$t(o, "section"), d = l.length;
+                if (e = Math.abs((c || 0) - r) || 0, A.loop && (e = Math.abs(((c || 0) - r) % (a - n)) || 0), e < n ? te.load(o) : te.unload(o), d) {
+                    let t = De(o);
                     for(let s = 0; s < d; s++){
                         let a = l[s];
-                        i = r === (c || 0) ? Math.abs((h || 0) - s) : Math.abs(s - t), e + i < n ? ee.load(a) : ee.unload(a);
+                        i = r === (c || 0) ? Math.abs((h || 0) - s) : Math.abs(s - t), e + i < n ? te.load(a) : te.unload(a);
                     }
                 }
             }
-            dt() ? Y.wrapper.classList.add("has-vertical-slides") : Y.wrapper.classList.remove("has-vertical-slides"), lt() ? Y.wrapper.classList.add("has-horizontal-slides") : Y.wrapper.classList.remove("has-horizontal-slides");
+            rt() ? _.wrapper.classList.add("has-vertical-slides") : _.wrapper.classList.remove("has-vertical-slides"), nt() ? _.wrapper.classList.add("has-horizontal-slides") : _.wrapper.classList.remove("has-horizontal-slides");
         }
     }
-    function it({ includeFragments: e = !1 } = {}) {
-        let t = Y.wrapper.querySelectorAll(f), i = Y.wrapper.querySelectorAll(y), s = {
+    function Ze({ includeFragments: e = !1 } = {}) {
+        let t = _.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$f), i = _.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$y), s = {
             left: c > 0,
             right: c < t.length - 1,
             up: h > 0,
             down: h < i.length - 1
         };
         if (A.loop && (t.length > 1 && (s.left = !0, s.right = !0), i.length > 1 && (s.up = !0, s.down = !0)), t.length > 1 && "linear" === A.navigationMode && (s.right = s.right || s.down, s.left = s.left || s.up), !0 === e) {
-            let e = oe.availableRoutes();
+            let e = le.availableRoutes();
             s.left = s.left || e.prev, s.up = s.up || e.prev, s.down = s.down || e.next, s.right = s.right || e.next;
         }
         if (A.rtl) {
@@ -2935,8 +2375,8 @@ function $(n, o) {
         }
         return s;
     }
-    function st(e = p) {
-        let t = rt(), i = 0;
+    function et(e = v) {
+        let t = st(), i = 0;
         e: for(let s = 0; s < t.length; s++){
             let a = t[s], n = a.querySelectorAll("section");
             for(let t = 0; t < n.length; t++){
@@ -2948,19 +2388,19 @@ function $(n, o) {
         }
         return i;
     }
-    function at(e) {
+    function tt(e) {
         let i, s = c, a = h;
         if (e) {
-            if (ne.isActive()) s = parseInt(e.getAttribute("data-index-h"), 10), e.getAttribute("data-index-v") && (a = parseInt(e.getAttribute("data-index-v"), 10));
+            if (re.isActive()) s = parseInt(e.getAttribute("data-index-h"), 10), e.getAttribute("data-index-v") && (a = parseInt(e.getAttribute("data-index-v"), 10));
             else {
-                let i = Oe(e), n = i ? e.parentNode : e, r = rt();
-                s = Math.max(r.indexOf(n), 0), a = void 0, i && (a = Math.max(t(e.parentNode, "section").indexOf(e), 0));
+                let i = Fe(e), n = i ? e.parentNode : e, r = st();
+                s = Math.max(r.indexOf(n), 0), a = void 0, i && (a = Math.max($ef6d0cb1bf5eee6a$var$t(e.parentNode, "section").indexOf(e), 0));
             }
         }
-        if (!e && p) {
-            if (p.querySelectorAll(".fragment").length > 0) {
-                let e = p.querySelector(".current-fragment");
-                i = e && e.hasAttribute("data-fragment-index") ? parseInt(e.getAttribute("data-fragment-index"), 10) : p.querySelectorAll(".fragment.visible").length - 1;
+        if (!e && v) {
+            if (v.querySelectorAll(".fragment").length > 0) {
+                let e = v.querySelector(".current-fragment");
+                i = e && e.hasAttribute("data-fragment-index") ? parseInt(e.getAttribute("data-fragment-index"), 10) : v.querySelectorAll(".fragment.visible").length - 1;
             }
         }
         return {
@@ -2969,272 +2409,268 @@ function $(n, o) {
             f: i
         };
     }
+    function it() {
+        return $ef6d0cb1bf5eee6a$var$t(_.wrapper, $ef6d0cb1bf5eee6a$var$m + ':not(.stack):not([data-visibility="uncounted"])');
+    }
+    function st() {
+        return $ef6d0cb1bf5eee6a$var$t(_.wrapper, $ef6d0cb1bf5eee6a$var$f);
+    }
+    function at() {
+        return $ef6d0cb1bf5eee6a$var$t(_.wrapper, ".slides>section>section");
+    }
     function nt() {
-        return t(Y.wrapper, m + ':not(.stack):not([data-visibility="uncounted"])');
+        return st().length > 1;
     }
     function rt() {
-        return t(Y.wrapper, f);
+        return at().length > 1;
     }
     function ot() {
-        return t(Y.wrapper, ".slides>section>section");
+        return it().length;
     }
-    function lt() {
-        return rt().length > 1;
-    }
-    function dt() {
-        return ot().length > 1;
-    }
-    function ct() {
-        return nt().length;
-    }
-    function ht(e, t) {
-        let i = rt()[e], s = i && i.querySelectorAll("section");
+    function lt(e, t) {
+        let i = st()[e], s = i && i.querySelectorAll("section");
         return s && s.length && "number" == typeof t ? s ? s[t] : void 0 : i;
     }
-    function ut() {
-        let e = at();
+    function dt() {
+        let e = tt();
         return {
             indexh: e.h,
             indexv: e.v,
             indexf: e.f,
-            paused: Xe(),
-            overview: le.isActive()
+            paused: je(),
+            overview: de.isActive()
         };
     }
-    function gt() {
-        if (pt(), p && !1 !== A.autoSlide) {
-            let e = p.querySelector(".current-fragment[data-autoslide]"), i = e ? e.getAttribute("data-autoslide") : null, s = p.parentNode ? p.parentNode.getAttribute("data-autoslide") : null, a = p.getAttribute("data-autoslide");
-            i ? J = parseInt(i, 10) : a ? J = parseInt(a, 10) : s ? J = parseInt(s, 10) : (J = A.autoSlide, 0 === p.querySelectorAll(".fragment").length && t(p, "video, audio").forEach((e)=>{
-                e.hasAttribute("data-autoplay") && J && 1e3 * e.duration / e.playbackRate > J && (J = 1e3 * e.duration / e.playbackRate + 1e3);
-            })), !J || Z || Xe() || le.isActive() || Ve() && !oe.availableRoutes().next && !0 !== A.loop || (G = setTimeout(()=>{
-                "function" == typeof A.autoSlideMethod ? A.autoSlideMethod() : St(), gt();
-            }, J), Q = Date.now()), w && w.setPlaying(-1 !== G);
+    function ct() {
+        if (ht(), v && !1 !== A.autoSlide) {
+            let e = v.querySelector(".current-fragment[data-autoslide]"), i = e ? e.getAttribute("data-autoslide") : null, s = v.parentNode ? v.parentNode.getAttribute("data-autoslide") : null, a = v.getAttribute("data-autoslide");
+            i ? G = parseInt(i, 10) : a ? G = parseInt(a, 10) : s ? G = parseInt(s, 10) : (G = A.autoSlide, 0 === v.querySelectorAll(".fragment").length && $ef6d0cb1bf5eee6a$var$t(v, "video, audio").forEach((e)=>{
+                e.hasAttribute("data-autoplay") && G && 1e3 * e.duration / e.playbackRate > G && (G = 1e3 * e.duration / e.playbackRate + 1e3);
+            })), !G || ee || je() || de.isActive() || Oe() && !le.availableRoutes().next && !0 !== A.loop || (Q = setTimeout(()=>{
+                "function" == typeof A.autoSlideMethod ? A.autoSlideMethod() : bt(), ct();
+            }, G), Z = Date.now()), S && S.setPlaying(-1 !== Q);
         }
     }
-    function pt() {
-        clearTimeout(G), G = -1;
+    function ht() {
+        clearTimeout(Q), Q = -1;
     }
-    function vt() {
-        J && !Z && (Z = !0, Ce({
+    function ut() {
+        G && !ee && (ee = !0, xe({
             type: "autoslidepaused"
-        }), clearTimeout(G), w && w.setPlaying(!1));
+        }), clearTimeout(Q), S && S.setPlaying(!1));
     }
-    function mt() {
-        J && Z && (Z = !1, Ce({
+    function gt() {
+        G && ee && (ee = !1, xe({
             type: "autoslideresumed"
-        }), gt());
+        }), ct());
+    }
+    function vt({ skipFragments: e = !1 } = {}) {
+        if (O.hasNavigatedHorizontally = !0, re.isActive()) return re.prev();
+        A.rtl ? (de.isActive() || e || !1 === le.next()) && Ze().left && Ke(c + 1, "grid" === A.navigationMode ? h : void 0) : (de.isActive() || e || !1 === le.prev()) && Ze().left && Ke(c - 1, "grid" === A.navigationMode ? h : void 0);
+    }
+    function pt({ skipFragments: e = !1 } = {}) {
+        if (O.hasNavigatedHorizontally = !0, re.isActive()) return re.next();
+        A.rtl ? (de.isActive() || e || !1 === le.prev()) && Ze().right && Ke(c - 1, "grid" === A.navigationMode ? h : void 0) : (de.isActive() || e || !1 === le.next()) && Ze().right && Ke(c + 1, "grid" === A.navigationMode ? h : void 0);
+    }
+    function mt({ skipFragments: e = !1 } = {}) {
+        if (re.isActive()) return re.prev();
+        (de.isActive() || e || !1 === le.prev()) && Ze().up && Ke(c, h - 1);
     }
     function ft({ skipFragments: e = !1 } = {}) {
-        if (q.hasNavigatedHorizontally = !0, ne.isActive()) return ne.prev();
-        A.rtl ? (le.isActive() || e || !1 === oe.next()) && it().left && Ye(c + 1, "grid" === A.navigationMode ? h : void 0) : (le.isActive() || e || !1 === oe.prev()) && it().left && Ye(c - 1, "grid" === A.navigationMode ? h : void 0);
+        if (O.hasNavigatedVertically = !0, re.isActive()) return re.next();
+        (de.isActive() || e || !1 === le.next()) && Ze().down && Ke(c, h + 1);
     }
     function yt({ skipFragments: e = !1 } = {}) {
-        if (q.hasNavigatedHorizontally = !0, ne.isActive()) return ne.next();
-        A.rtl ? (le.isActive() || e || !1 === oe.prev()) && it().right && Ye(c - 1, "grid" === A.navigationMode ? h : void 0) : (le.isActive() || e || !1 === oe.next()) && it().right && Ye(c + 1, "grid" === A.navigationMode ? h : void 0);
-    }
-    function bt({ skipFragments: e = !1 } = {}) {
-        if (ne.isActive()) return ne.prev();
-        (le.isActive() || e || !1 === oe.prev()) && it().up && Ye(c, h - 1);
-    }
-    function wt({ skipFragments: e = !1 } = {}) {
-        if (q.hasNavigatedVertically = !0, ne.isActive()) return ne.next();
-        (le.isActive() || e || !1 === oe.next()) && it().down && Ye(c, h + 1);
-    }
-    function Et({ skipFragments: e = !1 } = {}) {
-        if (ne.isActive()) return ne.prev();
-        if (e || !1 === oe.prev()) {
-            if (it().up) bt({
+        if (re.isActive()) return re.prev();
+        if (e || !1 === le.prev()) {
+            if (Ze().up) mt({
                 skipFragments: e
             });
             else {
                 let i;
-                if (i = A.rtl ? t(Y.wrapper, f + ".future").pop() : t(Y.wrapper, f + ".past").pop(), i && i.classList.contains("stack")) {
+                if (i = A.rtl ? $ef6d0cb1bf5eee6a$var$t(_.wrapper, $ef6d0cb1bf5eee6a$var$f + ".future").pop() : $ef6d0cb1bf5eee6a$var$t(_.wrapper, $ef6d0cb1bf5eee6a$var$f + ".past").pop(), i && i.classList.contains("stack")) {
                     let e = i.querySelectorAll("section").length - 1 || void 0;
-                    Ye(c - 1, e);
-                } else A.rtl ? yt({
+                    Ke(c - 1, e);
+                } else A.rtl ? pt({
                     skipFragments: e
-                }) : ft({
+                }) : vt({
                     skipFragments: e
                 });
             }
         }
     }
-    function St({ skipFragments: e = !1 } = {}) {
-        if (q.hasNavigatedHorizontally = !0, q.hasNavigatedVertically = !0, ne.isActive()) return ne.next();
-        if (e || !1 === oe.next()) {
-            let t = it();
-            t.down && t.right && A.loop && We() && (t.down = !1), t.down ? wt({
+    function bt({ skipFragments: e = !1 } = {}) {
+        if (O.hasNavigatedHorizontally = !0, O.hasNavigatedVertically = !0, re.isActive()) return re.next();
+        if (e || !1 === le.next()) {
+            let t = Ze();
+            t.down && t.right && A.loop && ze() && (t.down = !1), t.down ? ft({
                 skipFragments: e
-            }) : A.rtl ? ft({
+            }) : A.rtl ? vt({
                 skipFragments: e
-            }) : yt({
+            }) : pt({
                 skipFragments: e
             });
         }
     }
-    function At(e) {
+    function wt(e) {
         let t = e.data;
         if ("string" == typeof t && "{" === t.charAt(0) && "}" === t.charAt(t.length - 1) && (t = JSON.parse(t), t.method && "function" == typeof l[t.method])) {
-            if (!1 === b.test(t.method)) {
+            if (!1 === $ef6d0cb1bf5eee6a$var$b.test(t.method)) {
                 const e = l[t.method].apply(l, t.args);
-                Pe("callback", {
+                Ne("callback", {
                     method: t.method,
                     result: e
                 });
             } else console.warn('reveal.js: "' + t.method + '" is is blacklisted from the postMessage API');
         }
     }
-    function Rt(e) {
-        "running" === _ && /section/gi.test(e.target.nodeName) && (_ = "idle", Ce({
+    function Et(e) {
+        "running" === J && /section/gi.test(e.target.nodeName) && (J = "idle", xe({
             type: "slidetransitionend",
             data: {
                 indexh: c,
                 indexv: h,
                 previousSlide: g,
-                currentSlide: p
+                currentSlide: v
             }
         }));
     }
-    function kt(e) {
-        const t = r(e.target, 'a[href^="#"]');
+    function St(e) {
+        const t = $ef6d0cb1bf5eee6a$var$r(e.target, 'a[href^="#"]');
         if (t) {
-            const i = t.getAttribute("href"), s = ce.getIndicesFromHash(i);
+            const i = t.getAttribute("href"), s = he.getIndicesFromHash(i);
             s && (l.slide(s.h, s.v, s.f), e.preventDefault());
         }
     }
-    function Lt(e) {
-        He();
+    function Rt(e) {
+        Me();
     }
-    function Ct(e) {
+    function At(e) {
         !1 === document.hidden && document.activeElement !== document.body && ("function" == typeof document.activeElement.blur && document.activeElement.blur(), document.body.focus());
     }
-    function xt(e) {
-        (document.fullscreenElement || document.webkitFullscreenElement) === Y.wrapper && (e.stopImmediatePropagation(), setTimeout(()=>{
+    function kt(e) {
+        (document.fullscreenElement || document.webkitFullscreenElement) === _.wrapper && (e.stopImmediatePropagation(), setTimeout(()=>{
             l.layout(), l.focus.focus();
         }, 1));
     }
-    function Pt(e) {
-        if (e.currentTarget && e.currentTarget.hasAttribute("href")) {
-            let t = e.currentTarget.getAttribute("href");
-            t && (Me(t), e.preventDefault());
-        }
+    function Lt(e) {
+        Oe() && !1 === A.loop ? (Ke(0, 0), gt()) : ee ? gt() : ut();
     }
-    function Tt(e) {
-        Ve() && !1 === A.loop ? (Ye(0, 0), mt()) : Z ? mt() : vt();
-    }
-    const Nt = {
-        VERSION: K,
+    const Ct = {
+        VERSION: $ef6d0cb1bf5eee6a$var$K,
         initialize: function(e) {
             if (!n) throw 'Unable to find presentation root (<div class="reveal">).';
-            if (k = !0, Y.wrapper = n, Y.slides = n.querySelector(".slides"), !Y.slides) throw 'Unable to find slides container (<div class="slides">).';
+            if (H) throw "Reveal.js has already been initialized.";
+            if (H = !0, _.wrapper = n, _.slides = n.querySelector(".slides"), !_.slides) throw 'Unable to find slides container (<div class="slides">).';
             return A = {
-                ...j,
+                ...$ef6d0cb1bf5eee6a$var$j,
                 ...A,
                 ...o,
                 ...e,
-                ...d()
+                ...$ef6d0cb1bf5eee6a$var$d()
             }, /print-pdf/gi.test(window.location.search) && (A.view = "print"), function() {
-                !0 === A.embedded ? Y.viewport = r(n, ".reveal-viewport") || n : (Y.viewport = document.body, document.documentElement.classList.add("reveal-full-page"));
-                Y.viewport.classList.add("reveal-viewport");
-            }(), window.addEventListener("load", He, !1), pe.load(A.plugins, A.dependencies).then(ye), new Promise((e)=>l.on("ready", e));
+                !0 === A.embedded ? _.viewport = $ef6d0cb1bf5eee6a$var$r(n, ".reveal-viewport") || n : (_.viewport = document.body, document.documentElement.classList.add("reveal-full-page"));
+                _.viewport.classList.add("reveal-viewport");
+            }(), window.addEventListener("load", Me, !1), pe.load(A.plugins, A.dependencies).then(we), new Promise((e)=>l.on("ready", e));
         },
-        configure: Ee,
+        configure: Re,
         destroy: function() {
-            !1 !== k && (Ae(), pt(), Ne(), fe.destroy(), ve.destroy(), pe.destroy(), ge.destroy(), he.destroy(), ue.destroy(), ae.destroy(), te.destroy(), ie.destroy(), document.removeEventListener("fullscreenchange", xt), document.removeEventListener("webkitfullscreenchange", xt), document.removeEventListener("visibilitychange", Ct, !1), window.removeEventListener("message", At, !1), window.removeEventListener("load", He, !1), Y.pauseOverlay && Y.pauseOverlay.remove(), Y.statusElement && Y.statusElement.remove(), document.documentElement.classList.remove("reveal-full-page"), Y.wrapper.classList.remove("ready", "center", "has-horizontal-slides", "has-vertical-slides"), Y.wrapper.removeAttribute("data-transition-speed"), Y.wrapper.removeAttribute("data-background-transition"), Y.viewport.classList.remove("reveal-viewport"), Y.viewport.style.removeProperty("--slide-width"), Y.viewport.style.removeProperty("--slide-height"), Y.slides.style.removeProperty("width"), Y.slides.style.removeProperty("height"), Y.slides.style.removeProperty("zoom"), Y.slides.style.removeProperty("left"), Y.slides.style.removeProperty("top"), Y.slides.style.removeProperty("bottom"), Y.slides.style.removeProperty("right"), Y.slides.style.removeProperty("transform"), Array.from(Y.wrapper.querySelectorAll(m)).forEach((e)=>{
+            H = !1, !1 !== q && (ke(), ht(), be.destroy(), fe.destroy(), me.destroy(), pe.destroy(), ve.destroy(), ue.destroy(), ge.destroy(), ne.destroy(), ie.destroy(), se.destroy(), document.removeEventListener("fullscreenchange", kt), document.removeEventListener("webkitfullscreenchange", kt), document.removeEventListener("visibilitychange", At, !1), window.removeEventListener("message", wt, !1), window.removeEventListener("load", Me, !1), _.pauseOverlay && _.pauseOverlay.remove(), _.statusElement && _.statusElement.remove(), document.documentElement.classList.remove("reveal-full-page"), _.wrapper.classList.remove("ready", "center", "has-horizontal-slides", "has-vertical-slides"), _.wrapper.removeAttribute("data-transition-speed"), _.wrapper.removeAttribute("data-background-transition"), _.viewport.classList.remove("reveal-viewport"), _.viewport.style.removeProperty("--slide-width"), _.viewport.style.removeProperty("--slide-height"), _.slides.style.removeProperty("width"), _.slides.style.removeProperty("height"), _.slides.style.removeProperty("zoom"), _.slides.style.removeProperty("left"), _.slides.style.removeProperty("top"), _.slides.style.removeProperty("bottom"), _.slides.style.removeProperty("right"), _.slides.style.removeProperty("transform"), Array.from(_.wrapper.querySelectorAll($ef6d0cb1bf5eee6a$var$m)).forEach((e)=>{
                 e.style.removeProperty("display"), e.style.removeProperty("top"), e.removeAttribute("hidden"), e.removeAttribute("aria-hidden");
             }));
         },
-        sync: Je,
-        syncSlide: function(e = p) {
-            ae.sync(e), oe.sync(e), ee.load(e), ae.update(), fe.update();
+        sync: Xe,
+        syncSlide: function(e = v) {
+            ne.sync(e), le.sync(e), te.load(e), ne.update(), be.update();
         },
-        syncFragments: oe.sync.bind(oe),
-        slide: Ye,
-        left: ft,
-        right: yt,
-        up: bt,
-        down: wt,
-        prev: Et,
-        next: St,
-        navigateLeft: ft,
-        navigateRight: yt,
-        navigateUp: bt,
-        navigateDown: wt,
-        navigatePrev: Et,
-        navigateNext: St,
-        navigateFragment: oe.goto.bind(oe),
-        prevFragment: oe.prev.bind(oe),
-        nextFragment: oe.next.bind(oe),
-        on: Re,
-        off: ke,
-        addEventListener: Re,
-        removeEventListener: ke,
-        layout: He,
-        shuffle: Ge,
-        availableRoutes: it,
-        availableFragments: oe.availableRoutes.bind(oe),
-        toggleHelp: function(e) {
-            "boolean" == typeof e ? e ? Ie() : Be() : Y.overlay ? Be() : Ie();
-        },
-        toggleOverview: le.toggle.bind(le),
-        toggleScrollView: ne.toggle.bind(ne),
-        togglePause: $e,
+        syncFragments: le.sync.bind(le),
+        slide: Ke,
+        left: vt,
+        right: pt,
+        up: mt,
+        down: ft,
+        prev: yt,
+        next: bt,
+        navigateLeft: vt,
+        navigateRight: pt,
+        navigateUp: mt,
+        navigateDown: ft,
+        navigatePrev: yt,
+        navigateNext: bt,
+        navigateFragment: le.goto.bind(le),
+        prevFragment: le.prev.bind(le),
+        nextFragment: le.next.bind(le),
+        on: Le,
+        off: Ce,
+        addEventListener: Le,
+        removeEventListener: Ce,
+        layout: Me,
+        shuffle: Ye,
+        availableRoutes: Ze,
+        availableFragments: le.availableRoutes.bind(le),
+        toggleHelp: me.toggleHelp.bind(me),
+        toggleOverview: de.toggle.bind(de),
+        toggleScrollView: re.toggle.bind(re),
+        togglePause: Ve,
         toggleAutoSlide: function(e) {
-            "boolean" == typeof e ? e ? mt() : vt() : Z ? mt() : vt();
+            "boolean" == typeof e ? e ? gt() : ut() : ee ? gt() : ut();
         },
         toggleJumpToSlide: function(e) {
-            "boolean" == typeof e ? e ? ie.show() : ie.hide() : ie.isVisible() ? ie.hide() : ie.show();
+            "boolean" == typeof e ? e ? se.show() : se.hide() : se.isVisible() ? se.hide() : se.show();
         },
-        isFirstSlide: Ue,
-        isLastSlide: Ve,
-        isLastVerticalSlide: We,
-        isVerticalSlide: Oe,
-        isVerticalStack: function(e = p) {
+        isFirstSlide: qe,
+        isLastSlide: Oe,
+        isLastVerticalSlide: ze,
+        isVerticalSlide: Fe,
+        isVerticalStack: function(e = v) {
             return e.classList.contains(".stack") || null !== e.querySelector("section");
         },
-        isPaused: Xe,
+        isPaused: je,
         isAutoSliding: function() {
-            return !(!J || Z);
+            return !(!G || ee);
         },
-        isSpeakerNotes: fe.isSpeakerNotesWindow.bind(fe),
-        isOverview: le.isActive.bind(le),
-        isFocused: ve.isFocused.bind(ve),
-        isScrollView: ne.isActive.bind(ne),
-        isPrintView: re.isActive.bind(re),
-        isReady: ()=>D,
-        loadSlide: ee.load.bind(ee),
-        unloadSlide: ee.unload.bind(ee),
-        startEmbeddedContent: ()=>ee.startEmbeddedContent(p),
-        stopEmbeddedContent: ()=>ee.stopEmbeddedContent(p, {
+        isSpeakerNotes: be.isSpeakerNotesWindow.bind(be),
+        isOverview: de.isActive.bind(de),
+        isFocused: fe.isFocused.bind(fe),
+        isOverlayOpen: me.isOpen.bind(me),
+        isScrollView: re.isActive.bind(re),
+        isPrintView: oe.isActive.bind(oe),
+        isReady: ()=>q,
+        loadSlide: te.load.bind(te),
+        unloadSlide: te.unload.bind(te),
+        startEmbeddedContent: ()=>te.startEmbeddedContent(v),
+        stopEmbeddedContent: ()=>te.stopEmbeddedContent(v, {
                 unloadIframes: !1
             }),
-        showPreview: Me,
-        hidePreview: Be,
-        addEventListeners: Se,
-        removeEventListeners: Ae,
-        dispatchEvent: Ce,
-        getState: ut,
+        showIframePreview: me.showIframePreview.bind(me),
+        showMediaPreview: me.showMediaPreview.bind(me),
+        showPreview: me.showIframePreview.bind(me),
+        hidePreview: me.close.bind(me),
+        addEventListeners: Ae,
+        removeEventListeners: ke,
+        dispatchEvent: xe,
+        getState: dt,
         setState: function(e) {
             if ("object" == typeof e) {
-                Ye(s(e.indexh), s(e.indexv), s(e.indexf));
-                let t = s(e.paused), i = s(e.overview);
-                "boolean" == typeof t && t !== Xe() && $e(t), "boolean" == typeof i && i !== le.isActive() && le.toggle(i);
+                Ke($ef6d0cb1bf5eee6a$var$s(e.indexh), $ef6d0cb1bf5eee6a$var$s(e.indexv), $ef6d0cb1bf5eee6a$var$s(e.indexf));
+                let t = $ef6d0cb1bf5eee6a$var$s(e.paused), i = $ef6d0cb1bf5eee6a$var$s(e.overview);
+                "boolean" == typeof t && t !== je() && Ve(t), "boolean" == typeof i && i !== de.isActive() && de.toggle(i);
             }
         },
         getProgress: function() {
-            let e = ct(), t = st();
-            if (p) {
-                let e = p.querySelectorAll(".fragment");
+            let e = ot(), t = et();
+            if (v) {
+                let e = v.querySelectorAll(".fragment");
                 if (e.length > 0) {
                     let i = .9;
-                    t += p.querySelectorAll(".fragment.visible").length / e.length * i;
+                    t += v.querySelectorAll(".fragment.visible").length / e.length * i;
                 }
             }
             return Math.min(t / (e - 1), 1);
         },
-        getIndices: at,
+        getIndices: tt,
         getSlidesAttributes: function() {
-            return nt().map((e)=>{
+            return it().map((e)=>{
                 let t = {};
                 for(let i = 0; i < e.attributes.length; i++){
                     let s = e.attributes[i];
@@ -3243,77 +2679,78 @@ function $(n, o) {
                 return t;
             });
         },
-        getSlidePastCount: st,
-        getTotalSlides: ct,
-        getSlide: ht,
+        getSlidePastCount: et,
+        getTotalSlides: ot,
+        getSlide: lt,
         getPreviousSlide: ()=>g,
-        getCurrentSlide: ()=>p,
+        getCurrentSlide: ()=>v,
         getSlideBackground: function(e, t) {
-            let i = "number" == typeof e ? ht(e, t) : e;
+            let i = "number" == typeof e ? lt(e, t) : e;
             if (i) return i.slideBackgroundElement;
         },
-        getSlideNotes: fe.getSlideNotes.bind(fe),
-        getSlides: nt,
-        getHorizontalSlides: rt,
-        getVerticalSlides: ot,
-        hasHorizontalSlides: lt,
-        hasVerticalSlides: dt,
-        hasNavigatedHorizontally: ()=>q.hasNavigatedHorizontally,
-        hasNavigatedVertically: ()=>q.hasNavigatedVertically,
-        shouldAutoAnimateBetween: _e,
-        addKeyBinding: de.addKeyBinding.bind(de),
-        removeKeyBinding: de.removeKeyBinding.bind(de),
-        triggerKey: de.triggerKey.bind(de),
-        registerKeyboardShortcut: de.registerKeyboardShortcut.bind(de),
-        getComputedSlideSize: Fe,
+        getSlideNotes: be.getSlideNotes.bind(be),
+        getSlides: it,
+        getHorizontalSlides: st,
+        getVerticalSlides: at,
+        hasHorizontalSlides: nt,
+        hasVerticalSlides: rt,
+        hasNavigatedHorizontally: ()=>O.hasNavigatedHorizontally,
+        hasNavigatedVertically: ()=>O.hasNavigatedVertically,
+        shouldAutoAnimateBetween: $e,
+        addKeyBinding: ce.addKeyBinding.bind(ce),
+        removeKeyBinding: ce.removeKeyBinding.bind(ce),
+        triggerKey: ce.triggerKey.bind(ce),
+        registerKeyboardShortcut: ce.registerKeyboardShortcut.bind(ce),
+        getComputedSlideSize: Be,
         setCurrentScrollPage: function(e, t, i) {
             let s = c || 0;
             c = t, h = i;
-            const a = p !== e;
-            g = p, p = e, p && g && A.autoAnimate && _e(g, p, s, h) && se.run(g, p), a && (g && (ee.stopEmbeddedContent(g), ee.stopEmbeddedContent(g.slideBackgroundElement)), ee.startEmbeddedContent(p), ee.startEmbeddedContent(p.slideBackgroundElement)), requestAnimationFrame(()=>{
-                be(we(p));
-            }), xe();
+            const a = v !== e;
+            g = v, v = e, v && g && A.autoAnimate && $e(g, v, s, h) && ae.run(g, v), a && (g && (te.stopEmbeddedContent(g), te.stopEmbeddedContent(g.slideBackgroundElement)), te.startEmbeddedContent(v), te.startEmbeddedContent(v.slideBackgroundElement)), requestAnimationFrame(()=>{
+                Ee(Se(v));
+            }), Te();
         },
-        getScale: ()=>$,
+        getScale: ()=>X,
         getConfig: ()=>A,
-        getQueryHash: d,
-        getSlidePath: ce.getHash.bind(ce),
+        getQueryHash: $ef6d0cb1bf5eee6a$var$d,
+        getSlidePath: he.getHash.bind(he),
         getRevealElement: ()=>n,
-        getSlidesElement: ()=>Y.slides,
-        getViewportElement: ()=>Y.viewport,
-        getBackgroundsElement: ()=>ae.element,
+        getSlidesElement: ()=>_.slides,
+        getViewportElement: ()=>_.viewport,
+        getBackgroundsElement: ()=>ne.element,
         registerPlugin: pe.registerPlugin.bind(pe),
         hasPlugin: pe.hasPlugin.bind(pe),
         getPlugin: pe.getPlugin.bind(pe),
         getPlugins: pe.getRegisteredPlugins.bind(pe)
     };
-    return e(l, {
-        ...Nt,
-        announceStatus: be,
-        getStatusText: we,
-        focus: ve,
-        scroll: ne,
-        progress: ue,
-        controls: he,
-        location: ce,
-        overview: le,
-        fragments: oe,
-        backgrounds: ae,
-        slideContent: ee,
-        slideNumber: te,
+    return $ef6d0cb1bf5eee6a$var$e(l, {
+        ...Ct,
+        announceStatus: Ee,
+        getStatusText: Se,
+        focus: fe,
+        scroll: re,
+        progress: ge,
+        controls: ue,
+        location: he,
+        overview: de,
+        keyboard: ce,
+        fragments: le,
+        backgrounds: ne,
+        slideContent: te,
+        slideNumber: ie,
         onUserInput: function(e) {
-            A.autoSlideStoppable && vt();
+            A.autoSlideStoppable && ut();
         },
-        closeOverlay: Be,
-        updateSlidesVisibility: tt,
-        layoutSlideContents: De,
-        transformSlides: Le,
-        cueAutoSlide: gt,
-        cancelAutoSlide: pt
-    }), Nt;
+        closeOverlay: me.close.bind(me),
+        updateSlidesVisibility: Qe,
+        layoutSlideContents: Ie,
+        transformSlides: Pe,
+        cueAutoSlide: ct,
+        cancelAutoSlide: ht
+    }), Ct;
 }
-let X = $, Y = [];
-X.initialize = (e)=>(Object.assign(X, new $(document.querySelector(".reveal"), e)), Y.map((e)=>e(X)), X.initialize()), [
+let $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039 = $ef6d0cb1bf5eee6a$var$$, $ef6d0cb1bf5eee6a$var$Y = [];
+$ef6d0cb1bf5eee6a$export$2e2bcd8739ae039.initialize = (e)=>(Object.assign($ef6d0cb1bf5eee6a$export$2e2bcd8739ae039, new $ef6d0cb1bf5eee6a$var$$(document.querySelector(".reveal"), e)), $ef6d0cb1bf5eee6a$var$Y.map((e)=>e($ef6d0cb1bf5eee6a$export$2e2bcd8739ae039)), $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039.initialize()), [
     "configure",
     "on",
     "off",
@@ -3321,45 +2758,16 @@ X.initialize = (e)=>(Object.assign(X, new $(document.querySelector(".reveal"), e
     "removeEventListener",
     "registerPlugin"
 ].forEach((e)=>{
-    X[e] = (...t)=>{
-        Y.push((i)=>i[e].call(null, ...t));
+    $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039[e] = (...t)=>{
+        $ef6d0cb1bf5eee6a$var$Y.push((i)=>i[e].call(null, ...t));
     };
-}), X.isReady = ()=>!1, X.VERSION = K;
+}), $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039.isReady = ()=>!1, $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039.VERSION = $ef6d0cb1bf5eee6a$var$K;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
 
-},{}],"bFmVD":[function(require,module,exports,__globalThis) {
+var $d16eb09acf14544d$exports = {};
 !function(t, e) {
-    module.exports = e();
-}(this, function() {
+    $d16eb09acf14544d$exports = e();
+}($d16eb09acf14544d$exports, function() {
     "use strict";
     function t() {
         return {
@@ -4667,10 +4075,11 @@ exports.export = function(dest, destName, get) {
     };
 });
 
-},{}],"jDyx9":[function(require,module,exports,__globalThis) {
+
+var $64e7f54992ce4b7d$exports = {};
 !function(e, t) {
-    module.exports = t();
-}(this, function() {
+    $64e7f54992ce4b7d$exports = t();
+}($64e7f54992ce4b7d$exports, function() {
     "use strict";
     function e(e) {
         return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
@@ -17317,7 +16726,7 @@ exports.export = function(dest, destName, get) {
                 end: n,
                 excludeEnd: !0,
                 contains: [].concat(r)
-            }, i || {});
+            }, {});
             return s.contains.push(o), s.contains.push(e.C_NUMBER_MODE), s.contains.push(e.C_BLOCK_COMMENT_MODE), s.contains.push(a), s;
         }, l = {
             className: "built_in",
@@ -50013,34 +49422,1020 @@ exports.export = function(dest, destName, get) {
     return ()=>Rs;
 });
 
-},{}],"10drY":[function(require,module,exports,__globalThis) {
-addEventListener('DOMContentLoaded', ()=>{
-    const diveIn = document.querySelector('dive-in');
-    const stackContainer = diveIn && diveIn.querySelector('stack-container');
-    if (stackContainer) {
-        const stackItems = [
-            ...stackContainer.querySelectorAll('stack-item')
-        ].reverse();
-        for(let i = 0; i < stackItems.length; i++)stackItems[i].style.setProperty('--index', i);
-        document.addEventListener('mousemove', (e)=>{
-            let vw = window.innerWidth;
-            let vh = window.innerHeight;
-            let vc = {
-                x: vw / 2,
-                y: vh / 2
-            };
-            let x = e.clientX;
-            let y = e.clientY;
-            let transformOffset = {
-                x: `${-(x <= vc.x ? -(vc.x - x) : x - vc.x)}px`,
-                y: `${-(y <= vc.y ? -(vc.y - y) : y - vc.y)}px`
-            };
-            stackContainer.style.setProperty('--mouse-x', transformOffset.x);
-            stackContainer.style.setProperty('--mouse-y', transformOffset.y);
+
+
+var $7c7d8023db1856bb$exports = {};
+
+$parcel$export($7c7d8023db1856bb$exports, "trueTypeOf", () => $7c7d8023db1856bb$export$d211e1a3ee5abe23);
+$parcel$export($7c7d8023db1856bb$exports, "isNull", () => $7c7d8023db1856bb$export$630801d484da15df);
+$parcel$export($7c7d8023db1856bb$exports, "isUndefined", () => $7c7d8023db1856bb$export$fce6876652108ab);
+$parcel$export($7c7d8023db1856bb$exports, "isNullOrUndefined", () => $7c7d8023db1856bb$export$bedb7023a7733221);
+$parcel$export($7c7d8023db1856bb$exports, "isObject", () => $7c7d8023db1856bb$export$a6cdc56e425d0d0a);
+$parcel$export($7c7d8023db1856bb$exports, "isSymbol", () => $7c7d8023db1856bb$export$a244864fd9645c7f);
+$parcel$export($7c7d8023db1856bb$exports, "isFunction", () => $7c7d8023db1856bb$export$f6e2535fb5126e54);
+$parcel$export($7c7d8023db1856bb$exports, "isBoolean", () => $7c7d8023db1856bb$export$f9ce7b637dfbe238);
+$parcel$export($7c7d8023db1856bb$exports, "isNumber", () => $7c7d8023db1856bb$export$7e4aa119212bc614);
+$parcel$export($7c7d8023db1856bb$exports, "isDate", () => $7c7d8023db1856bb$export$871608497c498473);
+$parcel$export($7c7d8023db1856bb$exports, "isString", () => $7c7d8023db1856bb$export$844ec244b1367d54);
+$parcel$export($7c7d8023db1856bb$exports, "isRegExp", () => $7c7d8023db1856bb$export$49841c62b9eff15);
+$parcel$export($7c7d8023db1856bb$exports, "isArray", () => $7c7d8023db1856bb$export$43bee75e5e14138e);
+/*!
+ * More accurately check the type of a JavaScript object
+ * (c) 2021 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Object} obj The object
+ * @return {String} The object type
+ */ const $7c7d8023db1856bb$export$d211e1a3ee5abe23 = (obj)=>Object.prototype.toString.call(obj).slice(8, -1);
+const $7c7d8023db1856bb$export$630801d484da15df = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Null";
+};
+const $7c7d8023db1856bb$export$fce6876652108ab = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Undefined";
+};
+const $7c7d8023db1856bb$export$bedb7023a7733221 = (any)=>{
+    return $7c7d8023db1856bb$export$630801d484da15df(any) || $7c7d8023db1856bb$export$fce6876652108ab(any);
+};
+const $7c7d8023db1856bb$export$a6cdc56e425d0d0a = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Object";
+};
+const $7c7d8023db1856bb$export$a244864fd9645c7f = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Symbol";
+};
+const $7c7d8023db1856bb$export$f6e2535fb5126e54 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Function";
+};
+const $7c7d8023db1856bb$export$f9ce7b637dfbe238 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Boolean";
+};
+const $7c7d8023db1856bb$export$7e4aa119212bc614 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Number";
+};
+const $7c7d8023db1856bb$export$871608497c498473 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Date";
+};
+const $7c7d8023db1856bb$export$844ec244b1367d54 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "String";
+};
+const $7c7d8023db1856bb$export$49841c62b9eff15 = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "RegExp";
+};
+const $7c7d8023db1856bb$export$43bee75e5e14138e = (any)=>{
+    return $7c7d8023db1856bb$export$d211e1a3ee5abe23(any) === "Array";
+};
+
+
+var $fec36f09826875e9$export$2e2bcd8739ae039 = {
+    /**
+   * checks if "something" is a string
+   *
+   * @example <caption>eg. usage</caption>
+   * const x = 'hi';
+   * const y = new Date();
+   *
+   * console.log(String.isString(x)); // true
+   * console.log(String.isString(y)); // false
+   * @memberOf string
+   * @method isString()
+   * @param {any} s - the provided "something"
+   * @return {boolean}
+   */ isString: {
+        value (s) {
+            return (0, $7c7d8023db1856bb$export$844ec244b1367d54)(s);
+        }
+    },
+    guid: {
+        value () {
+            return `${Math.random().toString(16).slice(2, 10)}-${Math.random().toString(16).slice(2, 6)}-4${Math.random().toString(16).slice(2, 5)}-${Math.random().toString(16).slice(2, 6)}-${Math.random().toString(16).slice(2, 14)}`;
+        }
+    },
+    capitalize: {
+        value (s) {
+            return String.isString(s) && String.prototype.capitalize.call(s);
+        }
+    },
+    camelize: {
+        value (s) {
+            return String.isString(s) && String.prototype.camelize.call(s);
+        }
+    },
+    pascalize: {
+        value (s) {
+            return String.isString(s) && String.prototype.pascalize.call(s);
+        }
+    },
+    stripEmojis: {
+        value (s) {
+            return String.isString(s) && String.prototype.stripEmojis.call(s);
+        }
+    },
+    toBoolean: {
+        value (s) {
+            return String.isString(s) && String.prototype.toBoolean.call(s);
+        }
+    }
+};
+
+
+var $c8053045979f15d2$export$2e2bcd8739ae039 = {
+    /**
+   * Capitalizes a string
+   *
+   * @example <caption>eg. usage</caption>
+   * const x = 'hi';
+   *
+   * console.log(x); // hi
+   * console.log(x.capitalize()); // Hi
+   * @memberOf string
+   * @method capitalize()
+   * @return {string}
+   */ capitalize: {
+        value () {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+    },
+    camelize: {
+        value () {
+            return this.toLowerCase() // Convertiamo tutto in minuscolo
+            .replace(/[-_\s]+(.)?/g, (match, chr)=>chr ? chr.toUpperCase() : '') // Rimuoviamo delimitatori e capitalizziamo la lettera successiva
+            .replace(/^(.)/, (match, chr)=>chr.toLowerCase()); // Assicuriamo che la prima lettera sia minuscola
+        }
+    },
+    pascalize: {
+        value () {
+            return this.replace(/(^|-)([a-z])/g, (match, separator, letter)=>letter.toUpperCase());
+        }
+    },
+    stripEmojis: {
+        value () {
+            return this.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '').replace(/\s+/g, ' ').trim();
+        }
+    },
+    toBoolean: {
+        value () {
+            // TODO: handle returning undefined when this is not a boolean string ('true','false','0','1'...)
+            return /^\s*(true|1|on|yes)\s*$/i.test(this);
+        }
+    }
+};
+
+
+Object.defineProperties(String, (0, $fec36f09826875e9$export$2e2bcd8739ae039));
+Object.defineProperties(String.prototype, (0, $c8053045979f15d2$export$2e2bcd8739ae039));
+
+
+
+
+"use strict";
+/* Inspired by (c) Andrea Giammarchi @webreflection ISC https://github.com/WebReflection/custom-elements-builtin */ /* 
+  check the fix I did on line 283 changing HTMLBuiltin 
+  with HTMLElement for debugging purposes
+*/ (function() {
+    var attributesObserver = (whenDefined, MutationObserver1)=>{
+        const attributeChanged = (records)=>{
+            for (const record of records)dispatch(record);
+        };
+        const dispatch = ({ target: target, attributeName: attributeName, oldValue: oldValue })=>{
+            target.attributeChangedCallback(attributeName, oldValue, target.getAttribute(attributeName));
+        };
+        return (target, is)=>{
+            const { observedAttributes: attributeFilter } = target.constructor;
+            if (attributeFilter) whenDefined(is).then(()=>{
+                new MutationObserver1(attributeChanged).observe(target, {
+                    attributes: true,
+                    attributeOldValue: true,
+                    attributeFilter: attributeFilter
+                });
+                for (const attributeFilterItem of attributeFilter)target.hasAttribute(attributeFilterItem) && dispatch({
+                    target: target,
+                    attributeName: attributeFilterItem,
+                    oldValue: null
+                });
+            });
+            return target;
+        };
+    };
+    const { keys: keys } = Object;
+    const expando = (element)=>{
+        const key = keys(element);
+        const value = [];
+        const ignore = new Set();
+        const { length: length } = key;
+        for(let i = 0; i < length; i++){
+            value[i] = element[key[i]];
+            try {
+                delete element[key[i]];
+            } catch (SafariTP) {
+                ignore.add(i);
+            }
+        }
+        return ()=>{
+            for(let i = 0; i < length; i++)ignore.has(i) || (element[key[i]] = value[i]);
+        };
+    };
+    /*! (c) Andrea Giammarchi - ISC */ /**
+   * @callback TLifecycleCallback
+   * @param {Element} node
+   * @param {boolean} connected
+   * @returns {void}
+   */ /**
+  /**
+   * Start observing a generic document or root element.
+   * @param {TLifecycleCallback} callback triggered per each dis/connected element
+   * @param {Document|Element} [root=document] by default, the global document to observe
+   * @param {Function} [MO=MutationObserver] by default, the global MutationObserver
+   * @param {string[]} [query=['*']] the selectors to use within nodes
+   * @returns {MutationObserver}
+   */ const notify = (callback, root = document, MO = MutationObserver, query = [
+        "*"
+    ])=>{
+        const loop = (nodes, selectors, added, removed, connected, pass)=>{
+            for (const node of nodes)if (pass || 'querySelectorAll' in node) {
+                if (connected) {
+                    if (!added.has(node)) {
+                        added.add(node);
+                        removed.delete(node);
+                        callback(node, connected);
+                    }
+                } else if (!removed.has(node)) {
+                    removed.add(node);
+                    added.delete(node);
+                    callback(node, connected);
+                }
+                if (!pass) loop(node.querySelectorAll(selectors), selectors, added, removed, connected, true);
+            }
+        };
+        const mo = new MO((records)=>{
+            if (query.length) {
+                const selectors = query.join(",");
+                const added = new Set();
+                const removed = new Set();
+                for (const { addedNodes: addedNodes, removedNodes: removedNodes } of records){
+                    loop(removedNodes, selectors, added, removed, false, false);
+                    loop(addedNodes, selectors, added, removed, true, false);
+                }
+            }
         });
+        const { observe: observe } = mo;
+        (mo.observe = (node)=>observe.call(mo, node, {
+                subtree: true,
+                childList: true
+            }))(root);
+        return mo;
+    };
+    const QSA = "querySelectorAll";
+    const elements = (element)=>QSA in element;
+    const { filter: filter } = [];
+    var qsaObserver = (options)=>{
+        const live = new WeakMap();
+        const drop = (elements)=>{
+            for (const element of elements)live.delete(element);
+        };
+        const flush = ()=>{
+            const records = observer.takeRecords();
+            for (const record of records){
+                parse(filter.call(record.removedNodes, elements), false);
+                parse(filter.call(record.addedNodes, elements), true);
+            }
+        };
+        const matches = (element)=>element.matches || element.webkitMatchesSelector || element.msMatchesSelector;
+        const notifier = (element, connected)=>{
+            let selectors;
+            if (connected) {
+                for(let q, m = matches(element), i = 0, { length: length } = query; i < length; i++)if (m.call(element, q = query[i])) {
+                    !live.has(element) && live.set(element, new Set());
+                    selectors = live.get(element);
+                    if (!selectors.has(q)) {
+                        selectors.add(q);
+                        options.handle(element, connected, q);
+                    }
+                }
+            } else if (live.has(element)) {
+                selectors = live.get(element);
+                live.delete(element);
+                for (const selector of selectors)options.handle(element, connected, selector);
+            }
+        };
+        const parse = (elements, connected = true)=>{
+            for (const element of elements)notifier(element, connected);
+        };
+        const { query: query } = options;
+        const root = options.root || document;
+        const observer = notify(notifier, root, MutationObserver, query);
+        const { attachShadow: attachShadow } = Element.prototype;
+        if (attachShadow) Element.prototype.attachShadow = function(init) {
+            const shadowRoot = attachShadow.call(this, init);
+            observer.observe(shadowRoot);
+            return shadowRoot;
+        };
+        query.length && parse(root[QSA](query));
+        return {
+            drop: drop,
+            flush: flush,
+            observer: observer,
+            parse: parse
+        };
+    };
+    const { createElement: createElement } = document;
+    const { define: define, get: get, upgrade: upgrade } = customElements;
+    const { construct: construct } = Reflect || {
+        construct (HTMLElement) {
+            return HTMLElement.call(this);
+        }
+    };
+    const { defineProperty: defineProperty, getOwnPropertyNames: getOwnPropertyNames, setPrototypeOf: setPrototypeOf } = Object;
+    const shadowRoots = new WeakMap();
+    const shadows = new Set();
+    const classes = new Map();
+    const defined = new Map();
+    const prototypes = new Map();
+    const registry = new Map();
+    const shadowed = [];
+    const query = [];
+    const getCE = (is)=>registry.get(is) || get.call(customElements, is);
+    const handle = (element, connected, selector)=>{
+        const proto = prototypes.get(selector);
+        if (connected && !proto.isPrototypeOf(element)) {
+            const redefine = expando(element);
+            override = setPrototypeOf(element, proto);
+            try {
+                new proto.constructor();
+            } finally{
+                override = null;
+                redefine();
+            }
+        }
+        const method = `${connected ? "" : "dis"}connectedCallback`;
+        if (method in proto) element[method]();
+    };
+    const { parse: parse } = qsaObserver({
+        query: query,
+        handle: handle
+    });
+    const { parse: parseShadowed } = qsaObserver({
+        query: shadowed,
+        handle (element, connected) {
+            if (shadowRoots.has(element)) {
+                connected ? shadows.add(element) : shadows.delete(element);
+                query.length && parseShadow.call(query, element);
+            }
+        }
+    });
+    // qsaObserver also patches attachShadow
+    // be sure this runs *after* that
+    const { attachShadow: attachShadow } = Element.prototype;
+    if (attachShadow) Element.prototype.attachShadow = function(init) {
+        const root = attachShadow.call(this, init);
+        shadowRoots.set(this, root);
+        return root;
+    };
+    const whenDefined = (name)=>{
+        if (!defined.has(name)) {
+            let _;
+            let $ = new Promise(($)=>{
+                _ = $;
+            });
+            defined.set(name, {
+                $: $,
+                _: _
+            });
+        }
+        return defined.get(name).$;
+    };
+    const augment = attributesObserver(whenDefined, MutationObserver);
+    let override = null;
+    getOwnPropertyNames(self).filter((k)=>/^HTML.*Element$/.test(k)).forEach((k)=>{
+        const HTMLElement = self[k];
+        function HTMLBuiltIn() {
+            const { constructor: constructor } = this;
+            if (!classes.has(constructor)) throw new TypeError("Illegal constructor");
+            const { is: is, tag: tag } = classes.get(constructor);
+            if (is) {
+                if (override) return augment(override, is);
+                const element = createElement.call(document, tag);
+                element.setAttribute("is", is);
+                return augment(setPrototypeOf(element, constructor.prototype), is);
+            }
+            return construct.call(this, HTMLElement, [], constructor);
+        }
+        setPrototypeOf(HTMLBuiltIn, HTMLElement);
+        defineProperty(HTMLBuiltIn.prototype = HTMLElement.prototype, "constructor", {
+            value: HTMLElement
+        });
+        defineProperty(self, k, {
+            value: HTMLBuiltIn
+        });
+    });
+    document.createElement = function(name, options) {
+        const is = options && options.is;
+        if (is) {
+            const Class = registry.get(is);
+            if (Class && classes.get(Class).tag === name) return new Class();
+        }
+        const element = createElement.call(document, name);
+        is && element.setAttribute("is", is);
+        return element;
+    };
+    customElements.get = getCE;
+    customElements.whenDefined = whenDefined;
+    customElements.upgrade = function(element) {
+        const is = element.getAttribute("is");
+        if (is) {
+            const constructor = registry.get(is);
+            if (constructor) {
+                augment(setPrototypeOf(element, constructor.prototype), is);
+                // apparently unnecessary because this is handled by qsa observer
+                // if (element.isConnected && element.connectedCallback)
+                //   element.connectedCallback();
+                return;
+            }
+        }
+        upgrade.call(customElements, element);
+    };
+    customElements.define = function(is, Class, options) {
+        if (getCE(is)) throw new Error(`'${is}' has already been defined as a custom element`);
+        let selector;
+        const tag = options && options.extends;
+        classes.set(Class, tag ? {
+            is: is,
+            tag: tag
+        } : {
+            is: "",
+            tag: is
+        });
+        if (tag) {
+            selector = `${tag}[is="${is}"]`;
+            prototypes.set(selector, Class.prototype);
+            registry.set(is, Class);
+            query.push(selector);
+        } else {
+            define.apply(customElements, arguments);
+            shadowed.push(selector = is);
+        }
+        whenDefined(is).then(()=>{
+            if (tag) {
+                parse(document.querySelectorAll(selector));
+                shadows.forEach(parseShadow, [
+                    selector
+                ]);
+            } else parseShadowed(document.querySelectorAll(selector));
+        });
+        defined.get(is)._(Class);
+    };
+    function parseShadow(element) {
+        const root = shadowRoots.get(element);
+        parse(root.querySelectorAll(this), element.isConnected);
+    }
+})();
+
+
+
+
+function $85f23c9f9599e65c$export$25f58c15f3766358(attributesOrEvents, methodSuffix = "") {
+    return Object.entries(attributesOrEvents).reduce((acc, item)=>{
+        acc[`handle${item[0].pascalize()}${methodSuffix}`] = item[1];
+        return acc;
+    }, {});
+}
+function $85f23c9f9599e65c$export$ce5e2133d7d47ec3(componentEvents) {
+    return $85f23c9f9599e65c$export$25f58c15f3766358(componentEvents);
+}
+function $85f23c9f9599e65c$export$752779fc07b5a2ca(componentAttributes) {
+    return $85f23c9f9599e65c$export$25f58c15f3766358(componentAttributes, "Change");
+}
+
+
+function $a7ecc6d50d840c36$export$12b126dbe0b12583(component) {
+    return {
+        handleEvent (e) {
+            this[`handle${e.type.capitalize()}`]?.(e);
+        },
+        attributeChangedCallback (name, oldValue, newValue) {
+            this[`handle${name.pascalize()}Change`]?.(oldValue, newValue);
+            this.onAttributeChanged instanceof Function && this.onAttributeChanged(name, oldValue, newValue);
+        },
+        connectedCallback () {
+            for (const event of Object.keys(component.events))this.addEventListener(event, this);
+            this.onConnected instanceof Function && this.onConnected();
+        },
+        disconnectedCallback () {
+            for (const event of Object.keys(component.events))this.removeEventListener(event, this);
+            this.onDisconnected instanceof Function && this.onDisconnected();
+        }
+    };
+}
+
+
+function $9ba39216500ea741$export$6ccb92ce135089b4(component) {
+    Object.assign(component.prototype, {
+        componentName: component.name
+    }, component.attributes && {
+        ...(0, $85f23c9f9599e65c$export$752779fc07b5a2ca)(component.attributes)
+    }, component.events && {
+        ...(0, $85f23c9f9599e65c$export$ce5e2133d7d47ec3)(component.events)
+    }, (0, $a7ecc6d50d840c36$export$12b126dbe0b12583)(component));
+    component.attributes && Object.defineProperty(component, "observedAttributes", {
+        get: ()=>Object.keys(component.attributes)
+    });
+}
+
+
+function $b20c3a3a709e8857$export$50ed050586e71fac(component, key) {
+    if (!component[key]) throw new Error(`The meta ${key} is required for the wcagUI component: ${component}`);
+}
+
+
+function $d9b6009be5ba077b$export$dc17d4ef963d7d7f(mixins) {
+    return mixins.extends ? {
+        extends: mixins.extends
+    } : undefined;
+}
+
+
+function $853c52223eeed7dc$export$a00e2346eabbdbef(component) {
+    !!customElements && !customElements.get(component.name) && customElements.define(component.name, component, (0, $d9b6009be5ba077b$export$dc17d4ef963d7d7f)(component));
+}
+
+
+function $25b2b497d891fbef$export$b0b3dc53d6a0250d(componentName, component) {
+    // TODO: check if possibile to extract componentName from component
+    Object.assign(self, {
+        wcagUI: {
+            ...self.wcagUI,
+            [componentName]: component
+        }
+    });
+}
+
+
+function $96c1724fca3eeec3$export$5478d5c9a1cb9b6(componentName, component) {
+    (0, $b20c3a3a709e8857$export$50ed050586e71fac)(component, "name");
+    (0, $853c52223eeed7dc$export$a00e2346eabbdbef)(component);
+    (0, $9ba39216500ea741$export$6ccb92ce135089b4)(component);
+    (0, $25b2b497d891fbef$export$b0b3dc53d6a0250d)(componentName, component);
+}
+
+
+/**
+ * returns true if the provided string contains HTML tags
+ *
+ * @param {Event} e - the event
+ * @param {boolean} [preventDefault=true] - enable/disable preventDefault
+ * @param {boolean} [stopPropagation=true] - enable/disable stopPropagation
+ * @param {boolean} [stopImmediatePropagation=true] - enable/disable stopImmediatePropagation
+ * @return {boolean|undefined}
+ */ const $e3592ad15e79f4cc$export$e9caaaecfee38128 = (e, preventDefault = true, stopPropagation = true, stopImmediatePropagation = true)=>{
+    if (!e) return;
+    !!preventDefault && e.preventDefault();
+    !!stopPropagation && e.stopPropagation();
+    !!stopImmediatePropagation && e.stopImmediatePropagation();
+    return false;
+};
+
+
+/**
+ * dispatches a CustomEvent according to the params
+ *
+ * @param {string} eventNamespace - the namespace of the event
+ * @param {string} eventName - the event name
+ * @param {object} [detail={}] - the data to be passed as CustomEvent detail
+ * @param {Event} [originalEvent=undefined] - the original DOM event to be added to the CustomEvent detail
+ * @param {EventTarget} [dispatcher=undefined] - pass an EventTarget (Node, Elements, ...) in order to override the dispatcher
+ */ const $94307426a9408e4e$export$fb20829f6af70575 = function(eventNamespace, eventName, detail = {}, originalEvent, dispatcher) {
+    dispatcher = dispatcher ?? this ?? self;
+    const event = new CustomEvent(`${eventNamespace}.${eventName}`, {
+        bubbles: true,
+        cancelable: true,
+        detail: {
+            ...detail,
+            ...originalEvent && {
+                originalEvent: originalEvent
+            }
+        }
+    });
+    console.log(`CustomEvent emitted: ${eventNamespace}.${eventName}`);
+    dispatcher.dispatchEvent(event);
+};
+
+
+
+const $55f6f00702bb68f4$export$abdebb0d6fb36405 = function(eventName, details, originalEvent) {
+    const componentName = this.componentName;
+    (0, $94307426a9408e4e$export$fb20829f6af70575).call(this, componentName, eventName, details, originalEvent ?? new Event(`${componentName}.${eventName}`));
+};
+
+
+const $117cc959faffd245$export$4bf9923669ad6c63 = {
+    cancelEvent: $e3592ad15e79f4cc$export$e9caaaecfee38128,
+    dispatchCustomEvent: $94307426a9408e4e$export$fb20829f6af70575,
+    dispatchComponentEvent: $55f6f00702bb68f4$export$abdebb0d6fb36405
+};
+
+
+
+const $e98e5db7d31df0ed$export$b3b2de96497acc47 = {
+    /**
+   * encodes a string in base64
+   *
+   * @param {string} s - the given string
+   * @return {string}
+   */ encode: (s)=>{
+        if (!(0, $7c7d8023db1856bb$export$844ec244b1367d54)(s)) throw new Error("@wcag-js/core error, encodeBase64: the provided parameter is not a valid string");
+        return btoa(encodeURIComponent(s));
+    },
+    /**
+   * decodes a string in base64
+   *
+   * @param {string} s - the given string
+   * @return {string}
+   */ decode: (s)=>{
+        if (!(0, $7c7d8023db1856bb$export$844ec244b1367d54)(s)) throw new Error("@wcag-js/core error, decodeBase64: the provided parameter is not a valid string");
+        return decodeURIComponent(atob(s));
+    },
+    /**
+   * stringifies an Object in JSON and encodes it in base64
+   *
+   * @param {object} o - the given object
+   * @return {string}
+   */ fromJSON: (o)=>{
+        if (!(0, $7c7d8023db1856bb$export$a6cdc56e425d0d0a)(o)) throw new Error("@wcag-js/core error, base64.fromJSON: the provided parameter is not a valid object");
+        return encodeBase64(JSON.stringify(o));
+    },
+    /**
+   * decodes a base64 string into a Json parsed object
+   *
+   * @param {string} s - the given string
+   * @return {object}
+   */ toJSON: (s)=>{
+        if (!(0, $7c7d8023db1856bb$export$844ec244b1367d54)(s)) throw new Error("@wcag-js/core error, base64ToJson: the provided parameter is not a valid string");
+        return JSON.parse(decodeBase64(s));
+    }
+};
+ // console.log(
+ //   "encodeBase64",
+ //   encodeBase64("Hello, world!"),
+ //   encodeBase64("Hello, world!") === "SGVsbG8lMkMlMjB3b3JsZCE="
+ // );
+ // console.log(
+ //   "decodeBase64",
+ //   decodeBase64("SGVsbG8lMkMlMjB3b3JsZCE="),
+ //   decodeBase64("SGVsbG8lMkMlMjB3b3JsZCE=") === "Hello, world!"
+ // );
+ // console.log(
+ //   "jsonToBase64",
+ //   jsonToBase64({ hello: "world" }),
+ //   jsonToBase64({ hello: "world" }) === "JTdCJTIyaGVsbG8lMjIlM0ElMjJ3b3JsZCUyMiU3RA=="
+ // );
+
+
+const $8b32f450beb0cb33$export$6b49f0d0c2777fe9 = {
+    parse: (token)=>{
+        var base64Url = token.split(".")[1];
+        var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        var jsonPayload = decodeURIComponent(atob(base64).split("").map(function(c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(""));
+        return JSON.parse(jsonPayload);
+    }
+};
+
+
+// https://www.exeideas.com/2021/12/javascript-md5-function.html
+const $9bf335bbc695d246$export$a58ec6a60c09ca72 = function(string) {
+    function RotateLeft(lValue, iShiftBits) {
+        return lValue << iShiftBits | lValue >>> 32 - iShiftBits;
+    }
+    function AddUnsigned(lX, lY) {
+        var lX4, lY4, lX8, lY8, lResult;
+        lX8 = lX & 0x80000000;
+        lY8 = lY & 0x80000000;
+        lX4 = lX & 0x40000000;
+        lY4 = lY & 0x40000000;
+        lResult = (lX & 0x3fffffff) + (lY & 0x3fffffff);
+        if (lX4 & lY4) return lResult ^ 0x80000000 ^ lX8 ^ lY8;
+        if (lX4 | lY4) {
+            if (lResult & 0x40000000) return lResult ^ 0xc0000000 ^ lX8 ^ lY8;
+            else return lResult ^ 0x40000000 ^ lX8 ^ lY8;
+        } else return lResult ^ lX8 ^ lY8;
+    }
+    function F(x, y, z) {
+        return x & y | ~x & z;
+    }
+    function G(x, y, z) {
+        return x & z | y & ~z;
+    }
+    function H(x, y, z) {
+        return x ^ y ^ z;
+    }
+    function I(x, y, z) {
+        return y ^ (x | ~z);
+    }
+    function FF(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    }
+    function GG(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    }
+    function HH(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    }
+    function II(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    }
+    function ConvertToWordArray(string) {
+        var lWordCount;
+        var lMessageLength = string.length;
+        var lNumberOfWords_temp1 = lMessageLength + 8;
+        var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - lNumberOfWords_temp1 % 64) / 64;
+        var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+        var lWordArray = Array(lNumberOfWords - 1);
+        var lBytePosition = 0;
+        var lByteCount = 0;
+        while(lByteCount < lMessageLength){
+            lWordCount = (lByteCount - lByteCount % 4) / 4;
+            lBytePosition = lByteCount % 4 * 8;
+            lWordArray[lWordCount] = lWordArray[lWordCount] | string.charCodeAt(lByteCount) << lBytePosition;
+            lByteCount++;
+        }
+        lWordCount = (lByteCount - lByteCount % 4) / 4;
+        lBytePosition = lByteCount % 4 * 8;
+        lWordArray[lWordCount] = lWordArray[lWordCount] | 0x80 << lBytePosition;
+        lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+        lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+        return lWordArray;
+    }
+    function WordToHex(lValue) {
+        var WordToHexValue = '', WordToHexValue_temp = '', lByte, lCount;
+        for(lCount = 0; lCount <= 3; lCount++){
+            lByte = lValue >>> lCount * 8 & 255;
+            WordToHexValue_temp = '0' + lByte.toString(16);
+            WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+        }
+        return WordToHexValue;
+    }
+    function Utf8Encode(string) {
+        string = string.replace(/\r\n/g, '\n');
+        var utftext = '';
+        for(var n = 0; n < string.length; n++){
+            var c = string.charCodeAt(n);
+            if (c < 128) utftext += String.fromCharCode(c);
+            else if (c > 127 && c < 2048) {
+                utftext += String.fromCharCode(c >> 6 | 192);
+                utftext += String.fromCharCode(c & 63 | 128);
+            } else {
+                utftext += String.fromCharCode(c >> 12 | 224);
+                utftext += String.fromCharCode(c >> 6 & 63 | 128);
+                utftext += String.fromCharCode(c & 63 | 128);
+            }
+        }
+        return utftext;
+    }
+    var x = Array();
+    var k, AA, BB, CC, DD, a, b, c, d;
+    var S11 = 7, S12 = 12, S13 = 17, S14 = 22;
+    var S21 = 5, S22 = 9, S23 = 14, S24 = 20;
+    var S31 = 4, S32 = 11, S33 = 16, S34 = 23;
+    var S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+    string = Utf8Encode(string);
+    x = ConvertToWordArray(string);
+    a = 0x67452301;
+    b = 0xefcdab89;
+    c = 0x98badcfe;
+    d = 0x10325476;
+    for(k = 0; k < x.length; k += 16){
+        AA = a;
+        BB = b;
+        CC = c;
+        DD = d;
+        a = FF(a, b, c, d, x[k + 0], S11, 0xd76aa478);
+        d = FF(d, a, b, c, x[k + 1], S12, 0xe8c7b756);
+        c = FF(c, d, a, b, x[k + 2], S13, 0x242070db);
+        b = FF(b, c, d, a, x[k + 3], S14, 0xc1bdceee);
+        a = FF(a, b, c, d, x[k + 4], S11, 0xf57c0faf);
+        d = FF(d, a, b, c, x[k + 5], S12, 0x4787c62a);
+        c = FF(c, d, a, b, x[k + 6], S13, 0xa8304613);
+        b = FF(b, c, d, a, x[k + 7], S14, 0xfd469501);
+        a = FF(a, b, c, d, x[k + 8], S11, 0x698098d8);
+        d = FF(d, a, b, c, x[k + 9], S12, 0x8b44f7af);
+        c = FF(c, d, a, b, x[k + 10], S13, 0xffff5bb1);
+        b = FF(b, c, d, a, x[k + 11], S14, 0x895cd7be);
+        a = FF(a, b, c, d, x[k + 12], S11, 0x6b901122);
+        d = FF(d, a, b, c, x[k + 13], S12, 0xfd987193);
+        c = FF(c, d, a, b, x[k + 14], S13, 0xa679438e);
+        b = FF(b, c, d, a, x[k + 15], S14, 0x49b40821);
+        a = GG(a, b, c, d, x[k + 1], S21, 0xf61e2562);
+        d = GG(d, a, b, c, x[k + 6], S22, 0xc040b340);
+        c = GG(c, d, a, b, x[k + 11], S23, 0x265e5a51);
+        b = GG(b, c, d, a, x[k + 0], S24, 0xe9b6c7aa);
+        a = GG(a, b, c, d, x[k + 5], S21, 0xd62f105d);
+        d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+        c = GG(c, d, a, b, x[k + 15], S23, 0xd8a1e681);
+        b = GG(b, c, d, a, x[k + 4], S24, 0xe7d3fbc8);
+        a = GG(a, b, c, d, x[k + 9], S21, 0x21e1cde6);
+        d = GG(d, a, b, c, x[k + 14], S22, 0xc33707d6);
+        c = GG(c, d, a, b, x[k + 3], S23, 0xf4d50d87);
+        b = GG(b, c, d, a, x[k + 8], S24, 0x455a14ed);
+        a = GG(a, b, c, d, x[k + 13], S21, 0xa9e3e905);
+        d = GG(d, a, b, c, x[k + 2], S22, 0xfcefa3f8);
+        c = GG(c, d, a, b, x[k + 7], S23, 0x676f02d9);
+        b = GG(b, c, d, a, x[k + 12], S24, 0x8d2a4c8a);
+        a = HH(a, b, c, d, x[k + 5], S31, 0xfffa3942);
+        d = HH(d, a, b, c, x[k + 8], S32, 0x8771f681);
+        c = HH(c, d, a, b, x[k + 11], S33, 0x6d9d6122);
+        b = HH(b, c, d, a, x[k + 14], S34, 0xfde5380c);
+        a = HH(a, b, c, d, x[k + 1], S31, 0xa4beea44);
+        d = HH(d, a, b, c, x[k + 4], S32, 0x4bdecfa9);
+        c = HH(c, d, a, b, x[k + 7], S33, 0xf6bb4b60);
+        b = HH(b, c, d, a, x[k + 10], S34, 0xbebfbc70);
+        a = HH(a, b, c, d, x[k + 13], S31, 0x289b7ec6);
+        d = HH(d, a, b, c, x[k + 0], S32, 0xeaa127fa);
+        c = HH(c, d, a, b, x[k + 3], S33, 0xd4ef3085);
+        b = HH(b, c, d, a, x[k + 6], S34, 0x4881d05);
+        a = HH(a, b, c, d, x[k + 9], S31, 0xd9d4d039);
+        d = HH(d, a, b, c, x[k + 12], S32, 0xe6db99e5);
+        c = HH(c, d, a, b, x[k + 15], S33, 0x1fa27cf8);
+        b = HH(b, c, d, a, x[k + 2], S34, 0xc4ac5665);
+        a = II(a, b, c, d, x[k + 0], S41, 0xf4292244);
+        d = II(d, a, b, c, x[k + 7], S42, 0x432aff97);
+        c = II(c, d, a, b, x[k + 14], S43, 0xab9423a7);
+        b = II(b, c, d, a, x[k + 5], S44, 0xfc93a039);
+        a = II(a, b, c, d, x[k + 12], S41, 0x655b59c3);
+        d = II(d, a, b, c, x[k + 3], S42, 0x8f0ccc92);
+        c = II(c, d, a, b, x[k + 10], S43, 0xffeff47d);
+        b = II(b, c, d, a, x[k + 1], S44, 0x85845dd1);
+        a = II(a, b, c, d, x[k + 8], S41, 0x6fa87e4f);
+        d = II(d, a, b, c, x[k + 15], S42, 0xfe2ce6e0);
+        c = II(c, d, a, b, x[k + 6], S43, 0xa3014314);
+        b = II(b, c, d, a, x[k + 13], S44, 0x4e0811a1);
+        a = II(a, b, c, d, x[k + 4], S41, 0xf7537e82);
+        d = II(d, a, b, c, x[k + 11], S42, 0xbd3af235);
+        c = II(c, d, a, b, x[k + 2], S43, 0x2ad7d2bb);
+        b = II(b, c, d, a, x[k + 9], S44, 0xeb86d391);
+        a = AddUnsigned(a, AA);
+        b = AddUnsigned(b, BB);
+        c = AddUnsigned(c, CC);
+        d = AddUnsigned(d, DD);
+    }
+    var temp = WordToHex(a) + WordToHex(b) + WordToHex(c) + WordToHex(d);
+    return temp.toLowerCase();
+};
+
+
+const $89827928e1f4b747$export$d8738670c721d955 = {
+    base64: $e98e5db7d31df0ed$export$b3b2de96497acc47,
+    jwt: $8b32f450beb0cb33$export$6b49f0d0c2777fe9,
+    md5: $9bf335bbc695d246$export$a58ec6a60c09ca72
+};
+
+
+/**
+ * decodes a base64 string into a Json parsed object
+ *
+ * @param {string} s - the given string
+ * @return {object}
+ */ function $ad9da3b2a3a74c06$export$61fc7d43ac8f84b0(callback, threshold = 300) {
+    let debounce1;
+    return (...args)=>{
+        clearTimeout(debounce1);
+        debounce1 = setTimeout(()=>{
+            callback.apply(this, args);
+        }, threshold);
+    };
+}
+
+
+/**
+ * Handles callback function throttling
+ *
+ * @param {Function} callback
+ * @param {number} [threshold=300]
+ * @return {Function} the throttled function
+ */ function $2f5678b51342b2e9$export$de363e709c412c8a(callback, threshold = 300) {
+    let throttlePause;
+    return (...args)=>{
+        if (throttlePause) return;
+        throttlePause = true;
+        setTimeout(()=>{
+            callback.apply(this, args);
+            throttlePause = false;
+        }, threshold);
+    };
+}
+
+
+var $3b136602595f7c27$exports = {};
+
+$parcel$export($3b136602595f7c27$exports, "buildFileList", () => $3b136602595f7c27$export$da9521b36bc42432);
+$parcel$export($3b136602595f7c27$exports, "buildFileArray", () => $3b136602595f7c27$export$5c1235a8581c233b);
+// fileArrayOrList: File[] | FileList
+// returns a FileList instance
+const $3b136602595f7c27$export$da9521b36bc42432 = (fileArrayOrList)=>{
+    if (fileArrayOrList instanceof FileList) return fileArrayOrList;
+    const dataTransfer = new DataTransfer();
+    for (const file of fileArrayOrList)dataTransfer.items.add(file);
+    return dataTransfer.files;
+};
+const $3b136602595f7c27$export$5c1235a8581c233b = (fileArrayOrList)=>{
+    if (fileArrayOrList instanceof Array) return fileArrayOrList;
+    return Array.from(fileArrayOrList);
+};
+
+
+
+const $e81cc0939c6e24bb$export$cbfd4c4104bf5a27 = {
+    debounce: $ad9da3b2a3a74c06$export$61fc7d43ac8f84b0,
+    throttle: $2f5678b51342b2e9$export$de363e709c412c8a,
+    files: $3b136602595f7c27$exports,
+    types: $7c7d8023db1856bb$exports
+};
+
+
+const $f84d875504fede26$export$33c318ca909f6b6 = (mixins)=>{
+    const self = self || window;
+    Object.assign(self, {
+        wcagUI: {
+            ...self.wcagUI,
+            ...mixin
+        }
+    });
+};
+
+
+"use strict";
+
+
+
+var $bf79e9013d94ad8f$export$2e2bcd8739ae039 = {
+    disabled: function(oldValue, newValue) {
+        if (!!newValue) console.log("disabled changed", oldValue, newValue, this.textContent);
+    }
+};
+
+
+var $5811beae79b3216b$export$2e2bcd8739ae039 = {
+    click: function(e) {
+        console.log("button clicked", this.textContent);
+    }
+};
+
+
+class $5d3dbd10dd0c7b33$export$353f5b6fc5456de1 extends HTMLButtonElement {
+    static name = "wcag-button";
+    static extends = "button";
+    static attributes = (0, $bf79e9013d94ad8f$export$2e2bcd8739ae039);
+    static events = (0, $5811beae79b3216b$export$2e2bcd8739ae039);
+    /**
+   * static initialization
+   *
+   * @static
+   * @memberof Button
+   */ static{
+        (0, $96c1724fca3eeec3$export$5478d5c9a1cb9b6)("Button", $5d3dbd10dd0c7b33$export$353f5b6fc5456de1);
+    }
+    constructor(){
+        super();
+        this.#initialize();
+    }
+    #initialize() {
+        !this.hasAttribute("type") && this.setAttribute("type", "button");
+    // !this.hasAttribute("role") && this.setAttribute("role", "button");
+    }
+}
+
+
+// import './_dive-in';
+// reveal.js initialization
+const $ce2ab6a3784a12d8$var$slides = (0, $ef6d0cb1bf5eee6a$export$2e2bcd8739ae039)({
+    plugins: [
+        (0, (/*@__PURE__*/$parcel$interopDefault($d16eb09acf14544d$exports))),
+        (0, (/*@__PURE__*/$parcel$interopDefault($64e7f54992ce4b7d$exports)))
+    ],
+    // highlight.js options
+    highlight: {
+        highlightOnLoad: true,
+        tabReplace: '  '
+    },
+    navigationMode: 'linear',
+    ...window.location.href.includes('?print-pdf') && {
+        pdfSeparateFragments: false
+    },
+    hash: true,
+    // Flags if we should monitor the hash and change slides accordingly
+    respondToHashChanges: true,
+    // Push each slide change to the browser history.  Implies `hash: true`
+    history: true
+});
+// keyboard interaction configuration
+$ce2ab6a3784a12d8$var$slides.configure({
+    keyboard: {
+        8: 'prev',
+        // 27: null,
+        78: null
     }
 });
+$ce2ab6a3784a12d8$var$slides.initialize();
 
-},{}]},["cKNkg","fFaKF"], "fFaKF", "parcelRequire94c2")
 
-//# sourceMappingURL=index.0fbc91cd.js.map
+//# sourceMappingURL=introducing-wcag-ui.ac7560ff.js.map

@@ -3,8 +3,8 @@
     --r-main-font-size: 4.5rem;
     --r-heading-color: #f0f0f0;
     --r-heading-text-transform: none;
-    --r-link-color: #AD85D6;
-    --r-highlight-color: #AD85D6;
+    --r-link-color: #ad85d6;
+    --r-highlight-color: #ad85d6;
   }
 
   .reveal {
@@ -39,7 +39,7 @@
 
     pre {
       code {
-        font-size: 0.7em;
+        font-size: 1em;
         line-height: 1.3;
       }
     }

@@ -1,3 +1,6 @@
+@import 'npm:@wcag-ui/iconography';
+@import 'npm:@wcag-ui/typography';
+
 @import 'npm:reveal.js/dist/reset.css' layer(reveal);
 @import 'npm:reveal.js/dist/reveal.css' layer(reveal);
 @import 'npm:reveal.js/dist/theme/black.css' layer(reveal);
