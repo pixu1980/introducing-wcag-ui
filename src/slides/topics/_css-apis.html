@@ -1,0 +1,148 @@
+<section cascade>
+  <section>
+    <h2>Exposing CSS <mark>APIs</mark>?</h2>
+  </section>
+  <section>
+    <h3>We needed to re-learn the <mark>"C"</mark> in CSS</h3>
+  </section>
+  <section>
+    <blockquote>
+      The <mark>Cascade</mark> is an <mark>algorithm</mark>
+      that defines how user agents combine property values originating from different sources.
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade" target="_blank" rel="noopener noreferrer">MDN</a>
+    </blockquote>
+  </section>
+  <section>
+    <h3>
+      What are the <mark>players</mark> involved<br />
+      in the algorithm?
+    </h3>
+    <ul>
+      <li class="fragment">user-agent stylesheets</li>
+      <li class="fragment">user stylesheets</li>
+      <li class="fragment">author stylesheets <span class="fragment">(+ inline styles)</span></li>
+    </ul>
+  </section>
+  <section>
+    <h3>How the cascade algorithm handles the <mark>precedence of declarations</mark>?</h3>
+    <ol>
+      <li class="fragment">user-agent declarations</li>
+      <li class="fragment">user declarations</li>
+      <li class="fragment">author and inline declarations</li>
+      <li class="fragment">@keyframe animations</li>
+      <li class="fragment">!important 😞 author and inline declarations</li>
+      <li class="fragment">!important 😢 user declarations</li>
+      <li class="fragment">!important 😭 user-agent declarations</li>
+      <li class="fragment">transitions</li>
+    </ol>
+  </section>
+  <section>
+    <h3>
+      How the @layer <br />
+      <mark>integrates into this</mark>?
+    </h3>
+    <ol>
+      <li class="fragment">@layer 1 declarations</li>
+      <li class="fragment">@layer ... declarations</li>
+      <li class="fragment">@layer N declarations</li>
+      <li class="fragment">un-layered declarations</li>
+      <li class="fragment">inline declarations</li>
+    </ol>
+  </section>
+  <section>
+    <h3>
+      What about <br />
+      <mark>@layer</mark> and <mark>!important</mark>?
+    </h3>
+    <ol>
+      <li class="fragment">!important 😟 un-layered declarations</li>
+      <li class="fragment">!important 😞 @layer N declarations</li>
+      <li class="fragment">!important 😖 @layer ... declarations</li>
+      <li class="fragment">!important 😫 @layer 1 declarations</li>
+      <li class="fragment">!important 😢 inline declarations</li>
+    </ol>
+  </section>
+  <section>
+    <h3>So in the end...</h3>
+  </section>
+  <section>
+    <h4>Order of <mark>precedence</mark> (lower to higher priority)</h4>
+    <small>
+      <ol>
+        <li class="fragment">user-agent declarations</li>
+        <li class="fragment">user declarations</li>
+        <li class="fragment">
+          author declarations
+          <ol>
+            <li class="fragment">@layer 1 declarations</li>
+            <li class="fragment">@layer ... declarations</li>
+            <li class="fragment">@layer N declarations</li>
+            <li class="fragment">un-layered declarations</li>
+            <li class="fragment">inline declarations</li>
+          </ol>
+        </li>
+        <li class="fragment">@keyframe animations</li>
+        <li class="fragment">
+          !important 😟 author and inline declarations
+          <ol>
+            <li class="fragment">!important 😞 un-layered declarations</li>
+            <li class="fragment">!important 😖 @layer N declarations</li>
+            <li class="fragment">!important 😫 @layer ... declarations</li>
+            <li class="fragment">!important 😢 @layer 1 declarations</li>
+            <li class="fragment">!important 😭 inline declarations</li>
+          </ol>
+        </li>
+        <li class="fragment">!important 😡 user declarations</li>
+        <li class="fragment">!important 🤬 user-agent declarations</li>
+        <li class="fragment">transitions</li>
+      </ol>
+    </small>
+  </section>
+  <section>
+    <h4>exposing CSS <mark>API</mark>?</h4>
+    <pre class="fragment">
+      <code class="hljs css" data-trim="" data-line-numbers="1|3-11|13,14|15-22|24-31|35-38|40">
+@layer wcag-ui.core, wcag-ui.foundations, wcag-ui.components;
+
+@layer wcag-ui.foundations {
+  @layer typography {
+  :root {
+    --wcag-t--font-family: "Inter";
+    --wcag-t--font-size--base: 1.6rem;
+    
+    ...
+  }
+}
+
+@layer wcag-ui.components {
+  @layer button {
+    :root {
+      ...
+      
+      --wcag-button--border-radius: .4rem;
+      --wcag-button--background-color: var(--wcag-c--blue-400);
+      
+      ...
+    }
+    
+    [is="wcag-button"] {
+      ...
+      
+      border-radius: var(--wcag-button--border-radius);
+      background-color: var(--wcag-button--background-color);
+      
+      ...
+    }
+  }
+}
+
+// un-layered styles
+:root {
+  --wcag-button--background-color: rebeccapurple;
+}
+  
+// yee, css APIs!
+  </code>
+    </pre>
+  </section>
+</section>

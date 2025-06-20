@@ -3,15 +3,14 @@
     <h2>How does it <mark>work</mark>?</h2>
   </section>
   <section>
-    <h3><mark>customElements</mark> (specs v1) without Shadow DOM ✨</h3>
+    <h3><mark>customElements v1</mark> without ShadowDOM ✨</h3>
     <small>
       <ul>
-        <!-- <li><strong>Native Integration:</strong> Uses standard custom elements without shadow DOM for easy debugging and SEO benefits.</li> -->
         <li class="fragment">
-          <strong><mark>Transparent Structure</mark>:</strong> No encapsulation means better accessibility and natural content interpretation.
+          <strong><mark>Transparent Structure</mark>:</strong> No encapsulation means no styling boundaries, better accessibility and natural content parsing.
         </li>
         <li class="fragment">
-          <strong><mark>Simple Debugging</mark>:</strong> Inspect elements directly with developer tools.
+          <strong><mark>Simple Debugging</mark>:</strong> Inspect elements directly with developer tools, as usual for any common HTML element.
         </li>
         <li class="fragment">
           <strong><mark>VanillaJS & Semantic HTML</mark>:</strong> Extends native Semantic HTML elements, without using shadowDOM, to stay as close as possible to Accessibility and SEO-friendly
@@ -20,33 +19,35 @@
       </ul>
     </small>
   </section>
-  <!-- <section>
-    <h3>Efficient Initialization with Static Blocks & JS Mixins ⚡️🛠</h3>
+  <section>
+    <h3>Integration ⚡️🛠</h3>
     <small>
       <ul>
-        <li><strong>Instant Setup:</strong> Static blocks ensure components are ready immediately.</li>
-        <li><strong>Reusable Code:</strong> JavaScript mixins enhance code reusability.</li>
-        <li><strong>Predictable Behavior:</strong> Structured execution avoids unexpected issues.</li>
+        <li class="fragment">
+          <strong><mark>Efficient DOM Manipulation</mark>:</strong> every update in components takes less than a requestAnimationFrame.
+        </li>
+        <li class="fragment">
+          <strong><mark>Custom Events Driven</mark>:</strong> any of the components use custom events for seamless data flow.
+        </li>
+        <li class="fragment">
+          <strong><mark>Observable & Observed</mark>:</strong> every external update to the internal HTML structure is "mutation observed" and the component updates itself accordingly.
+        </li>
       </ul>
     </small>
-  </section> -->
-  <!-- <section>
-    <h3>Dynamic Interactions with Custom Events 🔄🎉</h3>
-    <small>
-      <ul>
-        <li class="fragment"><strong>Smooth Communication:</strong> Components use custom events for seamless data flow.</li>
-        <li class="fragment"><strong>Decoupled Architecture:</strong> Promotes modular and maintainable design.</li>
-        <li class="fragment"><strong>Flexible Handling:</strong> Dispatch and listen for events tailored to your needs.</li>
-      </ul>
-    </small>
-  </section> -->
+  </section>
   <section>
     <h3><mark>Modular Styling</mark> with CSS Custom Properties & @layer 🎨📐</h3>
     <small>
       <ul>
-        <li class="fragment"><strong><mark>Real-Time Adaptability</mark>:</strong> Dynamic styling reacts instantly to user interactions.</li>
-        <li class="fragment"><strong><mark>Exposed CSS APIs</mark>:</strong> Easily adjust colors, fonts, and layouts with CSS custom properties.</li>
-        <li class="fragment"><strong><mark>Organized CSS Layers</mark>:</strong> `@layer` ensures better structure and reduced conflicts, and flow with the cascade algorithm.</li>
+        <li class="fragment">
+          <strong><mark>Real-Time Adaptability</mark>:</strong> Dynamic styling reacts instantly to user interactions.
+        </li>
+        <li class="fragment">
+          <strong><mark>Exposed CSS APIs</mark>:</strong> Easily adjust colors, fonts, and layouts with CSS custom properties.
+        </li>
+        <li class="fragment">
+          <strong><mark>Organized CSS Layers</mark>:</strong> `@layer` ensures better structure and reduced conflicts, and flow with the cascade algorithm.
+        </li>
       </ul>
     </small>
   </section>
@@ -54,9 +55,15 @@
     <h3><mark>Monorepo</mark> Architecture & Optimization 🏗️📦</h3>
     <small>
       <ul>
-        <li class="fragment"><strong><mark>Modular by Design</mark>:</strong> The entire design system/UI kit follows a monorepo structure, ensuring seamless scalability and maintainability.</li>
-        <li class="fragment"><strong><mark>Tree Shaking & Deduplication</mark>:</strong> The modular architecture allows efficient bundling, reducing unused code and optimizing performance.</li>
-        <li class="fragment"><strong><mark>Native Compatibility</mark>:</strong> Designed to work efficiently with modern build tools and frameworks.</li>
+        <li class="fragment">
+          <strong><mark>Modular by Design</mark>:</strong> The entire design system/UI kit follows a monorepo structure, ensuring seamless scalability and maintainability.
+        </li>
+        <li class="fragment">
+          <strong><mark>Tree Shaking & Deduplication</mark>:</strong> The modular architecture allows efficient bundling, reducing unused code and optimizing performance.
+        </li>
+        <li class="fragment">
+          <strong><mark>Native Compatibility</mark>:</strong> Designed to work efficiently with modern build tools and frameworks.
+        </li>
       </ul>
     </small>
   </section>

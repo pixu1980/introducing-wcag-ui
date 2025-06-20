@@ -6,18 +6,18 @@
     <h3>Button</h3>
     <pre>
       <code class="hljs html" data-trim data-line-numbers>
-        <button is="wcag-button">
+        &lt;button is="wcag-button">
           Button
-        </button>
-        <button is="wcag-button" secondary>
+        &lt;/button>
+        &lt;button is="wcag-button" secondary>
           Button
-        </button>
-        <button is="wcag-button" tertiary>
+        &lt;/button>
+        &lt;button is="wcag-button" tertiary>
           Button
-        </button>
-        <button is="wcag-button" destructive>
+        &lt;/button>
+        &lt;button is="wcag-button" destructive>
           Button
-        </button>
+        &lt;/button>
       </code>
     </pre>
   </section>
@@ -36,7 +36,6 @@
         &lt;label&gt;
           Username        
           &lt;input is="wcag-input" name="username" type="text"
-            aria-label="Username"
             placeholder="Enter your username..." />
         &lt;/label&gt;
       </code>
@@ -46,7 +45,10 @@
     <h2>Select Dropdown</h2>
     <pre>
       <code class="hljs html" data-trim data-line-numbers>
-        <select is="wcag-select" aria-label="Select an option">
+        &lt;select is="wcag-select"
+          name="options" aria-label="Options"
+          placeholder="Select an option"
+        >
           <option value="option1">Option 1</option>
           <option value="option2">Option 2</option>
           <option value="option3">Option 3</option>
@@ -56,8 +58,9 @@
     <pre>
       <code class="hljs html" data-trim data-line-numbers>
         <label>
-          Select an Option
-          <select is="wcag-select" aria-label="Select an option">
+          Options
+          <select is="wcag-select" name="options">
+            &lt;option disabled selected value="">Select an option&lt;/option>
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
@@ -87,7 +90,7 @@
   </section>
   <section>
     <h3>Components <mark>Implemented</mark></h3>
-    <p>
+    <p balance>
       <span class="fragment">Button,</span>
       <span class="fragment">Input,</span>
       <span class="fragment">Textarea,</span>
@@ -98,7 +101,8 @@
       <span class="fragment">Details,</span>
       <span class="fragment">Accordion,</span>
       <span class="fragment">Dialog,</span>
-      <span class="fragment">Tooltip,</span>
+      <span class="fragment">Tooltips,</span>
+      <span class="fragment">Popovers,</span>
     </p>
   </section>
   <section>

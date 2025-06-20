@@ -1,10 +1,13 @@
-@import 'npm:@wcag-ui/iconography';
-@import 'npm:@wcag-ui/typography';
-
 @import 'npm:@pixu-talks/fonts';
 @import 'npm:@pixu-talks/theme';
 
+@import './_cascade.css' layer(pixu-talk);
+
 @layer pixu-talk {
+  .reveal pre {
+    max-width: 80%;
+  }
+
   @layer doodle {
     doodle {
       position: relative;

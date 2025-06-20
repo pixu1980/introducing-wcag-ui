@@ -11,15 +11,15 @@
   </section>
   <section>
     <h3>
-      <span class="fragment">.talk:is(:not(<mark>'.enough'</mark>));</span>
+      .talk:is(:not(<mark>[enough]</mark>));
       <br />
-      <span class="fragment">showMe(<mark>'the &lt;code&gt;&lt;/code&gt;'</mark>);</span>
+      showMe(<mark>'the &lt;code&gt;&lt;/code&gt;'</mark>);
     </h3>
   </section>
   <section>
     <h4>extending Semantic HTML elements</h4>
     <pre class="fragment">
-      <code class="hljs javascript"  data-trim="" data-line-numbers="1,2|1-5|1-8|1-11">
+      <code class="hljs javascript"  data-trim="" data-line-numbers="">
 export class Button extends HTMLButtonElement {
 }
 
@@ -104,7 +104,7 @@ export class Button extends HTMLButtonElement {
   <section>
     <h4><mark>Decorators</mark>?</h4>
     <pre class="fragment">
-      <code class="hljs javascript" data-trim="" data-line-numbers="1-6|8-16|18-23|25-32|34-38|40|41">
+      <code class="hljs javascript" data-trim="" data-line-numbers="1-6|8-16|18-23|25-32|34-38|40">
 export function componentDecorator(componentName, component) {
   assertMetaKey(component, "name");
   defineCustomElement(component);
@@ -144,38 +144,31 @@ export function applyMixins(component) {
     });
 }
 
-// yee, mixins!
 // yee, decorators!
   </code>
     </pre>
   </section>
   <section>
-    <h4><mark>Lifecycle methods</mark>?</h4>
+    <h4><mark>Lifecycle</mark> methods?</h4>
     <pre class="fragment">
-      <code class="hljs javascript" data-trim="" data-line-numbers="|6-10|11-17|18-24|3-5|28">
+      <code class="hljs javascript" data-trim="" data-line-numbers="|6-8|9-13|14-18|3-5|22">
 export function buildLifecycleMethods(component) {
   return {
     handleEvent(e) {
-      this[`handle${e.type.capitalize()}`]?.(e);
+      this[`handle${pascalize(e.type)}Event`]?.(e);
     },
     attributeChangedCallback(name, oldValue, newValue) {
-      this[`handle${name.pascalize()}Change`]?.(oldValue, newValue);
-
-      this.onAttributeChanged instanceof Function && this.onAttributeChanged(name, oldValue, newValue);
+      this[`handle${pascalize(name)}AttributeChanged`]?.(oldValue, newValue);
     },
     connectedCallback() {
       for (const event of Object.keys(component.events)) {
         this.addEventListener(event, this);
       }
-
-      this.onConnected instanceof Function && this.onConnected();
     },
     disconnectedCallback() {
       for (const event of Object.keys(component.events)) {
         this.removeEventListener(event, this);
       }
-
-      this.onDisconnected instanceof Function && this.onDisconnected();
     },
   };
 }
@@ -184,51 +177,5 @@ export function buildLifecycleMethods(component) {
   </code>
     </pre>
   </section>
-  <section>
-    <h4>exposing CSS <mark>API</mark>?</h4>
-    <pre class="fragment">
-      <code class="hljs css" data-trim="" data-line-numbers="1|3-11|13,14|15-22|24-31|35-38|40">
-@layer wcag-ui.core, wcag-ui.foundations, wcag-ui.components;
-
-@layer wcag-ui.foundations {
-  @layer typography {
-  :root {
-    --wcag-t--font-family: "Inter";
-    --wcag-t--font-size--base: 1.6rem;
-    
-    ...
-  }
-}
-
-@layer wcag-ui.components {
-  @layer button {
-    :root {
-      ...
-      
-      --wcag-button--border-radius: .4rem;
-      --wcag-button--background-color: var(--wcag-c--blue-400);
-      
-      ...
-    }
-    
-    [is="wcag-button"] {
-      ...
-      
-      border-radius: var(--wcag-button--border-radius);
-      background-color: var(--wcag-button--background-color);
-      
-      ...
-    }
-  }
-}
-
-// un-layered styles
-:root {
-  --wcag-button--background-color: rebeccapurple;
-}
-  
-// yee, css API!
-  </code>
-    </pre>
-  </section>
 </section>
+
