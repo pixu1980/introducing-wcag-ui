@@ -4,6 +4,11 @@
   </section>
   <section>
     <h3>Button</h3>
+    <figure>
+      <img src="./assets/components-button.png" width="800" alt="" />
+    </figure>
+  </section>
+  <section>
     <pre>
       <code class="hljs html" data-trim data-line-numbers>
         &lt;button is="wcag-button">
@@ -23,7 +28,12 @@
   </section>
   <section>
     <h3>Input</h3>
-    <pre class="fragment">
+    <figure>
+      <img src="./assets/components-input.png" width="800" alt="" />
+    </figure>
+  </section>
+  <section>
+    <pre>
       <code class="hljs html" data-trim data-line-numbers>
         &lt;input is="wcag-input" name="username"
           type="text"
@@ -52,7 +62,7 @@
           <option value="option1">Option 1</option>
           <option value="option2">Option 2</option>
           <option value="option3">Option 3</option>
-        </select>
+        &lt;/select>
       </code>
     </pre>
     <pre>
@@ -71,19 +81,36 @@
   </section>
   <section>
     <h2>Checkbox</h2>
-    <pre class="fragment">
+    <pre>
       <code class="hljs html" data-trim data-line-numbers>
         &lt;input is="wcag-checkbox" name="accept"
           aria-label="Accept agreement" /&gt;
       </code>
     </pre>
-    <pre class="fragment">
+    <pre>
       <code class="hljs html" data-trim data-line-numbers>
         &lt;label&gt;
           Accept agreement
           &lt;input is="wcag-checkbox" name="accept"
-            type="checkbox"
-            aria-label="Accept agreement" /&gt;
+            type="checkbox" /&gt;
+        &lt;/label&gt;
+      </code>
+    </pre>
+  </section>
+  <section>
+    <h2>Radio</h2>
+    <pre>
+      <code class="hljs html" data-trim data-line-numbers>
+        &lt;input is="wcag-radio" name="accept"
+          aria-label="Accept agreement" /&gt;
+      </code>
+    </pre>
+    <pre>
+      <code class="hljs html" data-trim data-line-numbers>
+        &lt;label&gt;
+          Accept agreement
+          &lt;input is="wcag-radio" name="accept"
+            type="radio" /&gt;
         &lt;/label&gt;
       </code>
     </pre>
