@@ -28,6 +28,14 @@
             fill: #000;
           }
         }
+
+        @media (prefers-color-scheme: light) {
+          head:has(meta[name='color-scheme'][content='light dark']) + body [intro] svg {
+            path {
+              fill: #000;
+            }
+          }
+        }
       </style>
     </svg>
   </h1>
